@@ -1,61 +1,90 @@
 package com.example.mosque.model
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-data class Mosque (
+data class Mosque(
     @SerializedName("id")
-    val id : Int,
+    @Expose
+    val mosqueId: Int,
     @SerializedName("type")
-    val type : String,
+    @Expose
+    val mosqueType: String,
     @SerializedName("code")
-    val code : String,
+    @Expose
+    val mosqueCode: String,
     @SerializedName("name")
-    val name : String,
+    @Expose
+    val mosqueName: String,
     @SerializedName("identity")
-    val identity : String,
+    @Expose
+    val mosqueIdentity: String,
     @SerializedName("surface_area")
-    val surface_area : String,
+    @Expose
+    val surfaceArea: String,
     @SerializedName("building_area")
-    val building_area : String,
+    @Expose
+    val buildingArea: String,
     @SerializedName("los")
-    val los : String,
+    @Expose
+    val mosqueLos: String,
     @SerializedName("since")
-    val since : Int,
+    @Expose
+    val mosqueSince: String,
     @SerializedName("bank_id")
-    val bank_id : Int,
+    @Expose
+    val bankId: String,
     @SerializedName("rek")
-    val rek : String,
+    @Expose
+    val mosqueRek: String,
     @SerializedName("address")
-    val address : String,
+    @Expose
+    val mosqueAddress: String,
     @SerializedName("latitude")
-    val latitude : String,
+    @Expose
+    val latitude: String,
     @SerializedName("longitude")
-    val longitude : String,
+    @Expose
+    val longitude: String,
     @SerializedName("province_id")
-    val province_id : Int,
+    @Expose
+    val provinceId: String,
     @SerializedName("estimate")
-    val estimate : String,
+    @Expose
+    val estimate: String,
     @SerializedName("estimate_date")
-    val estimate_date : String,
+    @Expose
+    val estimateDate: String,
     @SerializedName("city_id")
-    val city_id : Int,
+    @Expose
+    val cityId: String,
     @SerializedName("kec_id")
-    val kec_id : Int,
+    @Expose
+    val kecId: String,
     @SerializedName("kel_id")
-    val kel_id : String,
+    @Expose
+    val kelId: String,
     @SerializedName("pic")
-    val pic : String,
+    @Expose
+    val pic: String,
     @SerializedName("description")
-    val description : String,
+    @Expose
+    val description: String,
     @SerializedName("bank")
-    val bank : Bank,
+    @Expose
+    val bank: Bank,
     @SerializedName("province")
-    val province : Province,
+    @Expose
+    val province: Province,
     @SerializedName("regency")
-    val regency : String,
+    @Expose
+    val regency: String,
     @SerializedName("districts")
-    val districts : String,
+    @Expose
+    val districts: String,
     @SerializedName("village")
-    val village : String
-
+    @Expose
+    val village: String
 )
+   

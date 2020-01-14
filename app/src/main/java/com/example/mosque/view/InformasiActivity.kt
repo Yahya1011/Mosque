@@ -33,7 +33,7 @@ class InformasiActivity : AppCompatActivity() {
 
 
     private fun observeViewModel(){
-        viewModel.masjids.observe(this, Observer{ mosques ->
+        viewModel.mosquesData.observe(this, Observer{ mosques ->
             mosques?.let {
                 println("DATA ${it.size}")
                 rv_masjid.visibility = View.VISIBLE
