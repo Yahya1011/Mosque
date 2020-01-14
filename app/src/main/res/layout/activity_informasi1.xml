@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintBottom_toTopOf="@+id/viewPager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabBackground="@color/colorPrimary"
+                app:tabGravity="fill"
+                app:tabMode="fixed"
+                app:tabTextColor="@android:color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+    </androidx.viewpager.widget.ViewPager>
+
+<!--    <com.google.android.material.appbar.AppBarLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:theme="@style/AppTheme.AppBarOverlay">-->
+
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--                android:id="@+id/toolbar"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="?attr/actionBarSize"-->
+<!--                android:background="?attr/colorPrimary"-->
+<!--                app:popupTheme="@style/AppTheme.PopupOverlay" />-->
+
+<!--    </com.google.android.material.appbar.AppBarLayout>-->
+
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/fab"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="bottom|end"-->
+<!--            android:layout_margin="@dimen/fab_margin"-->
+<!--            app:srcCompat="@android:drawable/ic_dialog_email" />-->
+
+
+<!--    <ScrollView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/scroll1">-->
+<!--    <LinearLayout-->
+<!--            android:orientation="vertical"-->
+<!--            android:layout_marginTop="50dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
+
+<!--    <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Masjid Darul Jannah"-->
+<!--            android:textColor="#000000"-->
+<!--            android:textSize="30sp"-->
+<!--            android:layout_marginStart="15dp"/>-->
+<!--    <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Cimpaeun, Tapos - Depok"-->
+<!--            android:textColor="#000000"-->
+<!--            android:textSize="20sp"-->
+<!--            android:layout_marginStart="15dp"/>-->
+<!--    <ImageView-->
+<!--            android:src="@drawable/gambar_masjid"-->
+<!--            android:layout_width="380dp"-->
+<!--            android:layout_height="150dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:scaleType="fitXY"/>-->
+
+<!--        <ScrollView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+<!--    <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
+
+<!--        <Button-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:background="@drawable/icon_struktur"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_marginStart="70dp"/>-->
+<!--        <Button-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:background="@drawable/icon_laporan"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_marginStart="25dp"/>-->
+<!--        <Button-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:background="@drawable/icon_gallery"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_marginStart="25dp"/>-->
+<!--        <Button-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:background="@drawable/icon_acara"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_marginStart="25dp"/>-->
+<!--    </LinearLayout>-->
+<!--        </ScrollView>-->
+<!--    <Button-->
+<!--            android:id="@+id/informasi"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Informasi Masjid"-->
+<!--            android:textColor="#000000"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginStart="15dp"-->
+<!--            android:layout_marginEnd="15dp"/>-->
+
+<!--    <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:visibility="visible"-->
+<!--            android:background="#000000"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_marginTop="3dp"-->
+<!--            android:layout_marginStart="15dp"-->
+<!--            android:layout_marginEnd="15dp"/>-->
+
+<!--    <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="ID                            : 01.0.00.00.00.000001"-->
+<!--            android:textColor="#000000"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginStart="15dp"/>-->
+<!--    <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Nama                     : Masjid Darul Jannah"-->
+<!--            android:textColor="#000000"-->
+<!--            android:layout_marginStart="15dp"/>-->
+<!--    <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Alamat                   : Cimpaun, Tapos - Depok"-->
+<!--            android:textColor="#000000"-->
+<!--            android:layout_marginStart="15dp"/>-->
+<!--    <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Luas Tanah           : 200.000 m2"-->
+<!--            android:textColor="#000000"-->
+<!--            android:layout_marginStart="15dp"/>-->
+<!--    <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Luas Bangunan    : 450.000 m2"-->
+<!--            android:textColor="#000000"-->
+<!--            android:layout_marginStart="15dp"/>-->
+<!--    <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Status Tanah        : Wakaf"-->
+<!--            android:textColor="#000000"-->
+<!--            android:layout_marginStart="15dp"/>-->
+<!--    <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Tahun Berdiri        : 2005"-->
+<!--            android:textColor="#000000"-->
+<!--            android:layout_marginStart="15dp"/>-->
+<!--    <ImageView-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="150dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:src="@drawable/persegi_panjang"/>-->
+
+<!--    </LinearLayout>-->
+<!--</ScrollView>-->
+</androidx.constraintlayout.widget.ConstraintLayout>

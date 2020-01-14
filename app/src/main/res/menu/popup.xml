@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/informasi_masjid"
+            android:title="Informasi Masjid"
+            app:showAsAction="never"/>
+    <item
+            android:id="@+id/sejarah"
+            android:title="Sejarah"
+            app:showAsAction="never"/>
+    <item
+            android:id="@+id/visi_misi"
+            android:title="Visi Misi"
+            app:showAsAction="never"/>
+    <item
+            android:id="@+id/pengurus"
+            android:title="Pengurus"
+            app:showAsAction="never"/>
+    <item
+            android:id="@+id/jamaah"
+            android:title=""
+            app:showAsAction="never"/>
+</menu>

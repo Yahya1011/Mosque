@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".fragment.AcaraFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Masjid Darul Jannah"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp" />
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cimpaeun, Tapos - Depok"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp" />
+    <ImageView
+            android:src="@drawable/gambar_masjid"
+            android:layout_width="380dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:scaleType="fitXY"/>
+    <Button
+            android:id="@+id/informasi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Acara Masjid"
+            android:textColor="#000000"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
+    <View
+            android:layout_width="match_parent"
+            android:visibility="visible"
+            android:background="#000000"
+            android:layout_height="1dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+            <ImageView
+                    android:id="@+id/iconIv"
+                    android:src="@color/colorAccent"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp" />
+            <LinearLayout
+                    android:layout_margin="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+                <TextView
+                        android:id="@+id/titleTv"
+                        android:text="Judul Acara"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                <TextView
+                        android:id="@+id/descTv"
+                        android:text="18 November 2019"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+            <ImageView
+                    android:src="@color/colorAccent"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp" />
+            <LinearLayout
+                    android:layout_margin="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+                <TextView
+                        android:text="Judul Acara"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                <TextView
+                        android:text="18 November 2019"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+            <ImageView
+                    android:src="@color/colorAccent"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp" />
+            <LinearLayout
+                    android:layout_margin="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+                <TextView
+                        android:text="Judul Acara"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                <TextView
+                        android:text="18 November 2019"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
