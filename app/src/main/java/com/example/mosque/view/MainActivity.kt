@@ -6,7 +6,9 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.*
 import android.os.Bundle
+import android.os.Handler
 import android.os.IBinder
+import android.view.Gravity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -22,15 +24,22 @@ import com.example.mosque.common.Constans.LOCATION_REQUEST
 import com.example.mosque.utils.*
 import com.example.mosque.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
+import kotlin.collections.ArrayList
+
 
 class MainActivity : AppCompatActivity() {
 
+    private var updateTime: String? = null
+    private var futureDate: String? = null
     lateinit var receiver: LocationReceiver
     lateinit var service: LocationService
     lateinit var viewModel: MainViewModel
     private var isBound: Boolean = false
     private val jadwalShalatAdapter = JadwalSholatAdapter(ArrayList())
-    private var connection  = object : ServiceConnection{
+    private val COUNTDOWN_UPDATE_INTERVAL : Long = 500
+    private var countdownHandler: Handler? = null
+    private var connection = object : ServiceConnection {
         override fun onServiceDisconnected(name: ComponentName) {
             isBound = false
         }
@@ -44,10 +53,11 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.turnOnGps(this)
@@ -61,7 +71,7 @@ class MainActivity : AppCompatActivity() {
             }*/
         }
 
-        rv_jadwal_sholat.apply{
+        rv_jadwal_sholat.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = jadwalShalatAdapter
         }
@@ -71,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun observeViewModel() {
-        viewModel.isGpsOnBoolean.observe(this, Observer{
+        viewModel.isGpsOnBoolean.observe(this, Observer {
             if (it) {
                 provideLocation()
             } else {
@@ -79,54 +89,87 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        viewModel.dataJadwal.observe(this, Observer{ mosques ->
+        viewModel.dataJadwal.observe(this, Observer { mosques ->
             mosques?.let {
                 println("DATA ${it.items.size}")
                 rv_jadwal_sholat.visibility = View.VISIBLE
+                jadwalShalatAdapter.updateJadwal(it.items)
                 waktu_sholat.visibility = View.VISIBLE
                 jam_sholat.visibility = View.VISIBLE
-                jadwalShalatAdapter.updateJadwal(it.items)
-                val strTime = getCurrentTime()
-                when (strTime) {
-                    it.items[0].fajar -> {
-                        waktu_sholat.text = "Fajar"
-                        jam_sholat.text = convertTime(it.items[0].fajar)
+                counting_time.visibility = View.VISIBLE
+                val calendar = Calendar.getInstance()
+                val timeOfDay = calendar.get(Calendar.HOUR_OF_DAY)
+                if (timeOfDay in 4..5) {
+                    waktu_sholat.text = "Fajar"
+                    //greetImg?.setImageResource(R.drawable.img_default_half_morning)
+                    it.items[0].fajar.let {
+                        jam_sholat.text = convertTime(it)
+
                     }
-                    it.items[0].subuh -> {
-                        waktu_sholat.text = "Shubuh"
-                        jam_sholat.text = convertTime(it.items[0].subuh)
+                    getFutureDate(it.items[0].subuh)
+                    startCountdown()
+                } else if (timeOfDay in 5..6) {
+                    waktu_sholat.text = "Subuh"
+                    it.items[0].subuh.let {
+                        jam_sholat.text = convertTime(it)
                     }
-                    it.items[0].zuhur -> {
-                        waktu_sholat.visibility = View.VISIBLE
-                        jam_sholat.visibility = View.VISIBLE
-                        waktu_sholat.text = "Dzuhur"
-                        jam_sholat.text = convertTime(it.items[0].zuhur)
+
+                    getFutureDate(it.items[0].zuhur)
+                    startCountdown()
+                } else if (timeOfDay in 7..9) {
+                    waktu_sholat.text = "Dhuha"
+                }else if (timeOfDay in 12..14) {
+                    waktu_sholat.text = "Dzuhur"
+                    it.items[0].zuhur.let {
+                        jam_sholat.text = convertTime(it)
                     }
-                    it.items[0].ashar -> {
-                        waktu_sholat.text = "Ashar"
-                        jam_sholat.text = convertTime(it.items[0].ashar)
+                    getFutureDate(it.items[0].ashar)
+                    startCountdown()
+                } else if (timeOfDay in 15..17) {
+                    waktu_sholat.text = "Ashar"
+                    it.items[0].ashar.let {
+                        jam_sholat.text = convertTime(it)
                     }
-                    it.items[0].maghrib -> {
-                        waktu_sholat.text = "Magrib"
-                        jam_sholat.text = convertTime(it.items[0].maghrib)
+                    getFutureDate(it.items[0].maghrib)
+                    startCountdown()
+                } else if (timeOfDay in 18..19) {
+                    waktu_sholat.text = "Maghrib"
+                    it.items[0].maghrib.let {
+                        jam_sholat.text = convertTime(it)
                     }
-                    it.items[0].isya -> {
-                        waktu_sholat.text = "Isya"
-                        jam_sholat.text = convertTime(it.items[0].isya)
+                    getFutureDate(it.items[0].isya)
+                    startCountdown()
+                } else if (timeOfDay in 19..24) {
+                    waktu_sholat.text = "Isya"
+                    it.items[0].isya.let {
+                        jam_sholat.text = convertTime(it)
                     }
+
+                    getFutureDate(it.items[0].fajar)
+                    startCountdown()
+                } else {
+                    waktu_sholat.text = "Shalat Sunnah Malam"
+                    waktu_sholat.gravity = Gravity.CENTER_VERTICAL
+                    jam_sholat.visibility = View.GONE
+                    getFutureDate(it.items[0].fajar)
+                    startCountdown()
+
+
                 }
 
+
+
             }
         })
 
-        viewModel.jadwalLoadError.observe(this, Observer { isError->
+        viewModel.jadwalLoadError.observe(this, Observer { isError ->
             isError?.let {
-                error_jadwal.visibility = if(it) View.VISIBLE else View.GONE
-                error_waktu_shalat.visibility = if(it) View.VISIBLE else View.GONE
+                error_jadwal.visibility = if (it) View.VISIBLE else View.GONE
+                error_waktu_shalat.visibility = if (it) View.VISIBLE else View.GONE
             }
         })
 
-        viewModel.loading.observe(this, Observer { isLoading->
+        viewModel.loading.observe(this, Observer { isLoading ->
             isLoading?.let {
                 progressJadwal.visibility = if (it) View.VISIBLE else View.GONE
                 progressWaktuSholat.visibility = if (it) View.VISIBLE else View.GONE
@@ -141,9 +184,53 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    private fun getFutureDate(str: String): String? {
+        futureDate = convertTime(str)
+        println("MAIN ACTIVITY $futureDate")
+        return  futureDate
+    }
+
+
+    private fun startCountdown() {
+        stopCountdown()
+        countdownHandler = Handler()
+        updateCountdown().run()
+    }
+
+    private fun stopCountdown() {
+        if (countdownHandler != null) {
+            countdownHandler!!.removeCallbacks(updateCountdown())
+            countdownHandler = null
+        }
+    }
+
+    /**
+     * Updates the countdown.
+     */
+    private fun updateCountdown() : Runnable  = Runnable {
+
+        try {
+            counting_time.visibility = View.VISIBLE
+            val convertTime = futureDate?.let { mTimeDifference(getCurrentTime(), it) }
+            println("Update Count ${convertTime}")
+            if (convertTime != null) {
+                updateString(convertTime)
+            }
+            //counting_time.text =
+        } finally {
+            countdownHandler?.postDelayed(updateCountdown(), COUNTDOWN_UPDATE_INTERVAL)
+        }
+    }
+
+    private fun updateString(mTimeDifference: String)  {
+        println("Update Count  == $mTimeDifference")
+        updateTime = mTimeDifference
+        counting_time.text = mTimeDifference
+    }
 
     override fun onResume() {
         super.onResume()
+
         LocalBroadcastManager.getInstance(applicationContext).registerReceiver(
             receiver,
             IntentFilter(ACTION_BROADCAST)
@@ -153,11 +240,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        startCountdown()
         bindService(Intent(this, LocationService::class.java), connection, Context.BIND_AUTO_CREATE)
         observeViewModel()
     }
-
-
 
 
     override fun onStop() {
@@ -165,6 +251,7 @@ class MainActivity : AppCompatActivity() {
             unbindService(connection)
             isBound = false
         }
+        stopCountdown()
         super.onStop()
     }
 
@@ -174,7 +261,6 @@ class MainActivity : AppCompatActivity() {
             provideLocation()
         }
     }
-
 
 
     @SuppressLint("InlinedApi")

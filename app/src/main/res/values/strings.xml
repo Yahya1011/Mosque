@@ -17,4 +17,26 @@
     <string name="notice">Pemberitahuan</string>
     <string name="pukul">Pukul</string>
     <string name="waktu_sholat">Waktu Sholat</string>
+
+
+    <plurals name="days">
+        <item quantity="zero">%d Hari</item>
+        <item quantity="one">%d Hari</item>
+        <item quantity="other">%d Hari</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="zero">%d Jam</item>
+        <item quantity="one">%d Jam</item>
+        <item quantity="other">%d Jam</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="zero">%d Menit</item>
+        <item quantity="one">%d Menit</item>
+        <item quantity="other">%d Menit</item>
+    </plurals>
+    <plurals name="seconds">
+        <item quantity="zero">%d Detik</item>
+        <item quantity="one">%d Detik</item>
+        <item quantity="other">%d Detik</item>
+    </plurals>
 </resources>

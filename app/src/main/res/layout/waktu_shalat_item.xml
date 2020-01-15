@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/waktu_sholat"
+        style="@style/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/WhiteColor"
+        tools:text="Magrib" />
+
+    <TextView
+        android:id="@+id/jam_sholat"
+        style="@style/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textColor="@color/WhiteColor"
+        android:textAllCaps="true"
+        tools:text="17:55" />
+
+    <TextView
+        android:id="@+id/counting_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/WhiteColor"
+        tools:text="1 Jam 50 Menit Lagi" />
+
+</LinearLayout>
