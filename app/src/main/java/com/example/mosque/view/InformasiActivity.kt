@@ -27,6 +27,12 @@ class InformasiActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(context)
             adapter = homeAdapter
         }
+
+
+        swipeRefresh.setOnRefreshListener {
+            swipeRefresh.isRefreshing = false
+            viewModel.refresh()
+        }
         observeViewModel()
 
     }

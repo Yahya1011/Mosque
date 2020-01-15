@@ -5,10 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.example.mosque.R
+import com.example.mosque.common.Constans
 import com.example.mosque.model.Bank
 import com.example.mosque.model.Mosque
 import com.example.mosque.model.Province
+import com.example.mosque.extention.getProgressDrawable
+import com.example.mosque.extention.loadImage
 import kotlinx.android.synthetic.main.row.view.*
 
 class HomeAdapter(var masjidItems: MutableList<Mosque>) :
@@ -133,9 +137,20 @@ class HomeAdapter(var masjidItems: MutableList<Mosque>) :
             districts: String,
             village: String
         ) {
+
+            val progressDrawable: CircularProgressDrawable = getProgressDrawable(itemView.context)
+            val imgTarget = Constans.imageUrlPath
             mosqueName.let {
                 itemView.titleTv.text = it
             }
+            pic.let {
+                itemView.iconIv.loadImage(imgTarget + it, progressDrawable)
+            }
+
+            mosqueAddress.let {
+                itemView.descTv.text = it
+            }
+
         }
 
     }

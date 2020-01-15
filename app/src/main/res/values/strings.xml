@@ -6,4 +6,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="submit" />
     <string name="onError">Terjadi kesalahan pada saat loading data</string>
+    <string name="asset_statements" translatable="false">[{ \"include\": \"https://yukamal.com:80/.well-known/assetlinks.json\" }]</string>
+    <string name="launch_activity">MainActivity</string>
+    <string name="action_stop">Stop</string>
+    <string name="location_updated">Updated: %1$s</string>
+    <string name="latitude">Latitude: %.8f</string>
+    <string name="longitude">Longitude: %.8f</string>
+    <string name="current_location">Last location: %.8f / %.8f</string>
+    <string name="error_lokasi">Tidak dapat menemukan lokasi</string>
+    <string name="notice">Pemberitahuan</string>
+    <string name="pukul">Pukul</string>
+    <string name="waktu_sholat">Waktu Sholat</string>
 </resources>

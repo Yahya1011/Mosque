@@ -11,7 +11,7 @@ class PagerAdapter(supportFragmentManager: FragmentManager) : FragmentStatePager
 
     // menentukan fragment yang akan dibuka pada posisi tertentu
     override fun getItem(position: Int): Fragment {
-        return mFragmentList.get(position)
+        return mFragmentList[position]
     }
 
     override fun getCount(): Int {

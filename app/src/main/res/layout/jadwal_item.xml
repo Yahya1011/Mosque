@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/tv_hari"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Senin"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_tanggal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hari"
+        tools:text="15 April 2020 / 12 Sya'ban 1440" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tanggal" />
+
+        <LinearLayout
+            android:id="@+id/layout_fajar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view">
+            <TextView
+                android:id="@+id/lbl_waktu_fajar"
+                style="@style/small_text"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textAlignment="textStart"
+                tools:text="@string/waktu_sholat"/>
+
+            <TextView
+                android:id="@+id/lbl_jam_fajar"
+                style="@style/small_text"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="@string/pukul"
+                android:textAlignment="textStart"/>
+
+            <ImageView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/notice"
+                android:textAlignment="textStart"/>
+        </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_subuh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_fajar">
+        <TextView
+            android:id="@+id/lbl_waktu_subuh"
+            android:layout_width="0dip"
+            style="@style/small_text"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textAlignment="textStart"
+            tools:text="@string/waktu_sholat"/>
+
+        <TextView
+            android:id="@+id/lbl_jam_subuh"
+            android:layout_width="0dip"
+            style="@style/small_text"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="@string/pukul"
+            android:textAlignment="textStart"/>
+
+        <ImageView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/notice"
+            android:textAlignment="textStart"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_dzuhur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_subuh">
+        <TextView
+            android:id="@+id/lbl_waktu_dzuhur"
+            style="@style/small_text"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textAlignment="textStart"
+            tools:text="@string/waktu_sholat"/>
+
+        <TextView
+            android:id="@+id/lbl_jam_dzuhur"
+            android:layout_width="0dip"
+            style="@style/small_text"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="@string/pukul"
+            android:textAlignment="textStart"/>
+
+        <ImageView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/notice"
+            android:textAlignment="textStart"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_ashar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_dzuhur">
+        <TextView
+            android:id="@+id/lbl_waktu_ashar"
+            style="@style/small_text"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textAlignment="textStart"
+            tools:text="@string/waktu_sholat"/>
+
+        <TextView
+            android:id="@+id/lbl_jam_ashar"
+            style="@style/small_text"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="@string/pukul"
+            android:textAlignment="textStart"/>
+
+        <ImageView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/notice"
+            android:textAlignment="textStart"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_magrib"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_ashar">
+        <TextView
+            android:id="@+id/lbl_waktu_magrib"
+            style="@style/small_text"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textAlignment="textStart"
+            tools:text="@string/waktu_sholat"/>
+
+        <TextView
+            android:id="@+id/lbl_jam_magrib"
+            style="@style/small_text"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="@string/pukul"
+            android:textAlignment="textStart"/>
+
+        <ImageView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/notice"
+            android:textAlignment="textStart"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_isya"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_magrib">
+        <TextView
+            android:id="@+id/lbl_waktu_isya"
+            style="@style/small_text"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textAlignment="textStart"
+            tools:text="@string/waktu_sholat"/>
+
+        <TextView
+            android:id="@+id/lbl_jam_isya"
+            style="@style/small_text"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="@string/pukul"
+            android:textAlignment="textStart"/>
+
+        <ImageView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/notice"
+            android:textAlignment="textStart"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
