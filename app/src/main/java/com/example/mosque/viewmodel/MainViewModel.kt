@@ -1,14 +1,17 @@
 package com.example.mosque.viewmodel
 
 import android.content.Context
+import android.content.res.Resources
 import android.location.Address
 import android.location.Geocoder
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.mosque.R
 import com.example.mosque.common.Constans
 import com.example.mosque.model.Jadwal
 import com.example.mosque.model.LocationDataModel
 import com.example.mosque.model.LocationModel
+import com.example.mosque.model.MainNav
 import com.example.mosque.network.Services
 import com.example.mosque.utils.LocationUtils
 import com.example.mosque.utils.getLatitudeText
@@ -35,11 +38,16 @@ class MainViewModel : ViewModel() {
     }
 
 
+
+
     fun turnOnGps(context: Context) {
         LocationUtils().turnGPSOn(context) {
             isGpsOn.value = it
         }
     }
+
+
+
 
 
 
@@ -97,6 +105,9 @@ class MainViewModel : ViewModel() {
         }
         return regioName
     }
+
+
+
 
     override fun onCleared() {
         super.onCleared()

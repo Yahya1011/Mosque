@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Mosque</string>
     <string name="action_settings">Settings</string>
@@ -17,6 +18,11 @@
     <string name="notice">Pemberitahuan</string>
     <string name="pukul">Pukul</string>
     <string name="waktu_sholat">Waktu Sholat</string>
+    <string name="donasi_nav">Donasi</string>
+
+    <string name="masjid_sekitar">Masjid Sekitar</string>
+    <string name="event">Acara</string>
+    <string name="info_nav">Informasi</string>
 
 
     <plurals name="days">

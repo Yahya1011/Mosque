@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="menuText">
+        <item>@string/donasi_nav</item>
+        <item>@string/info_nav</item>
+        <item>@string/masjid_sekitar</item>
+        <item>@string/event</item>
+    </string-array>
+
+    <string-array name="menuIcon">
+        <item>@drawable/ic_donasi</item>
+        <item>@drawable/transaksi</item>
+        <item>@drawable/ic_masjid_sekitar</item>
+        <item>@drawable/ic_event</item>
+
+    </string-array>
 
 </resources>

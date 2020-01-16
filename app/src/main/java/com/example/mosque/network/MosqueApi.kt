@@ -1,5 +1,6 @@
 package com.example.mosque.network
 
+import com.example.mosque.R
 import com.example.mosque.model.Jadwal
 import com.example.mosque.model.Mosque
 import com.example.mosque.network.ApiEndPoint.MOSQUE
@@ -16,5 +17,7 @@ interface MosqueApi {
     @GET("{lokasi}/daily.json")
     fun getJadwalSholat(@Path ("lokasi") lokasi :String ,
                         @Query ("key") MuslimKey : String)  : Single<Jadwal>
+
+
 
 }

@@ -18,10 +18,16 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mosque.R
 import com.example.mosque.adapter.JadwalSholatAdapter
+import com.example.mosque.adapter.NavMainAdapter
 import com.example.mosque.common.Constans
 import com.example.mosque.common.Constans.ACTION_BROADCAST
 import com.example.mosque.common.Constans.LOCATION_REQUEST
+import com.example.mosque.model.MainNav
 import com.example.mosque.utils.*
+import com.example.mosque.view.activity.AcaraActivity
+import com.example.mosque.view.activity.DonasiActivity
+import com.example.mosque.view.activity.MasjidSekitarActivity
+import com.example.mosque.viewmodel.MainNavViewModel
 import com.example.mosque.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -35,9 +41,11 @@ class MainActivity : AppCompatActivity() {
     lateinit var receiver: LocationReceiver
     lateinit var service: LocationService
     lateinit var viewModel: MainViewModel
+    lateinit var mainViewModel: MainNavViewModel
     private var isBound: Boolean = false
     private val jadwalShalatAdapter = JadwalSholatAdapter(ArrayList())
-    private val COUNTDOWN_UPDATE_INTERVAL : Long = 500
+    private val navMainAdapter = NavMainAdapter(ArrayList())
+    private val COUNTDOWN_UPDATE_INTERVAL: Long = 500
     private var countdownHandler: Handler? = null
     private var connection = object : ServiceConnection {
         override fun onServiceDisconnected(name: ComponentName) {
@@ -57,12 +65,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        mainViewModel = ViewModelProvider(this)[MainNavViewModel::class.java]
         viewModel.turnOnGps(this)
-
-
+        mainViewModel.refresh(this)
 
         receiver = LocationReceiver {
             viewModel.sendLocationData(this, it)
@@ -74,6 +80,56 @@ class MainActivity : AppCompatActivity() {
         rv_jadwal_sholat.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = jadwalShalatAdapter
+        }
+
+        rv_nav_content.apply{
+            addItemDecoration(EqualSpacingItemDecoration(12, EqualSpacingItemDecoration.HORIZONTAL))
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = navMainAdapter
+        }
+
+
+        observeMainNavModel()
+
+    }
+
+    private fun observeMainNavModel() {
+        mainViewModel.dataNavigation.observe(this, Observer { mainNavs->
+            mainNavs?.let {
+                println("DATA NAV ${it.size}")
+                rv_nav_content.visibility = View.VISIBLE
+                navMainAdapter.updateNav(it)
+                navMainAdapter.setOnItemClickListener(object : NavMainAdapter.OnItemClickListener{
+                    override fun onItemSelected(mainNav: MainNav) {
+                        initClickListener(mainNav.nav_name)
+                    }
+
+                })
+
+
+            }
+
+        })
+    }
+
+    private fun initClickListener(navName: String) {
+
+        if (navName == "Masjid Sekitar"){
+            val intent = Intent(this, MasjidSekitarActivity::class.java)
+            intent.putExtra("key", navName)
+            startActivity(intent)
+        } else if(navName == "Donasi"){
+            val intent = Intent(this, DonasiActivity::class.java)
+            intent.putExtra("key", navName)
+            startActivity(intent)
+        } else if(navName == "Informasi"){
+            val intent = Intent(this, InformasiActivity::class.java)
+            intent.putExtra("key", navName)
+            startActivity(intent)
+        } else if(navName == "Acara"){
+            val intent = Intent(this, AcaraActivity::class.java)
+            intent.putExtra("key", navName)
+            startActivity(intent)
         }
 
 
@@ -88,6 +144,7 @@ class MainActivity : AppCompatActivity() {
                 viewModel.turnOnGps(this)
             }
         })
+
 
         viewModel.dataJadwal.observe(this, Observer { mosques ->
             mosques?.let {
@@ -118,7 +175,7 @@ class MainActivity : AppCompatActivity() {
                     startCountdown()
                 } else if (timeOfDay in 7..9) {
                     waktu_sholat.text = "Dhuha"
-                }else if (timeOfDay in 12..14) {
+                } else if (timeOfDay in 12..14) {
                     waktu_sholat.text = "Dzuhur"
                     it.items[0].zuhur.let {
                         jam_sholat.text = convertTime(it)
@@ -158,7 +215,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
 
-
             }
         })
 
@@ -186,8 +242,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getFutureDate(str: String): String? {
         futureDate = convertTime(str)
-        println("MAIN ACTIVITY $futureDate")
-        return  futureDate
+        return futureDate
     }
 
 
@@ -207,12 +262,11 @@ class MainActivity : AppCompatActivity() {
     /**
      * Updates the countdown.
      */
-    private fun updateCountdown() : Runnable  = Runnable {
+    private fun updateCountdown(): Runnable = Runnable {
 
         try {
             counting_time.visibility = View.VISIBLE
             val convertTime = futureDate?.let { mTimeDifference(getCurrentTime(), it) }
-            println("Update Count ${convertTime}")
             if (convertTime != null) {
                 updateString(convertTime)
             }
@@ -222,8 +276,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateString(mTimeDifference: String)  {
-        println("Update Count  == $mTimeDifference")
+    private fun updateString(mTimeDifference: String) {
         updateTime = mTimeDifference
         counting_time.text = mTimeDifference
     }
