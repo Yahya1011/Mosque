@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.example.mosque.R
@@ -18,8 +19,13 @@ import kotlinx.android.synthetic.main.row.view.*
 class HomeAdapter(var masjidItems: MutableList<Mosque>) :
     RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
-
     var mContext: Context? = null
+    private var mOnItemClickListener: HomeAdapter.OnItemClickListener? = null
+
+    interface OnItemClickListener {
+        fun onItemSelected(masjidItems: Mosque)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         mContext = parent.context
         val layoutInflater = LayoutInflater.from(mContext).inflate(R.layout.row, parent, false)
@@ -41,8 +47,15 @@ class HomeAdapter(var masjidItems: MutableList<Mosque>) :
         notifyDataSetChanged()
     }
 
-    inner class HomeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    internal fun setOnItemClickListener(listener: OnItemClickListener) {
+        mOnItemClickListener = listener
+    }
 
+    inner class HomeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+
+        override fun onClick(v: View?) {
+            mOnItemClickListener?.onItemSelected((masjidItems[adapterPosition]))
+        }
 
         fun clear() {
         }
@@ -150,6 +163,8 @@ class HomeAdapter(var masjidItems: MutableList<Mosque>) :
             mosqueAddress.let {
                 itemView.descTv.text = it
             }
+
+            itemView.setOnClickListener(this)
 
         }
 

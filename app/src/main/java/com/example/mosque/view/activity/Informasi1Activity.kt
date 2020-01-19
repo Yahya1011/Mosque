@@ -11,7 +11,6 @@ import com.example.mosque.adapter.PagerAdapter
 import com.example.mosque.fragment.BeritaFragment
 import com.example.mosque.fragment.GaleriFragment
 import com.example.mosque.fragment.InformasiFragment
-import com.example.mosque.fragment.LaporanFragment
 import com.google.android.material.tabs.TabLayout
 
 class Informasi1Activity : AppCompatActivity() {
@@ -33,7 +32,6 @@ class Informasi1Activity : AppCompatActivity() {
         val adapter =
             PagerAdapter(supportFragmentManager)
         adapter.addFragment(InformasiFragment(), "Informasi")
-        adapter.addFragment(LaporanFragment(), "Laporan")
         adapter.addFragment(BeritaFragment(), "Berita")
         adapter.addFragment(GaleriFragment(), "Galeri")
         viewPager.adapter = adapter

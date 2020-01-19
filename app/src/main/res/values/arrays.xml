@@ -10,7 +10,7 @@
     <string-array name="menuIcon">
         <item>@drawable/ic_donasi</item>
         <item>@drawable/transaksi</item>
-        <item>@drawable/ic_masjid_sekitar</item>
+        <item>@drawable/masjid</item>
         <item>@drawable/ic_event</item>
 
     </string-array>

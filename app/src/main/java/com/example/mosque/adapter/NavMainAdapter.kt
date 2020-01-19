@@ -57,8 +57,7 @@ class NavMainAdapter(val navData : MutableList<MainNav>) : RecyclerView.Adapter<
         }
 
         fun onBind(position: Int) {
-            val(nav_icon,
-                nav_name) = navData[position]
+            val(nav_icon,nav_name) = navData[position]
             inflateData(nav_icon, nav_name)
         }
 
@@ -78,7 +77,6 @@ class NavMainAdapter(val navData : MutableList<MainNav>) : RecyclerView.Adapter<
                     itemView.navIcon.loadAsset( it, progressDrawable)
                 }
             }
-
 
             itemView.setOnClickListener(this)
 

@@ -39,6 +39,4 @@ class HomeViewModels : ViewModel(){
         super.onCleared()
         disposable.clear()
     }
-
-
 }

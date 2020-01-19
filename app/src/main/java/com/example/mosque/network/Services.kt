@@ -28,6 +28,4 @@ object Services {
         .create(MosqueApi::class.java)
 
 
-
-
 }

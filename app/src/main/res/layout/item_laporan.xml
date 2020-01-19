@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="5dp"
+        app:layout_constraintEnd_toStartOf="@+id/tanggal"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/tanggal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/no"
+        app:layout_constraintEnd_toStartOf="@+id/keterangan"
+        app:layout_constraintStart_toEndOf="@+id/no"
+        app:layout_constraintTop_toTopOf="@+id/no"
+        tools:text="2020-01-19" />
+
+    <TextView
+        android:id="@+id/keterangan"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tanggal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tanggal"
+        app:layout_constraintTop_toTopOf="@+id/tanggal"
+        tools:text="Infaq Hamba Allah" />
+
+    <TextView
+        android:id="@+id/kredit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        app:layout_constraintStart_toEndOf="@+id/keterangan"
+        app:layout_constraintTop_toTopOf="@+id/keterangan"
+        tools:text="1.000.000" />
+
+    <TextView
+        android:id="@+id/debit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/kredit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/kredit"
+        app:layout_constraintTop_toTopOf="@+id/kredit"
+        tools:text="500.000" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

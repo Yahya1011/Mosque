@@ -18,6 +18,6 @@ interface MosqueApi {
     fun getJadwalSholat(@Path ("lokasi") lokasi :String ,
                         @Query ("key") MuslimKey : String)  : Single<Jadwal>
 
-
-
+    @GET("rest/public/mosques/{id}")
+    fun getDetailMosque(@Path (value = "id") id: String): Single<Mosque>
 }

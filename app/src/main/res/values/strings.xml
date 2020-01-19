@@ -23,6 +23,8 @@
     <string name="masjid_sekitar">Masjid Sekitar</string>
     <string name="event">Acara</string>
     <string name="info_nav">Informasi</string>
+    <string name="title">Nama Masjid</string>
+    <string name="alamat">Alamat Masjid</string>
 
 
     <plurals name="days">

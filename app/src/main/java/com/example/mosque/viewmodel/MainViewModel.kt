@@ -38,16 +38,11 @@ class MainViewModel : ViewModel() {
     }
 
 
-
-
     fun turnOnGps(context: Context) {
         LocationUtils().turnGPSOn(context) {
             isGpsOn.value = it
         }
     }
-
-
-
 
 
 

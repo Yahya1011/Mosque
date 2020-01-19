@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/titleMosque"
+                style="@style/title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/title" />
+
+            <TextView
+                android:id="@+id/sub_title"
+                style="@style/desc_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleMosque"
+                tools:text="@string/alamat" />
+
+            <ImageView
+                android:id="@+id/image_poster"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sub_title" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_poster"
+                tools:layout_editor_absoluteX="5dp">
+
+                <TextView
+                    android:id="@+id/no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:padding="5dp"
+                    android:background="@drawable/bg_item_stroke"
+                    app:layout_constraintEnd_toStartOf="@+id/tanggal"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="No." />
+
+                <TextView
+                    android:id="@+id/tanggal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_item_stroke"
+                    android:padding="5dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/no"
+                    app:layout_constraintEnd_toStartOf="@+id/keterangan"
+                    app:layout_constraintStart_toEndOf="@+id/no"
+                    app:layout_constraintTop_toTopOf="@+id/no"
+                    android:text="Tanggal" />
+
+                <TextView
+                    android:id="@+id/keterangan"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Keterangan"
+                    android:background="@drawable/bg_item_stroke"
+                    app:layout_constraintBottom_toBottomOf="@+id/tanggal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tanggal"
+                    app:layout_constraintTop_toTopOf="@+id/tanggal" />
+
+                <TextView
+                    android:id="@+id/kredit"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="kredit"
+                    app:layout_constraintStart_toEndOf="@+id/keterangan"
+                    app:layout_constraintTop_toTopOf="@+id/keterangan" />
+
+                <TextView
+                    android:id="@+id/debit"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Debit"
+                    android:background="@drawable/bg_item_stroke"
+                    app:layout_constraintBottom_toBottomOf="@+id/kredit"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/kredit"
+                    app:layout_constraintTop_toTopOf="@+id/kredit"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_laporan"
+                android:layout_width="0dp"
+                android:layout_height="350dp"
+                android:layout_marginTop="5dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

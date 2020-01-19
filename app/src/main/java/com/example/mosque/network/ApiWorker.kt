@@ -28,8 +28,8 @@ object ApiWorker {
                     .addInterceptor(interceptor)
                     //.addInterceptor(AuthenticationInterceptor())/// show all JSON in logCat
                 mClient = httpBuilder.build()
-
             }
+
             return mClient!!
         }
 

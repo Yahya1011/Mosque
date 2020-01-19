@@ -1,5 +1,6 @@
 package com.example.mosque.view.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -9,18 +10,24 @@ import kotlinx.android.synthetic.main.activity_donasi.*
 
 class DonasiActivity : AppCompatActivity() {
 
+//    lateinit var button1: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donasi)
 
+        donasi.setOnClickListener {
+            val intent = Intent(this, DetailDonasiActivity::class.java)
+            startActivity(intent)
+        }
+
 //Radio button on click change
 
         grupRadio.setOnCheckedChangeListener(
             RadioGroup.OnCheckedChangeListener{
-                    group, checkedId ->
+                    group, checkId ->
 
-                val radio_langange: RadioButton = findViewById(checkedId)
+                val radio_langange: RadioButton = this.findViewById(checkId)
 
 
                 Toast.makeText(applicationContext," On Checked change :${radio_langange.text}",Toast.LENGTH_SHORT).show()
@@ -41,8 +48,9 @@ class DonasiActivity : AppCompatActivity() {
             }
         )
 
+
         // Get radio group selected status and text using button click event
-        button.setOnClickListener{
+        radio_group.setOnClickListener{
             // Get the checked radio button id from radio group
             var id: Int = radio_group.checkedRadioButtonId
             if (id!=-1){ // If any radio button checked from radio group
@@ -56,7 +64,7 @@ class DonasiActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT).show()
             }
         }
-        button.setOnClickListener{
+        grupRadio.setOnClickListener{
             // Get the checked radio button id from radio group
             var id: Int = grupRadio.checkedRadioButtonId
             if (id!=-1){ // If any radio button checked from radio group
