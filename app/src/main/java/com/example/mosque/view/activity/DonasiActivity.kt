@@ -44,7 +44,6 @@ class DonasiActivity : AppCompatActivity() {
 
                 Toast.makeText(applicationContext," On Checked change :${radio_langange.text}",Toast.LENGTH_SHORT).show()
 
-
             }
         )
 

@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mosque.R
 import com.example.mosque.model.LaporanModel
 import kotlinx.android.synthetic.main.item_laporan.view.*
+import java.text.NumberFormat
+import java.util.*
+
 
 class LaporanAdapter (var laporanItems: MutableList<LaporanModel>) : RecyclerView.Adapter<LaporanAdapter.LaporanHolder>() {
 
@@ -51,8 +54,10 @@ class LaporanAdapter (var laporanItems: MutableList<LaporanModel>) : RecyclerVie
 
         }
 
-        private fun inflateData(tanggal: String, keterangan: String, debit: String, kredit: String) {
+        private fun inflateData(tanggal: String, keterangan: String, debit: Int, kredit: Int) {
             var pos = adapterPosition+1;
+            val localeID = Locale("in", "ID")
+            val formatRupiah: NumberFormat = NumberFormat.getCurrencyInstance(localeID)
             itemView.no.text = pos.toString()
 
             tanggal.let {
@@ -64,11 +69,11 @@ class LaporanAdapter (var laporanItems: MutableList<LaporanModel>) : RecyclerVie
             }
 
             debit.let {
-                itemView.debit.text = it
+                itemView.debit.text = formatRupiah.format(it).replace("Rp","Rp ")
             }
 
             kredit.let {
-                itemView.kredit.text = it
+                itemView.kredit.text = formatRupiah.format(it).replace("Rp","Rp ")
             }
 
         }

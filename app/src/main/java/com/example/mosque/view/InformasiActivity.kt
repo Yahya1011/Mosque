@@ -26,11 +26,6 @@ class InformasiActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_informasi)
 
-//        donasi1.setOnClickListener{
-//            val intent = Intent (this, DonasiActivity::class.java)
-//            startActivity(intent)
-//        }
-
 
         viewModel = ViewModelProvider(this)[HomeViewModels::class.java]
         viewModel.refresh()
@@ -52,7 +47,7 @@ class InformasiActivity : AppCompatActivity() {
     private fun observeViewModel(){
         viewModel.mosquesData.observe(this, Observer{ mosques ->
             mosques?.let {
-                println("DATA ${it.size}")
+                println("DATA INFORMASI ${it.size}")
                 rv_masjid.visibility = View.VISIBLE
                 homeAdapter.updateHome(it)
                 homeAdapter.setOnItemClickListener(object : HomeAdapter.OnItemClickListener{

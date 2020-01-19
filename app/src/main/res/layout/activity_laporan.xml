@@ -30,7 +30,6 @@
                 style="@style/desc_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +65,8 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="No." />
+                    android:text="No."
+                    style="@style/header_table"/>
 
                 <TextView
                     android:id="@+id/tanggal"
@@ -78,7 +78,8 @@
                     app:layout_constraintEnd_toStartOf="@+id/keterangan"
                     app:layout_constraintStart_toEndOf="@+id/no"
                     app:layout_constraintTop_toTopOf="@+id/no"
-                    android:text="Tanggal" />
+                    android:text="Tanggal"
+                    style="@style/header_table"/>
 
                 <TextView
                     android:id="@+id/keterangan"
@@ -86,6 +87,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="Keterangan"
+                    style="@style/header_table"
                     android:background="@drawable/bg_item_stroke"
                     app:layout_constraintBottom_toBottomOf="@+id/tanggal"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -98,6 +100,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="kredit"
+                    style="@style/header_table"
                     app:layout_constraintStart_toEndOf="@+id/keterangan"
                     app:layout_constraintTop_toTopOf="@+id/keterangan" />
 
@@ -107,6 +110,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="Debit"
+                    style="@style/header_table"
                     android:background="@drawable/bg_item_stroke"
                     app:layout_constraintBottom_toBottomOf="@+id/kredit"
                     app:layout_constraintEnd_toEndOf="parent"

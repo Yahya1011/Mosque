@@ -50,12 +50,12 @@ class LaporanViewModel : ViewModel() {
 
     private fun fetchLaporan() {
         val mockData = listOf(
-            LaporanModel("2020-01-19","Infaq Hamba Allah","0","1000000"),
-            LaporanModel("2020-01-20","Beli Semen","200.000","0"),
-            LaporanModel("2020-01-19","Infaq Udin","0","10000000"),
-            LaporanModel("2020-01-20","Beli Semen","12.000.000","0"),
-            LaporanModel("2020-01-19","Infaq Asep","0","100000000"),
-            LaporanModel("2020-01-20","Beli Sapu","2.000.000","0")
+            LaporanModel("2020-01-19","Infaq Hamba Allah",0,1000000),
+            LaporanModel("2020-01-20","Beli Semen",200000,0),
+            LaporanModel("2020-01-19","Infaq Udin",0,10000000),
+            LaporanModel("2020-01-20","Beli Semen",12000000,0),
+            LaporanModel("2020-01-19","Infaq Asep",0,100000000),
+            LaporanModel("2020-01-20","Beli Sapu",200000,0)
         )
 
         laporanLoadError.value = false
