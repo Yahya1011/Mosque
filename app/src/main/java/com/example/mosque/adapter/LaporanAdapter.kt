@@ -68,13 +68,27 @@ class LaporanAdapter (var laporanItems: MutableList<LaporanModel>) : RecyclerVie
                 itemView.keterangan.text = it
             }
 
-            debit.let {
-                itemView.debit.text = formatRupiah.format(it).replace("Rp","Rp ")
+            if (debit ==  0 || debit.equals("null")){
+                debit.let {
+                    itemView.debit.text =  "-"
+                }
+            } else {
+                debit.let {
+                    itemView.debit.text = formatRupiah.format(it).replace("Rp","Rp ")
+                }
             }
 
-            kredit.let {
-                itemView.kredit.text = formatRupiah.format(it).replace("Rp","Rp ")
+
+            if (kredit  == 0 || kredit.equals("null")){
+                kredit.let {
+                    itemView.kredit.text = "-"
+                }
+            } else {
+                kredit.let {
+                    itemView.kredit.text = formatRupiah.format(it).replace("Rp","Rp ")
+                }
             }
+
 
         }
 

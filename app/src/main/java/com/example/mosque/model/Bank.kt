@@ -13,4 +13,5 @@ data class Bank(
     @SerializedName("name")
     @Expose
     val bankName: String
+
 )

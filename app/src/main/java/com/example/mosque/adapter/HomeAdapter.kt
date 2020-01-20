@@ -9,11 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.example.mosque.R
 import com.example.mosque.common.Constans
-import com.example.mosque.model.Bank
-import com.example.mosque.model.Mosque
-import com.example.mosque.model.Province
 import com.example.mosque.extention.getProgressDrawable
 import com.example.mosque.extention.loadImage
+import com.example.mosque.model.*
 import kotlinx.android.synthetic.main.row.view.*
 
 class HomeAdapter(var masjidItems: MutableList<Mosque>) :
@@ -69,11 +67,11 @@ class HomeAdapter(var masjidItems: MutableList<Mosque>) :
                 mosqueIdentity,
                 surfaceArea,
                 buildingArea,
-                mosqueLos,
-                mosqueSince,
+                los,
+                since,
                 bankId,
-                mosqueRek,
-                mosqueAddress,
+                rek,
+                address,
                 latitude,
                 longitude,
                 provinceId,
@@ -84,10 +82,10 @@ class HomeAdapter(var masjidItems: MutableList<Mosque>) :
                 kelId,
                 pic,
                 description,
-                bank,
+                bank  ,
                 province,
                 regency,
-                districts,
+                district,
                 village) = masjidItems[position]
 
             inflateData(
@@ -98,11 +96,11 @@ class HomeAdapter(var masjidItems: MutableList<Mosque>) :
                 mosqueIdentity,
                 surfaceArea,
                 buildingArea,
-                mosqueLos,
-                mosqueSince,
+                los,
+                since,
                 bankId,
-                mosqueRek,
-                mosqueAddress,
+                rek,
+                address,
                 latitude,
                 longitude,
                 provinceId,
@@ -113,27 +111,27 @@ class HomeAdapter(var masjidItems: MutableList<Mosque>) :
                 kelId,
                 pic,
                 description,
-                bank,
+                bank  ,
                 province,
                 regency,
-                districts,
+                district,
                 village
             )
         }
 
         private fun inflateData(
-            mosqueId: Int,
+            mmosqueId: Int,
             mosqueType: String,
             mosqueCode: String,
             mosqueName: String,
             mosqueIdentity: String,
             surfaceArea: String,
             buildingArea: String,
-            mosqueLos: String,
-            mosqueSince: String,
+            los: String,
+            since: String,
             bankId: String,
-            mosqueRek: String,
-            mosqueAddress: String,
+            rek: String,
+            address: String,
             latitude: String,
             longitude: String,
             provinceId: String,
@@ -144,10 +142,10 @@ class HomeAdapter(var masjidItems: MutableList<Mosque>) :
             kelId: String,
             pic: String,
             description: String,
-            bank: Bank,
+            bank : Bank,
             province: Province,
-            regency: String,
-            districts: String,
+            regency: Regency,
+            district: District,
             village: String
         ) {
 
@@ -160,7 +158,7 @@ class HomeAdapter(var masjidItems: MutableList<Mosque>) :
                 itemView.iconIv.loadImage(imgTarget + it, progressDrawable)
             }
 
-            mosqueAddress.let {
+            address.let {
                 itemView.descTv.text = it
             }
 

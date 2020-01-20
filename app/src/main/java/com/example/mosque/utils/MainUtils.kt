@@ -139,6 +139,22 @@ fun mTimeDifference(startTime: String, stopTime: String): String {
     }
 
 
+
+fun convertDateShortFromString (strResponsDate: String?): String {
+
+    if (strResponsDate.isNullOrEmpty()){
+        return  "-"
+    } else {
+        val format = SimpleDateFormat("yyyy-MM-dd", Locale("in", "ID"))
+        val date = format.parse(strResponsDate)
+        val mFormat = SimpleDateFormat("dd MMMM yyyy", Locale("in", "ID"))
+        return mFormat.format(date)
+    }
+
+
+}
+
+
 /**
  * Returns a formatted string containing the amount of time (days, hours,
  * minutes, seconds) between the current time and the specified future date.

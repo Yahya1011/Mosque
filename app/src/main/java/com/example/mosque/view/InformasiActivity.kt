@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mosque.R
 import com.example.mosque.adapter.HomeAdapter
 import com.example.mosque.model.Mosque
+import com.example.mosque.utils.EqualSpacingItemDecoration
 import com.example.mosque.view.activity.DonasiActivity
 import com.example.mosque.view.activity.Informasi1Activity
 import com.example.mosque.view.activity.LaporanActivity
@@ -32,7 +33,12 @@ class InformasiActivity : AppCompatActivity() {
 
 
         rv_masjid.apply{
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            addItemDecoration(EqualSpacingItemDecoration(
+                12,
+                EqualSpacingItemDecoration.HORIZONTAL
+            ))
+
             adapter = homeAdapter
         }
 

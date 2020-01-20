@@ -47,7 +47,7 @@ class LaporanActivity : AppCompatActivity() {
             mosques?.let {
                 println("DATA recive API ${it.mosqueName}")
                 titleMosque.text =it.mosqueName
-                sub_title.text = it.mosqueAddress
+                sub_title.text = it.address
                  progressDrawable= getProgressDrawable(this)
                  imgTarget = Constans.imageUrlPath
                 it.pic.let {

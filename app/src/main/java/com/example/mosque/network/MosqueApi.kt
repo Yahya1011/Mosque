@@ -9,8 +9,6 @@ import io.reactivex.Single
 import retrofit2.http.*
 
 interface MosqueApi {
-    @GET (MOSQUE)
-    fun getMosque() : Observable<List<Mosque>>
 
     @GET("{lokasi}/daily.json")
     fun getJadwalSholat(@Path ("lokasi") lokasi :String ,
@@ -18,6 +16,10 @@ interface MosqueApi {
 
     @GET("rest/public/mosques/{id}")
     fun getDetailMosque(@Path (value = "id") id: String): Single<Mosque>
+
+    @GET (MOSQUE)
+    fun getMosque() : Observable<List<Mosque>>
+
 
     /*@POST("rest/public/mosque_donations")
     @FormUrlEncoded

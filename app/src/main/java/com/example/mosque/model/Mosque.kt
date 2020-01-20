@@ -2,7 +2,6 @@ package com.example.mosque.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
 data class Mosque(
     @SerializedName("id")
@@ -28,19 +27,19 @@ data class Mosque(
     val buildingArea: String,
     @SerializedName("los")
     @Expose
-    val mosqueLos: String,
+    val los: String,
     @SerializedName("since")
     @Expose
-    val mosqueSince: String,
+    val since: String,
     @SerializedName("bank_id")
     @Expose
     val bankId: String,
     @SerializedName("rek")
     @Expose
-    val mosqueRek: String,
+    val rek: String,
     @SerializedName("address")
     @Expose
-    val mosqueAddress: String,
+    val address: String,
     @SerializedName("latitude")
     @Expose
     val latitude: String,
@@ -73,16 +72,16 @@ data class Mosque(
     val description: String,
     @SerializedName("bank")
     @Expose
-    val bank: Bank,
+    val bank : Bank ,
     @SerializedName("province")
     @Expose
     val province: Province,
     @SerializedName("regency")
     @Expose
-    val regency: String,
-    @SerializedName("districts")
+    val regency: Regency,
+    @SerializedName("district")
     @Expose
-    val districts: String,
+    val district: District,
     @SerializedName("village")
     @Expose
     val village: String
