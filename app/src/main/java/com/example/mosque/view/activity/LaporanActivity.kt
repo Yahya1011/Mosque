@@ -33,7 +33,7 @@ class LaporanActivity : AppCompatActivity() {
          reciveData()
         laporanViewModel = ViewModelProvider(this)[LaporanViewModel::class.java]
         laporanViewModel.refresh(valueId)
-        laporanViewModel.refreshLaporan()
+        laporanViewModel.refreshLaporan(valueId)
 
         rv_laporan.apply{
             layoutManager = LinearLayoutManager(context)

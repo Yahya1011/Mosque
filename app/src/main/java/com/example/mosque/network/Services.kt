@@ -27,6 +27,15 @@ object Services {
         .build()
         .create(MosqueApi::class.java)
 
+    fun getLaporanDetail() =  Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .client(ApiWorker.client)
+        .build()
+        .create(MosqueApi::class.java)
+
+
    /* fun getPostDonation() =  Retrofit.Builder()
         .baseUrl(SHALAT_BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())

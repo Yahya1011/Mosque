@@ -2,6 +2,7 @@ package com.example.mosque.network
 
 import com.example.mosque.R
 import com.example.mosque.model.Jadwal
+import com.example.mosque.model.LaporanModel
 import com.example.mosque.model.Mosque
 import com.example.mosque.network.ApiEndPoint.MOSQUE
 import io.reactivex.Observable
@@ -19,6 +20,9 @@ interface MosqueApi {
 
     @GET (MOSQUE)
     fun getMosque() : Observable<List<Mosque>>
+
+    @GET("rest/public/mosques_finance_details/{id}")
+    fun getDetailLaporan(@Path (value = "id") id: String): Single<LaporanModel>
 
 
     /*@POST("rest/public/mosque_donations")

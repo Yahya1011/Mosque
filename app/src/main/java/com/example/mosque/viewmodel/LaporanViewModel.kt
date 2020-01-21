@@ -44,22 +44,29 @@ class LaporanViewModel : ViewModel() {
                 }))
     }
 
-    fun refreshLaporan(){
-        fetchLaporan()
+    fun refreshLaporan(id: Int){
+        fetchLaporan(id)
     }
 
-    private fun fetchLaporan() {
-        val mockData = listOf(
-            LaporanModel("2020-01-19","Infaq Hamba Allah",0,1000000),
-            LaporanModel("2020-01-20","Beli Semen",200000,0),
-            LaporanModel("2020-01-19","Infaq Udin",0,10000000),
-            LaporanModel("2020-01-20","Beli Semen",12000000,0),
-            LaporanModel("2020-01-19","Infaq Asep",0,100000000),
-            LaporanModel("2020-01-20","Beli Sapu",200000,0)
-        )
+    private fun fetchLaporan(id: Int) {
+        loading.value = true
+        println("data = $id")
+        disposable.add(
+            Services.getLaporanDetail().getDetailLaporan(id.toString())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ laporanRespons ->
+                    println("LAPORAN RESP ${laporanRespons}")
 
-        laporanLoadError.value = false
-        loading.value = false
-        laporan.value = mockData
+                    laporan.value = listOf(laporanRespons)
+                    laporanLoadError.value = false
+                    loading.value = false
+//                    mosquesData.value = mosqueRespons
+//                    masjidLoadError.value = false
+//                    loading.value = false
+                },{ err->
+                    laporanLoadError.value = true
+                    loading.value = false
+                }))
     }
 }

@@ -48,46 +48,78 @@ class LaporanAdapter (var laporanItems: MutableList<LaporanModel>) : RecyclerVie
         }
 
         fun onBind(position: Int) {
-            val (tanggal, keterangan, debit, kredit) = laporanItems[position]
-            inflateData(tanggal, keterangan, debit, kredit
+            val (
+                id,
+                mosque_finance_id,
+                category_id,
+                sub_category_id,
+                information,
+                nominal,
+                mosque_finance,
+                category,
+                category_sub) = laporanItems[position]
+
+            inflateData(
+                id,
+                mosque_finance_id,
+                category_id,
+                sub_category_id,
+                information,
+                nominal,
+                mosque_finance,
+                category,
+                category_sub
             )
 
         }
 
-        private fun inflateData(tanggal: String, keterangan: String, debit: Int, kredit: Int) {
+        private fun inflateData(
+            id: Int,
+            mosque_finance_id: Int,
+            category_id: Int,
+            sub_category_id: Int,
+            information: String,
+            nominal: Double,
+            mosque_finance: String,
+            category: String,
+            category_sub: String
+            ) {
             var pos = adapterPosition+1;
             val localeID = Locale("in", "ID")
             val formatRupiah: NumberFormat = NumberFormat.getCurrencyInstance(localeID)
             itemView.no.text = pos.toString()
 
-            tanggal.let {
-                itemView.tanggal.text =  it
+            category_id.let {
+                itemView.tanggal.text = it.toString()
             }
 
-            keterangan.let {
+            information.let {
                 itemView.keterangan.text = it
             }
-
-            if (debit ==  0 || debit.equals("null")){
-                debit.let {
-                    itemView.debit.text =  "-"
-                }
-            } else {
-                debit.let {
-                    itemView.debit.text = formatRupiah.format(it).replace("Rp","Rp ")
-                }
+            nominal.let {
+                itemView.keterangan.text = it.toString()
             }
 
-
-            if (kredit  == 0 || kredit.equals("null")){
-                kredit.let {
-                    itemView.kredit.text = "-"
-                }
-            } else {
-                kredit.let {
-                    itemView.kredit.text = formatRupiah.format(it).replace("Rp","Rp ")
-                }
-            }
+//            if (debit ==  0 || debit.equals("null")){
+//                debit.let {
+//                    itemView.debit.text =  "-"
+//                }
+//            } else {
+//                debit.let {
+//                    itemView.debit.text = formatRupiah.format(it).replace("Rp","Rp ")
+//                }
+//            }
+//
+//
+//            if (kredit  == 0 || kredit.equals("null")){
+//                kredit.let {
+//                    itemView.kredit.text = "-"
+//                }
+//            } else {
+//                kredit.let {
+//                    itemView.kredit.text = formatRupiah.format(it).replace("Rp","Rp ")
+//                }
+//            }
 
 
         }
