@@ -147,7 +147,7 @@ fun convertDateShortFromString (strResponsDate: String?): String {
     } else {
         val format = SimpleDateFormat("yyyy-MM-dd", Locale("in", "ID"))
         val date = format.parse(strResponsDate)
-        val mFormat = SimpleDateFormat("dd MMMM yyyy", Locale("in", "ID"))
+        val mFormat = SimpleDateFormat("dd MM yyyy", Locale("in", "ID"))
         return mFormat.format(date)
     }
 

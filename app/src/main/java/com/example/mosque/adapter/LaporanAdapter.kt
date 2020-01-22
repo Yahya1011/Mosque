@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mosque.R
 import com.example.mosque.model.LaporanModel
+import com.example.mosque.utils.convertDateShortFromString
+import com.example.mosque.utils.convertTimeNoTimeZone
 import kotlinx.android.synthetic.main.item_laporan.view.*
 import java.text.NumberFormat
 import java.util.*
@@ -50,76 +52,84 @@ class LaporanAdapter (var laporanItems: MutableList<LaporanModel>) : RecyclerVie
         fun onBind(position: Int) {
             val (
                 id,
-                mosque_finance_id,
-                category_id,
-                sub_category_id,
+                mosqueFinanceId,
+                categoryId,
+                subCategoryId,
                 information,
                 nominal,
-                mosque_finance,
-                category,
-                category_sub) = laporanItems[position]
+                date,
+                userId,
+                mosqueId,
+                nama) = laporanItems[position]
 
             inflateData(
                 id,
-                mosque_finance_id,
-                category_id,
-                sub_category_id,
+                mosqueFinanceId,
+                categoryId,
+                subCategoryId,
                 information,
                 nominal,
-                mosque_finance,
-                category,
-                category_sub
+                date,
+                userId,
+                mosqueId,
+                nama
             )
 
         }
 
         private fun inflateData(
             id: Int,
-            mosque_finance_id: Int,
-            category_id: Int,
-            sub_category_id: Int,
+            mosqueFinanceId: String,
+            categoryId: String,
+            subCategoryId: String,
             information: String,
-            nominal: Double,
-            mosque_finance: String,
-            category: String,
-            category_sub: String
+            nominal: String,
+            date: String,
+            userId: String,
+            mosqueId: String,
+            nama: String
             ) {
-            var pos = adapterPosition+1;
+            var pos = adapterPosition+1
             val localeID = Locale("in", "ID")
-            val formatRupiah: NumberFormat = NumberFormat.getCurrencyInstance(localeID)
+            val numFormat: NumberFormat = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
             itemView.no.text = pos.toString()
 
-            category_id.let {
-                itemView.tanggal.text = it.toString()
+            date.let {
+                itemView.tanggal.text = convertDateShortFromString(it)
             }
 
             information.let {
                 itemView.keterangan.text = it
             }
-            nominal.let {
-                itemView.keterangan.text = it.toString()
-            }
 
-//            if (debit ==  0 || debit.equals("null")){
-//                debit.let {
-//                    itemView.debit.text =  "-"
-//                }
-//            } else {
-//                debit.let {
-//                    itemView.debit.text = formatRupiah.format(it).replace("Rp","Rp ")
-//                }
-//            }
-//
-//
-//            if (kredit  == 0 || kredit.equals("null")){
-//                kredit.let {
-//                    itemView.kredit.text = "-"
-//                }
-//            } else {
-//                kredit.let {
-//                    itemView.kredit.text = formatRupiah.format(it).replace("Rp","Rp ")
-//                }
-//            }
+            if (nama == "Pendapatan"){
+                if (nominal == "0" || nominal == ""){
+                    nominal.let {
+                        itemView.kredit.text =  "-"
+                        itemView.debit.text = "-"
+                    }
+                }  else {
+                    nominal.let {
+                        itemView.kredit.text = numFormat.format(it.toInt()).replace("Rp","Rp ")
+                    }
+
+                    itemView.debit.text = "-"
+                }
+
+            } else if (nama == "Pengeluaran") {
+                if (nominal == "0" || nominal == ""){
+                    nominal.let {
+                        itemView.kredit.text =  "-"
+                        itemView.debit.text = "-"
+                    }
+                }  else {
+                    nominal.let {
+                        itemView.debit.text = numFormat.format(it.toInt()).replace("Rp","Rp ")
+                    }
+
+                    itemView.kredit.text = "-"
+                }
+            }
 
 
         }

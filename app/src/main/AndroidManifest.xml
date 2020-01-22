@@ -47,7 +47,7 @@
         <activity android:name=".view.activity.DonasiActivity" />
         <activity android:name=".view.activity.MasjidSekitarActivity" />
         <activity android:name=".view.activity.AcaraActivity" />
-        <activity android:name=".view.activity.LaporanActivity" />
+        <activity android:name=".view.LaporanActivity" />
         <activity android:name=".view.activity.DetailDonasiActivity" />
         <activity android:name=".view.activity.KeuanganActivity" />
 

@@ -1,4 +1,4 @@
-package com.example.mosque.view.activity
+package com.example.mosque.view
 
 import android.os.Bundle
 import android.view.View
@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.example.mosque.R
-import com.example.mosque.adapter.HomeAdapter
 import com.example.mosque.adapter.LaporanAdapter
 import com.example.mosque.common.Constans
 import com.example.mosque.extention.getProgressDrawable

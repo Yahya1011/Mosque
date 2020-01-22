@@ -11,13 +11,8 @@ import com.example.mosque.R
 import com.example.mosque.adapter.HomeAdapter
 import com.example.mosque.model.Mosque
 import com.example.mosque.utils.EqualSpacingItemDecoration
-import com.example.mosque.view.activity.DonasiActivity
-import com.example.mosque.view.activity.Informasi1Activity
-import com.example.mosque.view.activity.LaporanActivity
-import com.example.mosque.view.activity.MasjidSekitarActivity
 import com.example.mosque.viewmodel.HomeViewModels
 import kotlinx.android.synthetic.main.activity_informasi.*
-import kotlinx.android.synthetic.main.row.*
 
 class InformasiActivity : AppCompatActivity() {
 

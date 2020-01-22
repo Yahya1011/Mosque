@@ -1,25 +1,38 @@
 package com.example.mosque.model
 
-
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class LaporanModel (
+data class LaporanModel(
     @SerializedName("id")
-    val id : Int,
+    @Expose
+    val id: Int,
     @SerializedName("mosque_finance_id")
-    val mosque_finance_id : Int,
+    @Expose
+    val mosqueFinanceId: String,
     @SerializedName("category_id")
-    val category_id : Int,
+    @Expose
+    val categoryId: String,
     @SerializedName("sub_category_id")
-    val sub_category_id : Int,
+    @Expose
+    val subCategoryId: String,
     @SerializedName("information")
-    val information : String,
+    @Expose
+    val information: String,
     @SerializedName("nominal")
-    val nominal : Double,
-    @SerializedName("mosque_finance")
-    val mosque_finance : String,
-    @SerializedName("category")
-    val category : String,
-    @SerializedName("category_sub")
-    val category_sub : String
+    @Expose
+    val nominal: String,
+    @SerializedName("date")
+    @Expose
+    val date: String,
+    @SerializedName("user_id")
+    @Expose
+    val userId: String,
+    @SerializedName("mosque_id")
+    @Expose
+    val mosqueId: String,
+    @SerializedName("nama")
+    @Expose
+    val nama: String
+
 )
