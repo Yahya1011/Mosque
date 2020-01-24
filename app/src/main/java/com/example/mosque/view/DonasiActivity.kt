@@ -6,6 +6,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -127,6 +128,7 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
     override fun onItemSelected(parent: MaterialSpinner, view: View?, position: Int, id: Long) {
         if (parent.id == 0) {
             showToast(this,"Maaf anda belum menetukan jenis donasi anda!!")
+
             parent.focusSearch(View.FOCUS_UP)?.requestFocus()
 
         }else {
