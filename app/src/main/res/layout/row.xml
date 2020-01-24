@@ -47,16 +47,104 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     tools:text="Description" />
-            
-            <TextView
-                android:id="@+id/donasi"
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/title_text"
-                android:text="Donasi"
-                android:textAlignment="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"/>
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@android:color/darker_gray"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/layout_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        style="@style/text_label_info"
+                        android:text="Dana Terkumpul"
+                        android:textAlignment="center"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        style="@style/text_label_info"
+                        android:text="Tahap Pembangunan"
+                        android:textAlignment="center"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:id="@+id/layout_info_laporan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/layout_label">
+
+
+                    <TextView
+                        android:id="@+id/dana_terkumpul"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        style="@style/text_label_info"
+                        tools:text="Rp 20.000.000"
+                        android:textAlignment="center"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/tahap_pembangunan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        style="@style/text_label_info"
+                        tools:text="30%"
+                        android:textAlignment="center"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_below="@+id/layout_info_laporan">
+                    <Button
+                        android:id="@+id/donasi"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"
+                        android:layout_marginTop="10dp"
+                        style="@style/button_style"
+                        android:text="Donasi"
+                        android:textAlignment="center"/>
+
+                    <Button
+                        android:id="@+id/info"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
+                        style="@style/button_style"
+                        android:text="Detail Keuangan"
+                        android:textAlignment="center"/>
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
         </LinearLayout>
 
 

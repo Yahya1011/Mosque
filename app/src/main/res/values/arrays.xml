@@ -15,4 +15,13 @@
 
     </string-array>
 
+    <string-array name="donasi_category">
+        <item>Pilih Jenis Donasi</item>
+        <item>Infak</item>
+        <item>Zakat</item>
+        <item>Wakaf</item>
+        <item>Operasional</item>
+        <item>Modal Kerja</item>
+    </string-array>
+
 </resources>

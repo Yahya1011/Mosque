@@ -1,127 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp">
 
     <TextView
+        android:id="@+id/tv_masjid_name"
+        style="@style/title_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Donasi"
-        android:textSize="30sp" />
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Masjid Darul Jannah" />
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/layout_info_masjid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_masjid_name">
+
+        <LinearLayout
+            android:id="@+id/thumbnail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/image_bg"
+            android:padding="3dip">
+
+            <ImageView
+                android:id="@+id/iv_masjid"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                app:srcCompat="@drawable/ic_logo" />
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_weight="5"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/lbl_nama_masjid"
+                    style="@style/text_label_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="Alamat : " />
+
+                <TextView
+                    android:id="@+id/alamatMasjid"
+                    style="@style/text_label_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/lbl_nama_masjid"
+                    tools:text="Alamat Masjid" />
+
+                <TextView
+                    android:id="@+id/tipe_masjid"
+                    style="@style/text_label_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lbl_nama_masjid"
+                    android:text="@string/tipe" />
+
+                <TextView
+                    android:id="@+id/tahun_berdiri"
+                    style="@style/text_label_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tipe_masjid"
+                    android:text="@string/tahun_berdiri" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="Masjid Darul Jannah"
-        android:textSize="20sp" />
+        android:hint="@string/nominal_donasi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_info_masjid">
 
-    <RadioGroup
-        android:id="@+id/radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:padding="15dp">
-
-        <TextView
-            android:id="@+id/title"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_nominal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Payment for :"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            style="@style/MyTextInputLayout"
+            android:inputType="number"/>
 
-        <RadioButton
-            android:id="@+id/wakaf"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="radio_button_click"
-            android:text="Wakaf" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <RadioButton
-            android:id="@+id/infaq"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="radio_button_click"
-            android:text="Infaq" />
 
-        <RadioButton
-            android:id="@+id/zakat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="radio_button_click"
-            android:text="Zakat" />
-    </RadioGroup>
 
-    <TextView
+
+    <com.tiper.MaterialSpinner
+        android:id="@+id/spinner_donation"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
-        android:text="Nominal"
-        android:textSize="16sp" />
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:dropDownWidth="300dp"
+        android:hint="Pilih Jenis Donasi"
+        android:popupBackground="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"/>
 
-    <EditText
+
+    <LinearLayout
+        android:id="@+id/layout_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:padding="10dp" />
-    <!--    <CheckBox-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:text="Sebagai Hamba Allah"-->
-    <!--            android:textSize="10sp"/>-->
-    <RadioGroup
-        android:id="@+id/grupRadio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:padding="15dp">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_donation">
 
-        <TextView
-            android:id="@+id/select_bank"
-            android:layout_width="match_parent"
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Select Bank :"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_weight="1"
+            android:layout_marginTop="12dp">
 
-        <RadioButton
-            android:id="@+id/mandiri"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="radio_button_click"
-            android:text="Bank Mandiri" />
+            <TextView
+                android:id="@+id/label_tipe_donasi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bentuk Donasi : "
+                android:layout_marginBottom="15dp" />
 
-        <RadioButton
-            android:id="@+id/bsm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="radio_button_click"
-            android:text="Bank Syariah Mandiri" />
+            <RadioButton
+                android:id="@+id/wakaf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="radio_button_click"
+                app:useMaterialThemeColors="false"
+                android:text="Wakaf" />
 
-        <RadioButton
-            android:id="@+id/bri"
-            android:layout_width="wrap_content"
+            <RadioButton
+                android:id="@+id/infaq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="radio_button_click"
+                android:text="Infaq" />
+
+            <RadioButton
+                android:id="@+id/zakat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="radio_button_click"
+                android:text="Zakat" />
+        </RadioGroup>
+
+
+        <RadioGroup
+            android:id="@+id/metode_pembayaran"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="radio_button_click"
-            android:text="Bank Rakyat Indonesia" />
-    </RadioGroup>
+            android:layout_weight="1.5"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:id="@+id/lbl_bank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bank Tujuan :"
+                android:layout_marginBottom="15dp" />
+
+            <RadioButton
+                android:id="@+id/mandiri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="radio_button_click"
+                app:useMaterialThemeColors="false"
+                android:text="Bank Mandiri" />
+
+            <RadioButton
+                android:id="@+id/bsm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="radio_button_click"
+                android:text="Bank Syariah Mandiri" />
+
+            <RadioButton
+                android:id="@+id/bri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="radio_button_click"
+                android:text="Bank Rakyat Indonesia" />
+        </RadioGroup>
+
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/donasi"
+        android:id="@+id/btn_donasi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="3dp"
-        android:text="Donasi" />
+        android:text="Kirim Donasi"
+        android:layout_marginTop="20dp"
+        style="@style/button_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_input" />
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

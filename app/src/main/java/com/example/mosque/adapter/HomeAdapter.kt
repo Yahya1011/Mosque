@@ -18,9 +18,15 @@ class HomeAdapter(var masjidItems: MutableList<Mosque>) :
     RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     var mContext: Context? = null
-    private var mOnItemClickListener: HomeAdapter.OnItemClickListener? = null
+    private var mOnInfoItemClickListener: HomeAdapter.OnInfoItemClickListener? = null
 
-    interface OnItemClickListener {
+    private var mOnDonasiItemClickListener: HomeAdapter.OnDonasiItemClickListener? = null
+
+    interface OnInfoItemClickListener {
+        fun onItemSelected(masjidItems: Mosque)
+    }
+
+    interface OnDonasiItemClickListener {
         fun onItemSelected(masjidItems: Mosque)
     }
 
@@ -45,14 +51,24 @@ class HomeAdapter(var masjidItems: MutableList<Mosque>) :
         notifyDataSetChanged()
     }
 
-    internal fun setOnItemClickListener(listener: OnItemClickListener) {
-        mOnItemClickListener = listener
+    internal fun setOnInfoItemClickListener(listener: OnInfoItemClickListener) {
+        mOnInfoItemClickListener = listener
+    }
+    internal fun setOnDonasiItemClickListener(listener: OnDonasiItemClickListener) {
+        mOnDonasiItemClickListener = listener
     }
 
     inner class HomeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
         override fun onClick(v: View?) {
-            mOnItemClickListener?.onItemSelected((masjidItems[adapterPosition]))
+
+            if (v == itemView.info){
+                mOnInfoItemClickListener?.onItemSelected((masjidItems[adapterPosition]))
+            } else if (v == itemView.donasi){
+                mOnDonasiItemClickListener?.onItemSelected((masjidItems[adapterPosition]))
+            }
+
+
         }
 
         fun clear() {
@@ -162,7 +178,8 @@ class HomeAdapter(var masjidItems: MutableList<Mosque>) :
                 itemView.descTv.text = it
             }
 
-            itemView.setOnClickListener(this)
+            itemView.donasi.setOnClickListener(this)
+            itemView.info.setOnClickListener(this)
 
         }
 

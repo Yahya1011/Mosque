@@ -25,26 +25,11 @@
     <string name="info_nav">Informasi</string>
     <string name="title">Nama Masjid</string>
     <string name="alamat">Alamat Masjid</string>
+    <string name="tipe">Tipe :</string>
+    <string name="tahun_berdiri">Tahun Berdiri :</string>
+    <string name="tipe_mushola">Tipe : Musholla</string>
+    <string name="tipe_masjid">Tipe : Masjid</string>
+    <string name="nominal_donasi">Masukkan Nominal Donasi</string>
 
 
-    <plurals name="days">
-        <item quantity="zero">%d Hari</item>
-        <item quantity="one">%d Hari</item>
-        <item quantity="other">%d Hari</item>
-    </plurals>
-    <plurals name="hours">
-        <item quantity="zero">%d Jam</item>
-        <item quantity="one">%d Jam</item>
-        <item quantity="other">%d Jam</item>
-    </plurals>
-    <plurals name="minutes">
-        <item quantity="zero">%d Menit</item>
-        <item quantity="one">%d Menit</item>
-        <item quantity="other">%d Menit</item>
-    </plurals>
-    <plurals name="seconds">
-        <item quantity="zero">%d Detik</item>
-        <item quantity="one">%d Detik</item>
-        <item quantity="other">%d Detik</item>
-    </plurals>
 </resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/saldolbl"
+        android:layout_width="172dp"
+        android:layout_height="match_parent"
+        android:textAlignment="textEnd"
+        style="@style/content_table_label"
+        android:text="Saldo"/>
+
+    <TextView
+        android:id="@+id/debitlbl"
+        android:layout_width="74dp"
+        android:layout_height="match_parent"
+        android:textAlignment="textEnd"
+        style="@style/content_table_label"
+        tools:text="Debit" />
+
+    <TextView
+        android:id="@+id/kreditlbl"
+        android:layout_width="74dp"
+        android:layout_height="match_parent"
+        style="@style/content_table_label"
+        tools:text="Kredit"
+        android:textAlignment="textEnd" />
+
+</LinearLayout>
+

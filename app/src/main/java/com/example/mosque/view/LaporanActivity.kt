@@ -13,6 +13,7 @@ import com.example.mosque.common.Constans
 import com.example.mosque.extention.getProgressDrawable
 import com.example.mosque.extention.loadImage
 import com.example.mosque.viewmodel.LaporanViewModel
+import kotlinx.android.synthetic.main.activity_donasi.*
 import kotlinx.android.synthetic.main.activity_laporan.*
 
 
@@ -52,6 +53,11 @@ class LaporanActivity : AppCompatActivity() {
                 it.pic.let {
                     image_poster.loadImage(imgTarget + it, progressDrawable!!)
                 }
+
+
+
+
+
             }
         })
 
@@ -75,6 +81,8 @@ class LaporanActivity : AppCompatActivity() {
         return valueId
 
     }
+
+
 
 
 

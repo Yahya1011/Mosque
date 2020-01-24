@@ -8,6 +8,10 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.mosque.R
 import com.example.mosque.common.Constans
@@ -147,7 +151,7 @@ fun convertDateShortFromString (strResponsDate: String?): String {
     } else {
         val format = SimpleDateFormat("yyyy-MM-dd", Locale("in", "ID"))
         val date = format.parse(strResponsDate)
-        val mFormat = SimpleDateFormat("dd MM yyyy", Locale("in", "ID"))
+        val mFormat = SimpleDateFormat("dd MMM yyyy", Locale("in", "ID"))
         return mFormat.format(date)
     }
 
@@ -155,46 +159,24 @@ fun convertDateShortFromString (strResponsDate: String?): String {
 }
 
 
-/**
- * Returns a formatted string containing the amount of time (days, hours,
- * minutes, seconds) between the current time and the specified future date.
- *
- * @param context
- * @param futureDate
- * @return
- */
-fun getCountdownText(context: Context, futureDate: Date): CharSequence? {
-    println("MAIN UTILSD $futureDate")
-    val countdownText = StringBuilder()
-    // Calculate the time between now and the future date.
-    var timeRemaining = futureDate.time - Date().time
-    // If there is no time between (ie. the date is now or in the past), do nothing
-    if (timeRemaining > 0) {
-        val resources: Resources = context.resources
-        // Calculate the days/hours/minutes/seconds within the time difference.
-        //
-        // It's important to subtract the value from the total time remaining after each is calculated.
-        // For example, if we didn't do this and the time was 25 hours from now,
-        // we would get `1 day, 25 hours`.
-        val hours = TimeUnit.MILLISECONDS.toHours(timeRemaining) as Int
-        timeRemaining -= TimeUnit.HOURS.toMillis(hours.toLong())
-        val minutes = TimeUnit.MILLISECONDS.toMinutes(timeRemaining) as Int
-        timeRemaining -= TimeUnit.MINUTES.toMillis(minutes.toLong())
-        val seconds = TimeUnit.MILLISECONDS.toSeconds(timeRemaining)as Int
-        // For each time unit, add the quantity string to the output, with a space.
-        if ( hours > 0) {
-            countdownText.append(resources.getQuantityString(R.plurals.hours, hours, hours))
-            countdownText.append(" ")
+fun EditText.smartTextWatcher(on: (String) -> Unit, after: (String) -> Unit, before: (String) -> Unit) {
+    this.addTextChangedListener(object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+            after.invoke(s.toString())
         }
-        if (hours > 0 || minutes > 0) {
-            countdownText.append(resources.getQuantityString(R.plurals.minutes, minutes, minutes))
-            countdownText.append(" ")
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            before.invoke(s.toString())
         }
-        if (hours > 0 || minutes > 0 || seconds > 0) {
-            countdownText.append(resources.getQuantityString(R.plurals.seconds, seconds, seconds))
-            countdownText.append(" ")
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            on.invoke(s.toString())
         }
-    }
-    return countdownText.toString()
+    })
 }
+
+fun showToast(context: Context , message: String, duration: Int = Toast.LENGTH_LONG) {
+    Toast.makeText(context, message, duration).show()
+}
+
 

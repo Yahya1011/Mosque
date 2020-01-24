@@ -46,76 +46,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sub_title" />
 
-            <LinearLayout
-                android:id="@+id/layout_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_poster">
-
-                <TextView
-                    android:id="@+id/no"
-                    style="@style/content_table_label"
-                    android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:textAlignment="center"
-                    android:text="No" />
-
-                <TextView
-                    android:id="@+id/tanggal"
-                    style="@style/content_table_label"
-                    android:layout_width="60dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"
-                    android:textAlignment="center"
-                    android:layout_weight="0.2"
-                    android:text="Tanggal" />
-
-                <TextView
-                    android:id="@+id/keterangan"
-                    style="@style/content_table_label"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textAlignment="center"
-                    android:layout_weight="0.3"
-                    android:text="Keterangan" />
-
-                <TextView
-                    android:id="@+id/kredit"
-                    style="@style/content_table_label"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:textAlignment="center"
-                    android:text="Kredit" />
-
-                <TextView
-                    android:id="@+id/debit"
-                    style="@style/content_table_label"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:textAlignment="center"
-                    android:text="Debet" />
-
-            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_laporan"
                 android:layout_width="0dp"
-                android:layout_height="350dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_label">
-            </androidx.recyclerview.widget.RecyclerView>
-
-
+                app:layout_constraintTop_toBottomOf="@+id/image_poster" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

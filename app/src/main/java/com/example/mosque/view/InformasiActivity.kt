@@ -51,10 +51,18 @@ class InformasiActivity : AppCompatActivity() {
                 println("DATA INFORMASI ${it.size}")
                 rv_masjid.visibility = View.VISIBLE
                 homeAdapter.updateHome(it)
-                homeAdapter.setOnItemClickListener(object : HomeAdapter.OnItemClickListener{
+                homeAdapter.setOnInfoItemClickListener(object : HomeAdapter.OnInfoItemClickListener{
                     override fun onItemSelected(masjidItems: Mosque) {
-                        setOnClickItem(masjidItems.mosqueId)
+                        setOnClickItemInfo(masjidItems.mosqueId)
+
                     }
+                })
+
+                homeAdapter.setOnDonasiItemClickListener(object : HomeAdapter.OnDonasiItemClickListener{
+                    override fun onItemSelected(masjidItems: Mosque) {
+                        setOnClickItemDonate(masjidItems.mosqueId)
+                    }
+
                 })
             }
         })
@@ -75,9 +83,16 @@ class InformasiActivity : AppCompatActivity() {
 
     }
 
-    private fun setOnClickItem(mosqueId: Int){
-        println("$mosqueId")
+    private fun setOnClickItemInfo(mosqueId: Int){
+        println("Laporan $mosqueId")
         val intent = Intent(this, LaporanActivity::class.java)
+        intent.putExtra("key", mosqueId)
+        startActivity(intent)
+    }
+
+    private fun setOnClickItemDonate(mosqueId: Int){
+        println("Donasi $mosqueId")
+        val intent = Intent(this, DonasiActivity::class.java)
         intent.putExtra("key", mosqueId)
         startActivity(intent)
     }

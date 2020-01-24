@@ -25,7 +25,6 @@ import com.example.mosque.common.Constans.LOCATION_REQUEST
 import com.example.mosque.model.MainNav
 import com.example.mosque.utils.*
 import com.example.mosque.view.activity.AcaraActivity
-import com.example.mosque.view.activity.DonasiActivity
 import com.example.mosque.view.activity.MasjidSekitarActivity
 import com.example.mosque.viewmodel.MainNavViewModel
 import com.example.mosque.viewmodel.MainViewModel
