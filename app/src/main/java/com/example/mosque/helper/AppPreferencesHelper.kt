@@ -38,11 +38,11 @@ class AppPreferencesHelper(context: Context) : PreferencesHelper {
     }
 
     override fun isLoginIn(): Boolean {
-        return true
+        return false
     }
 
     override fun setLogin(logIn: Boolean) {
-        mPrefs.edit().putBoolean(Constans.PREF_KEY_ISLOGIN,false)
+        mPrefs.edit().putBoolean(Constans.PREF_KEY_ISLOGIN,true)
     }
 
 

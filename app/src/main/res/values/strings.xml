@@ -32,6 +32,6 @@
     <string name="nominal_donasi">Masukkan Nominal Donasi</string>
     <string name="MasukkanEmail">Masukkan Email Anda</string>
     <string name="MasukkanPassword">Masukkan Password Anda</string>
-    <string name="register">No account yet? Create one</string>
+    <string name="register">Tidak punya akun? Daftar di sini</string>
 
 </resources>

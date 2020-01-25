@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.MainActivity">
+    tools:context=".view.MainActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:id="@+id/nav"
         android:layout_alignParentBottom="true"
         app:itemTextColor="#000000"
-        app:itemBackground="@color/WhiteColor"
+        app:itemBackground="@color/colorWhite"
         android:background="?android:attr/windowBackground"
         app:menu="@menu/main_menu" />
 

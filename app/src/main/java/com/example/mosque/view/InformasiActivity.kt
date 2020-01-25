@@ -29,10 +29,10 @@ class InformasiActivity : AppCompatActivity() {
 
         rv_masjid.apply{
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            addItemDecoration(EqualSpacingItemDecoration(
+            /*addItemDecoration(EqualSpacingItemDecoration(
                 12,
                 EqualSpacingItemDecoration.HORIZONTAL
-            ))
+            ))*/
 
             adapter = homeAdapter
         }
