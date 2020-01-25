@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mosque.R
+import com.example.mosque.view.LaporanActivity
 
 class KeuanganActivity : AppCompatActivity() {
 
@@ -47,7 +48,7 @@ class KeuanganActivity : AppCompatActivity() {
         button5 = findViewById<Button>(R.id.keuangan)
 
         button5.setOnClickListener{
-            val intent = Intent(this, Informasi1Activity::class.java)
+            val intent = Intent(this, LaporanActivity::class.java)
             startActivity(intent)
         }
     }

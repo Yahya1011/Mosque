@@ -50,6 +50,7 @@
         <activity android:name=".view.LaporanActivity" />
         <activity android:name=".view.activity.DetailDonasiActivity" />
         <activity android:name=".view.activity.KeuanganActivity" />
+        <activity android:name=".view.LoginActivity"/>
 
         <service
             android:name=".utils.LocationService"

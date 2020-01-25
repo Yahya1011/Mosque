@@ -11,12 +11,19 @@
     <color name="red_700">#2196F3</color>
     <color name="blue_100">#00BCD4</color>
     <color name="blue_300">#7BAAF7</color>
-    <color name="blue_500">#009688</color>
     <color name="blue_700">#3367D6</color>
     <color name="green_100">#CDDC39</color>
     <color name="green_300">#57BB8A</color>
     <color name="green_500">#673AB7</color>
     <color name="green_700">#0B8043</color>
     <color name="color_actions">#0ABC49</color>
+
+    <!--color untuk gradient tansition-->
+    <color name="purple_500">#9c27b0</color>
+    <color name="deep_purple_500">#673ab7</color>
+    <color name="indigo_500">#3f51b5</color>
+    <color name="blue_500">#2196f3</color>
+    <color name="cyan_500">#00bcd4</color>
+    <color name="light_blue_500">#03a9f4</color>
 
 </resources>

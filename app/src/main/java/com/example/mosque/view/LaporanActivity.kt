@@ -1,5 +1,6 @@
 package com.example.mosque.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -12,12 +13,15 @@ import com.example.mosque.adapter.LaporanAdapter
 import com.example.mosque.common.Constans
 import com.example.mosque.extention.getProgressDrawable
 import com.example.mosque.extention.loadImage
+import com.example.mosque.helper.AppPreferencesHelper
+import com.example.mosque.view.activity.KeuanganActivity
 import com.example.mosque.viewmodel.LaporanViewModel
-import kotlinx.android.synthetic.main.activity_donasi.*
 import kotlinx.android.synthetic.main.activity_laporan.*
 
 
 class LaporanActivity : AppCompatActivity() {
+    lateinit var mPrefData: AppPreferencesHelper
+    private val isLogin: Boolean = false
     var valueId: Int = 0
     lateinit var laporanViewModel: LaporanViewModel
     private val laporanAdapter = LaporanAdapter(ArrayList())
@@ -30,7 +34,21 @@ class LaporanActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_laporan)
 
-         reciveData()
+        mPrefData = AppPreferencesHelper(this)
+        println(mPrefData.isLoginIn())
+
+        fab.setOnClickListener {
+            if (mPrefData.isLoginIn()){
+                val intent = Intent(this@LaporanActivity, KeuanganActivity::class.java)
+                startActivity(intent)
+            }else{
+                val intent = Intent(this@LaporanActivity, LoginActivity::class.java)
+                startActivity(intent)
+            }
+
+        }
+
+        reciveData()
         laporanViewModel = ViewModelProvider(this)[LaporanViewModel::class.java]
         laporanViewModel.refresh(valueId)
         laporanViewModel.refreshLaporan(valueId)
@@ -73,9 +91,11 @@ class LaporanActivity : AppCompatActivity() {
 
     private fun reciveData() : Int {
         val extras = intent.extras
-        if (extras != null) {
-            valueId = extras.getInt("key")
-            //The key argument here must match that used in the other activity
+        when {
+            extras != null -> {
+                valueId = extras.getInt("key")
+                //The key argument here must match that used in the other activity
+            }
         }
 
         return valueId
@@ -85,6 +105,4 @@ class LaporanActivity : AppCompatActivity() {
 
 
 
-
 }
-

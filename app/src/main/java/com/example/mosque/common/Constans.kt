@@ -33,4 +33,11 @@ object Constans {
         START,
         STOP
     }
+    // Preferences
+    const val NULL_INDEX: Long = -1L
+    const val PREF_KEY_CURRENT_USER_EMAIL: String ="PREF_KEY_CURRENT_USER_EMAIL"
+    const val PREF_KEY_ACCESS_TOKEN: String = "PREF_KEY_ACCESS_TOKEN"
+    const val PREF_FILE_NAME: String = "yukamal"
+    const val PREF_KEY_CURRENT_USER_ID: String = "PREF_KEY_CURRENT_USER_ID"
+    const val PREF_KEY_ISLOGIN: String = "PREF_KEY_ISLOGIN"
 }

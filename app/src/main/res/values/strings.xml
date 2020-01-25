@@ -30,6 +30,8 @@
     <string name="tipe_mushola">Tipe : Musholla</string>
     <string name="tipe_masjid">Tipe : Masjids</string>
     <string name="nominal_donasi">Masukkan Nominal Donasi</string>
-
+    <string name="MasukkanEmail">Masukkan Email Anda</string>
+    <string name="MasukkanPassword">Masukkan Password Anda</string>
+    <string name="register">No account yet? Create one</string>
 
 </resources>
