@@ -26,11 +26,12 @@ interface MosqueApi {
 
     @POST("rest/public/mosque_donations")
     @FormUrlEncoded
-    fun donationSubmit(@Query (value = "mosque_identity") mosque_identity: String,
-                       @Query (value = "user_id") user_id: String,
-                       @Query (value = "bank") bank: String,
-                       @Query (value = "date") date: String,
-                       @Query (value = "sub_category_id") sub_category_id: String,
-                       @Query (value = "nominal") nominal: Int,
-                       @Query (value = "status") status: Int): Observable<Mosque>
+    fun donationSubmit(@Header("Authorization") token: String,
+                       @Field (value = "mosque_identity") mosque_identity: String,
+                       @Field (value = "user_id") user_id: String,
+                       @Field (value = "bank") bank: String,
+                       @Field (value = "date") date: String,
+                       @Field (value = "sub_category_id") sub_category_id: String,
+                       @Field (value = "nominal") nominal: Int,
+                       @Field (value = "status") status: Int): Observable<Mosque>
 }

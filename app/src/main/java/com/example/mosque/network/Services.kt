@@ -36,11 +36,11 @@ object Services {
         .create(MosqueApi::class.java)
 
 
-   /* fun getPostDonation() =  Retrofit.Builder()
-        .baseUrl(SHALAT_BASE_URL)
+    fun getPostDonation() =  Retrofit.Builder()
+        .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .client(ApiWorker.privateClient)
         .build()
-        .create(MosqueApi::class.java)*/
+        .create(MosqueApi::class.java)
 }
