@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/bgHeader"
         android:layout_width="match_parent"
@@ -51,31 +52,40 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/bgHeader"
         android:layout_margin="20dp">
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="4dp">
+                app:cardElevation="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <LinearLayout
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:paddingBottom="50dp">
+                    android:paddingBottom="10dp">
+
+
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/inputLayoutNama"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Nama Lengkap"
                         android:layout_marginTop="10dp"
+                        android:hint="Nama Lengkap"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/emailInputLayout"
@@ -87,7 +97,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPersonName"
-                            />
+                            android:maxLength="50"
+                            android:maxLines="1" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,11 +108,11 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="UserName"
                         android:layout_marginTop="10dp"
+                        android:hint="UserName"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/emailInputLayout"
+                        app:layout_constraintTop_toBottomOf="@+id/inputLayoutNama"
                         app:startIconDrawable="@drawable/ic_user">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -110,7 +121,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPersonName"
-                            />
+                            android:maxLength="20"
+                            android:maxLines="1" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -119,11 +131,11 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Email"
                         android:layout_marginTop="10dp"
+                        android:hint="Email"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/emailInputLayout"
+                        app:layout_constraintTop_toBottomOf="@+id/inputLayoutUsername"
                         app:startIconDrawable="@drawable/ic_email">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -132,7 +144,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textEmailAddress"
-                            />
+                            android:maxLength="100"
+                            android:maxLines="1" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -141,11 +154,11 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Password"
                         android:layout_marginTop="10dp"
+                        android:hint="Password"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/emailInputLayout"
+                        app:layout_constraintTop_toBottomOf="@+id/inputLayoutEmail"
                         app:startIconDrawable="@drawable/ic_pass">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -154,7 +167,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPassword"
-                            />
+                            android:maxLength="30"
+                            android:maxLines="1" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -163,33 +177,36 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Password Konfirmasi"
                         android:layout_marginTop="10dp"
+                        android:hint="Password Konfirmasi"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/emailInputLayout"
+                        app:layout_constraintTop_toBottomOf="@+id/inputLayoutPassword"
                         app:startIconDrawable="@drawable/ic_pass">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/input_konfirmasi_passwod"
+                            android:id="@+id/input_konfirmasi_password"
                             style="@style/MyTextInputLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPassword"
-                            />
+                            android:maxLength="30"
+                            android:maxLines="1" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
+
             <RelativeLayout
+                android:id="@+id/relativeLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/cv"
-                android:layout_marginLeft="35dp"
-                android:layout_marginTop="-30dp"
-                android:layout_marginRight="35dp"
-                android:elevation="10dp">
+                android:elevation="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cv">
 
                 <Button
                     android:id="@+id/btn_register"
@@ -204,15 +221,15 @@
                     android:id="@+id/link_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textSize="16dp"
-                    android:fontFamily="@font/poppins_bold"
-                    android:layout_marginTop="15dp"
                     android:layout_below="@+id/btn_register"
-                    android:text="Sudah punya akun? Login di Sini" />
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Sudah punya akun? Login di Sini"
+                    android:textAlignment="center"
+                    android:textSize="16dp" />
 
             </RelativeLayout>
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>

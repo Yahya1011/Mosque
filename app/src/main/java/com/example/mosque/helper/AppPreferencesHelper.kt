@@ -16,7 +16,7 @@ class AppPreferencesHelper(context: Context) : PreferencesHelper {
     }
 
     override fun setAccessToken(accessToken: String?) {
-        mPrefs.edit().putString(Constans.PREF_KEY_ACCESS_TOKEN,accessToken)
+        mPrefs.edit().putString(Constans.PREF_KEY_ACCESS_TOKEN, accessToken).apply()
     }
 
     override fun getCurrentUserEmail(): String? {
@@ -24,7 +24,7 @@ class AppPreferencesHelper(context: Context) : PreferencesHelper {
     }
 
     override fun setCurrentUserEmail(email: String?) {
-        mPrefs.edit().putString(Constans.PREF_KEY_CURRENT_USER_EMAIL,email)
+        mPrefs.edit().putString(Constans.PREF_KEY_CURRENT_USER_EMAIL,email).apply()
     }
 
     override fun getCurrentUserId(): Long? {
@@ -42,7 +42,11 @@ class AppPreferencesHelper(context: Context) : PreferencesHelper {
     }
 
     override fun setLogin(logIn: Boolean) {
-        mPrefs.edit().putBoolean(Constans.PREF_KEY_ISLOGIN,true)
+        mPrefs.edit().putBoolean(Constans.PREF_KEY_ISLOGIN,true).apply()
+    }
+
+    override fun clearToken() {
+        mPrefs.edit().remove("PREF_KEY_ACCESS_TOKEN").apply()
     }
 
 

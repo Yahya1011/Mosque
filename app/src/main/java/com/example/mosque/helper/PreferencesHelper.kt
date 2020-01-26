@@ -17,4 +17,5 @@ interface PreferencesHelper {
     fun isLoginIn() : Boolean
 
     fun setLogin(logIn:Boolean)
+    fun clearToken()
 }

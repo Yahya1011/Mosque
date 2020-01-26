@@ -1,25 +1,39 @@
 package com.example.mosque.view
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.mosque.CustomProgressBar
 import com.example.mosque.R
+import com.example.mosque.helper.AppPreferencesHelper
 import com.example.mosque.view.activity.KeuanganActivity
+import com.example.mosque.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.input_email
+import kotlinx.android.synthetic.main.activity_register.*
 
 
 class LoginActivity : AppCompatActivity() {
 
+    lateinit var mPrefData: AppPreferencesHelper
     lateinit var animationDrawable: AnimationDrawable
+    lateinit var loginViewModel : LoginViewModel
+    var email: String =" "
+    var password: String =" "
     val progressBar = CustomProgressBar()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        mPrefData = AppPreferencesHelper(this)
+        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         initialView()
 
@@ -36,9 +50,10 @@ class LoginActivity : AppCompatActivity() {
                     progressBar.dialog.dismiss()
 
                }else{
-                    progressBar.dialog.dismiss()
-                    val intent = Intent(this@LoginActivity, KeuanganActivity::class.java)
-                    startActivity(intent)
+
+                   println("INPUT DATA $email, $password")
+                    loginViewModel.submitLogin( email, password)
+                   observerViewModel()
                }
             }
         })
@@ -50,6 +65,30 @@ class LoginActivity : AppCompatActivity() {
             }
         })
     }
+
+    private fun observerViewModel() {
+        loginViewModel.loginData.observe(this, Observer {loginResponds->
+            loginResponds.let {
+                println("Login $it")
+                if(mPrefData.getAccessToken()== it.token){
+                    progressBar.dialog.dismiss()
+                    mPrefData.setLogin(true)
+                    intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else{
+                    progressBar.dialog.dismiss()
+                    if (mPrefData.getAccessToken() != null){
+                        mPrefData.clearToken()
+                        mPrefData.setAccessToken(it.token)
+                    }
+
+                }
+            }
+
+        })
+    }
+
 
     private fun initialView() {
 
@@ -79,15 +118,15 @@ class LoginActivity : AppCompatActivity() {
 
     fun validate(): Boolean {
         var valid = true
-        val email: String = input_email.getText().toString()
-        val password: String = input_pass.getText().toString()
+        email = input_email.getText().toString()
+        password = input_pass.getText().toString()
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             input_email.error = "enter a valid email address"
             valid = false
         } else {
             input_email.error = null
         }
-        if (password.isEmpty() || password.length < 4 || password.length > 10) {
+        if (password.isEmpty() || password.length < 4 || password.length > 30) {
             input_pass.error = "between 4 and 10 alphanumeric characters"
             valid = false
         } else {
