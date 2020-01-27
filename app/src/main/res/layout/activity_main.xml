@@ -163,7 +163,7 @@
                     android:id="@+id/progressJadwal"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    style="@style/progress_green"
+                    style="@style/costumProgress"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

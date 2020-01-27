@@ -4,6 +4,7 @@ import com.example.mosque.network.ApiEndPoint
 
 object Constans {
 
+
     const val imageUrlPath : String = ApiEndPoint.BASE_URL + "uploads/"
     const val KEYAPI: String = "8e73c89b39aa03da7b1a1c97b57d531f"
     const val LOG_TAG = "LOG_TAG"
@@ -40,4 +41,10 @@ object Constans {
     const val PREF_FILE_NAME: String = "yukamal"
     const val PREF_KEY_CURRENT_USER_ID: String = "PREF_KEY_CURRENT_USER_ID"
     const val PREF_KEY_ISLOGIN: String = "PREF_KEY_ISLOGIN"
+
+    const val PREF_KEY_USER_ROLE: String = "PREF_KEY_USER_ROLE"
+
+
+    const val FIRST_PAGE = 1
+    const val POST_PER_PAGE = 10
 }

@@ -16,7 +16,7 @@ class AppPreferencesHelper(context: Context) : PreferencesHelper {
     }
 
     override fun setAccessToken(accessToken: String?) {
-        mPrefs.edit().putString(Constans.PREF_KEY_ACCESS_TOKEN,accessToken)
+        mPrefs.edit().putString(Constans.PREF_KEY_ACCESS_TOKEN, accessToken).apply()
     }
 
     override fun getCurrentUserEmail(): String? {
@@ -24,7 +24,7 @@ class AppPreferencesHelper(context: Context) : PreferencesHelper {
     }
 
     override fun setCurrentUserEmail(email: String?) {
-        mPrefs.edit().putString(Constans.PREF_KEY_CURRENT_USER_EMAIL,email)
+        mPrefs.edit().putString(Constans.PREF_KEY_CURRENT_USER_EMAIL,email).apply()
     }
 
     override fun getCurrentUserId(): Long? {
@@ -38,11 +38,27 @@ class AppPreferencesHelper(context: Context) : PreferencesHelper {
     }
 
     override fun isLoginIn(): Boolean {
-        return false
+        return  mPrefs.getBoolean(Constans.PREF_KEY_ISLOGIN, false)
     }
 
-    override fun setLogin(logIn: Boolean) {
-        mPrefs.edit().putBoolean(Constans.PREF_KEY_ISLOGIN,true)
+    override fun setLoginIn(logIn: Boolean?) {
+        mPrefs.edit().putBoolean(Constans.PREF_KEY_ISLOGIN, false).apply()
+    }
+
+    override fun clearToken() {
+        mPrefs.edit().remove("PREF_KEY_ACCESS_TOKEN").apply()
+    }
+
+    override fun getRoleUser(): String? {
+        return mPrefs.getString(Constans.PREF_KEY_USER_ROLE,null)
+    }
+
+    override fun setRoleUser(userRole: String?) {
+        mPrefs.edit().putString(Constans.PREF_KEY_USER_ROLE,userRole).apply()
+    }
+
+    override fun clearRole() {
+        mPrefs.edit().remove("PREF_KEY_USER_ROLE").apply()
     }
 
 

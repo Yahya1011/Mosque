@@ -3,6 +3,7 @@ package com.example.mosque.network
 import com.example.mosque.model.Jadwal
 import com.example.mosque.model.LaporanModel
 import com.example.mosque.model.Mosque
+import com.example.mosque.model.respons.ApiRespons
 import com.example.mosque.network.ApiEndPoint.MOSQUE
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -18,9 +19,9 @@ interface MosqueApi {
     fun getDetailMosque(@Path (value = "id") id: String): Single<Mosque>
 
     @GET (MOSQUE)
-    fun getMosque() : Observable<List<Mosque>>
+    fun getMosque(@Query("page") page: Int) : Observable<ApiRespons.MosqueRespons>
 
-    @GET("rest/public/mosque_finance_details/{id}")
+    @GET("rest/public/mosque_finance_details/neraca/{id}")
     fun getDetailLaporan(@Path (value = "id") id: String): Single<List<LaporanModel>>
 
 
@@ -33,5 +34,18 @@ interface MosqueApi {
                        @Field (value = "date") date: String,
                        @Field (value = "sub_category_id") sub_category_id: String,
                        @Field (value = "nominal") nominal: Int,
-                       @Field (value = "status") status: Int): Observable<Mosque>
+                       @Field (value = "status") status: Int): Observable<ApiRespons.DonationResponds>
+
+
+    @POST("rest/public/register")
+    @FormUrlEncoded
+    fun register (@Field (value = "name") name: String,
+                  @Field (value = "username") username: String,
+                  @Field (value = "email") email: String,
+                  @Field (value = "password") password: String): Single<ApiRespons.RegisterRespons>
+
+    @POST("rest/public/login")
+    @FormUrlEncoded
+    fun login(@Field (value= "email") email: String,
+              @Field (value= "password") password: String): Single<ApiRespons.LoginRespons>
 }

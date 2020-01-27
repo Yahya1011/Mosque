@@ -6,20 +6,32 @@ import android.os.Bundle
 import android.util.Patterns
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mosque.CustomProgressBar
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.example.mosque.utils.CustomProgressBar
 import com.example.mosque.R
+import com.example.mosque.helper.AppPreferencesHelper
 import com.example.mosque.view.activity.KeuanganActivity
+import com.example.mosque.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.input_email
 
 
 class LoginActivity : AppCompatActivity() {
 
+    lateinit var mPrefData: AppPreferencesHelper
     lateinit var animationDrawable: AnimationDrawable
+    lateinit var loginViewModel : LoginViewModel
+    var email: String =" "
+    var password: String =" "
     val progressBar = CustomProgressBar()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        mPrefData = AppPreferencesHelper(this)
+        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         initialView()
 
@@ -33,12 +45,15 @@ class LoginActivity : AppCompatActivity() {
 
 
                if(!validate()){
+                   println("LOGIN GAGAL ")
                     progressBar.dialog.dismiss()
 
                }else{
-                    progressBar.dialog.dismiss()
-                    val intent = Intent(this@LoginActivity, KeuanganActivity::class.java)
-                    startActivity(intent)
+
+                   println("INPUT DATA $email, $password")
+                   loginViewModel.submitLogin( email, password)
+                   observerViewModel()
+
                }
             }
         })
@@ -50,6 +65,59 @@ class LoginActivity : AppCompatActivity() {
             }
         })
     }
+
+
+    private fun observerViewModel() {
+        loginViewModel.loginData.observe(this, Observer {loginResponds->
+            loginResponds.let {
+               println("Data ${mPrefData.isLoginIn()}")
+                if(mPrefData.getAccessToken() == null || mPrefData.getAccessToken() != it.token || mPrefData.getRoleUser() == null){
+                    progressBar.dialog.dismiss()
+                    mPrefData.setAccessToken(it.token)
+                    mPrefData.setRoleUser(it.role)
+                    mPrefData.setLoginIn(true)
+                    openMainActivity()
+                }else if(mPrefData.getAccessToken() == it.token && mPrefData.isLoginIn()){
+                    progressBar.dialog.dismiss()
+                }/* else if (){
+
+                    mPrefData.clearToken()
+                    mPrefData.clearRole()
+                    mPrefData.setLoginIn(true)
+                    mPrefData.setAccessToken(it.token)
+                    mPrefData.setRoleUser(it.role)
+
+                    openMainActivity()
+
+                    println("Pindah Activity")
+
+                }else if (mPrefData.getRoleUser() != it.role  ){
+                    progressBar.dialog.dismiss()
+                    mPrefData.clearToken()
+                    mPrefData.setLogin(true)
+                    mPrefData.setAccessToken(it.token)
+                    mPrefData.setRoleUser(it.role)
+
+                    openMainActivity()
+
+                    println("Pindah Activity")
+
+                }*/else{
+                    progressBar.dialog.dismiss()
+
+
+                }
+            }
+
+        })
+    }
+
+    private fun openMainActivity() {
+        intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
 
     private fun initialView() {
 
@@ -79,15 +147,15 @@ class LoginActivity : AppCompatActivity() {
 
     fun validate(): Boolean {
         var valid = true
-        val email: String = input_email.getText().toString()
-        val password: String = input_pass.getText().toString()
+        email = input_email.getText().toString()
+        password = input_pass.getText().toString()
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             input_email.error = "enter a valid email address"
             valid = false
         } else {
             input_email.error = null
         }
-        if (password.isEmpty() || password.length < 4 || password.length > 10) {
+        if (password.isEmpty() || password.length < 4 || password.length > 30) {
             input_pass.error = "between 4 and 10 alphanumeric characters"
             valid = false
         } else {

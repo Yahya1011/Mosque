@@ -4,11 +4,13 @@ package com.example.mosque.view
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.*
 import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
 import android.view.Gravity
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -22,12 +24,14 @@ import com.example.mosque.adapter.NavMainAdapter
 import com.example.mosque.common.Constans
 import com.example.mosque.common.Constans.ACTION_BROADCAST
 import com.example.mosque.common.Constans.LOCATION_REQUEST
+import com.example.mosque.helper.AppPreferencesHelper
 import com.example.mosque.model.MainNav
 import com.example.mosque.utils.*
 import com.example.mosque.view.activity.AcaraActivity
 import com.example.mosque.view.activity.MasjidSekitarActivity
 import com.example.mosque.viewmodel.MainNavViewModel
 import com.example.mosque.viewmodel.MainViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -35,6 +39,8 @@ import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
+
+    lateinit var mPrefData: AppPreferencesHelper
     private var updateTime: String? = null
     private var futureDate: String? = null
     lateinit var receiver: LocationReceiver
@@ -64,6 +70,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+        mPrefData = AppPreferencesHelper(this)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         mainViewModel = ViewModelProvider(this)[MainNavViewModel::class.java]
         viewModel.turnOnGps(this)
@@ -90,7 +98,78 @@ class MainActivity : AppCompatActivity() {
 
         observeMainNavModel()
 
+        initNavigationListener()
+
+
+
     }
+
+    private fun initNavigationListener() {
+        nav.setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                when (item.itemId) {
+                    R.id.bantuan -> {
+                        return true
+                    }
+                    R.id.berita -> {
+                        return true
+                    }
+                    R.id.beranda -> {
+                        return true
+                    }
+                    R.id.transaksi -> {
+                        return true
+                    }
+                    R.id.akun -> {
+                            if(!mPrefData.isLoginIn()){
+                                println("Silahkan Login atau Daftar Terlebih Dahulu")
+                                showDialog("Silahkan Login atau Daftar Terlebih Dahulu",400)
+                            } /*else{
+
+                            }*/
+                        return true
+                    }
+                }
+               return false
+            }
+
+        })
+    }
+
+    fun showDialog(msg: String, code: Int){
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.setMessage(msg)
+            .setCancelable(false)
+            .setPositiveButton("ok") {dialog, id ->
+
+                selectActivity()
+            }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle("Maaf anda belum login")
+        alert.show()
+    }
+
+    private fun selectActivity() {
+        if (mPrefData.getAccessToken() !=null || !mPrefData.isLoginIn() )  {
+            openLoginActivity()
+        } else if (mPrefData.getAccessToken() == null){
+            openRegisterActivity()
+        }
+    }
+
+    private fun openLoginActivity() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun openRegisterActivity() {
+       val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
 
     private fun observeMainNavModel() {
         mainViewModel.dataNavigation.observe(this, Observer { mainNavs->

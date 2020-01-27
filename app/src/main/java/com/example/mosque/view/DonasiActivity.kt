@@ -13,6 +13,7 @@ import com.example.mosque.R
 import com.example.mosque.common.Constans
 import com.example.mosque.extention.getProgressDrawable
 import com.example.mosque.extention.loadImage
+import com.example.mosque.helper.AppPreferencesHelper
 import com.example.mosque.utils.showToast
 import com.example.mosque.viewmodel.DonationViewModel
 import com.tiper.MaterialSpinner
@@ -33,22 +34,22 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
     var progressDrawable: CircularProgressDrawable? = null
 
     lateinit var donationViewModel: DonationViewModel
-
+    lateinit var mPrefData: AppPreferencesHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donasi)
-
+        mPrefData =  AppPreferencesHelper(this)
         reciveData()
         donationViewModel = ViewModelProvider(this)[DonationViewModel::class.java]
         donationViewModel.refresh(valueId)
-        observeViewModel()
+
         donation = resources.getStringArray(R.array.donasi_category)
         initSpinnerData()
         initClickLitener()
 
         initRadioButton()
-
+        observeViewModel()
     }
 
 
@@ -61,6 +62,7 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
 
     private fun initClickLitener() {
         btn_donasi.setOnClickListener {
+
             submitDonationData()
         }
     }
@@ -72,20 +74,30 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
     }
 
     private fun submitDonationData() {
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        val currentDateandTime: String = sdf.format(Date())
 
-        if (donationSelected == 0 || selectedBankProvide == "" || input_nominal.text.toString() == "") {
+
+        println("Data ${ mPrefData.getAccessToken()} ")
+
+
+        /*if (donationSelected == 0 || selectedBankProvide == "" || input_nominal.text.toString() == "") {
             showToast(this, "Maaf terjadi kesalahan!!, harap input jenis donasi dan bank tujuan")
             spinner_donation.requestFocus()
         } else {
             //2020-01-12 18:48:30
-            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-            val currentDateandTime: String = sdf.format(Date())
-            donationViewModel.submitDonation(valueId, input_nominal.text.toString(), currentDateandTime, donationSelected, selectedBankProvide)
+
+
+            if (mPrefData.getAccessToken() != null){
+
+            }
+
+           // donationViewModel.submitDonation(, valueId, input_nominal.text.toString(), currentDateandTime, donationSelected, selectedBankProvide)
 
 
 
         }
-
+*/
     }
 
     private fun initSpinnerData() {
@@ -120,8 +132,8 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
     private fun observeViewModel() {
         donationViewModel.mosquesData.observe(this, Observer { mosques ->
             mosques?.let {
-                println("DATA recive API ${it.mosqueName}")
-                tv_masjid_name.text = it.mosqueName
+                println("DATA recive API ${it.name}")
+                tv_masjid_name.text = it.name
                 alamatMasjid.text = it.address
                 progressDrawable = getProgressDrawable(this)
                 imgTarget = Constans.imageUrlPath
@@ -129,7 +141,7 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
                     iv_masjid.loadImage(imgTarget + it, progressDrawable!!)
                 }
 
-                if (it.mosqueType == "0") {
+                if (it.type == "0") {
                     tipe_masjid.text = getString(R.string.tipe_masjid)
 
                 } else {
@@ -139,6 +151,7 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
 
             }
         })
+
 
 
     }
@@ -156,6 +169,5 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
     override fun onNothingSelected(parent: MaterialSpinner) {
         showToast(this, "Maaf anda belum menetukan jenis donasi anda!!")
     }
-
 
 }

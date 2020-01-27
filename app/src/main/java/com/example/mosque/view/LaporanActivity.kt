@@ -14,6 +14,7 @@ import com.example.mosque.common.Constans
 import com.example.mosque.extention.getProgressDrawable
 import com.example.mosque.extention.loadImage
 import com.example.mosque.helper.AppPreferencesHelper
+import com.example.mosque.utils.showToast
 import com.example.mosque.view.activity.KeuanganActivity
 import com.example.mosque.viewmodel.LaporanViewModel
 import kotlinx.android.synthetic.main.activity_laporan.*
@@ -38,9 +39,12 @@ class LaporanActivity : AppCompatActivity() {
         println(mPrefData.isLoginIn())
 
         fab.setOnClickListener {
-            if (mPrefData.isLoginIn()){
+            println(mPrefData.isLoginIn())
+            if (mPrefData.isLoginIn() && mPrefData.getRoleUser() == "DKM"){
                 val intent = Intent(this@LaporanActivity, KeuanganActivity::class.java)
                 startActivity(intent)
+            }else if(mPrefData.isLoginIn() &&mPrefData.getRoleUser()!= "DKM"){
+                showToast(this,"Anda tidak memiliki akses yang tepat untuk membuka halaman ini, \nHalaman ini hanya di gunakan untuk pengurus masjid(DKM)")
             }else{
                 val intent = Intent(this@LaporanActivity, LoginActivity::class.java)
                 startActivity(intent)
@@ -63,8 +67,8 @@ class LaporanActivity : AppCompatActivity() {
     private fun observeViewModel(){
         laporanViewModel.mosquesData.observe(this, Observer { mosques->
             mosques?.let {
-                println("DATA recive API ${it.mosqueName}")
-                titleMosque.text =it.mosqueName
+                println("DATA recive API ${it.name}")
+                titleMosque.text =it.name
                 sub_title.text = it.address
                  progressDrawable= getProgressDrawable(this)
                  imgTarget = Constans.imageUrlPath
