@@ -96,4 +96,6 @@ dependencies {
 
     implementation 'com.github.tiper:MaterialSpinner:1.4.1'
 
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
+
 }

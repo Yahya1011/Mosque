@@ -15,7 +15,6 @@ import com.example.mosque.extention.getProgressDrawable
 import com.example.mosque.extention.loadImage
 import com.example.mosque.helper.AppPreferencesHelper
 import com.example.mosque.utils.showToast
-import com.example.mosque.view.activity.KeuanganActivity
 import com.example.mosque.viewmodel.LaporanViewModel
 import kotlinx.android.synthetic.main.activity_laporan.*
 

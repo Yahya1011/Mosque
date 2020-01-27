@@ -61,5 +61,21 @@ class AppPreferencesHelper(context: Context) : PreferencesHelper {
         mPrefs.edit().remove("PREF_KEY_USER_ROLE").apply()
     }
 
+    override fun getUserName(): String? {
+        return mPrefs.getString(Constans.PREF_KEY_CURRENT_USERNAME,null)
+    }
+
+    override fun setUserName(username: String?) {
+        mPrefs.edit().putString(Constans.PREF_KEY_CURRENT_USERNAME,username).apply()
+    }
+
+    override fun getFullName(): String? {
+        return mPrefs.getString(Constans.PREF_KEY_CURRENT_FULLNAME,null)
+    }
+
+    override fun setFullName(name: String?) {
+        mPrefs.edit().putString(Constans.PREF_KEY_CURRENT_FULLNAME,name).apply()
+    }
+
 
 }
