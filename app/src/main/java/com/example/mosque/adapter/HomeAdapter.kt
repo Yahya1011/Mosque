@@ -1,26 +1,40 @@
 package com.example.mosque.adapter
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ProgressBar
+import androidx.paging.PagedList
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.example.mosque.R
 import com.example.mosque.common.Constans
 import com.example.mosque.extention.getProgressDrawable
 import com.example.mosque.extention.loadImage
 import com.example.mosque.model.*
+import com.example.mosque.utils.NetworkState
+import com.example.mosque.utils.convertDateFromString
+import com.example.mosque.view.DonasiActivity
+import com.example.mosque.view.LaporanActivity
+import kotlinx.android.synthetic.main.item_loading.view.*
 import kotlinx.android.synthetic.main.row.view.*
+import java.text.NumberFormat
+import java.util.*
 
-class HomeAdapter(var masjidItems: MutableList<Mosque>) :
-    RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
-    var mContext: Context? = null
-    private var mOnInfoItemClickListener: HomeAdapter.OnInfoItemClickListener? = null
+class HomeAdapter(val context: Context) : PagedListAdapter<Mosque, ViewHolder>(MosqueDiffCallback()) {
 
-    private var mOnDonasiItemClickListener: HomeAdapter.OnDonasiItemClickListener? = null
+    val VIEW_TYPE_NORMAL: Int = 1
+    val VIEW_TYPE_LOADING: Int = 2
+
+    private var networkState: NetworkState? = null
+
 
     interface OnInfoItemClickListener {
         fun onItemSelected(masjidItems: Mosque)
@@ -30,159 +44,142 @@ class HomeAdapter(var masjidItems: MutableList<Mosque>) :
         fun onItemSelected(masjidItems: Mosque)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
-        mContext = parent.context
-        val layoutInflater = LayoutInflater.from(mContext).inflate(R.layout.row, parent, false)
-        return HomeViewHolder(layoutInflater)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val view: View
+
+        if (viewType == VIEW_TYPE_NORMAL) {
+            view = layoutInflater.inflate(R.layout.row, parent, false)
+            return ContentHolder(view)
+        } else {
+            view = layoutInflater.inflate(R.layout.item_loading, parent, false)
+            return LodingHolder(view)
+        }
+
+    }
+
+
+    private fun hasExtraRow(): Boolean {
+        return networkState != null && networkState != NetworkState.LOADED
     }
 
     override fun getItemCount(): Int {
-        return masjidItems.size
+        return super.getItemCount() + if (hasExtraRow()) 1 else 0
     }
 
-    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        holder.clear()
-        holder.onBind(position)
+
+    override fun getItemViewType(position: Int): Int {
+        return if (hasExtraRow() && position == itemCount - 1) {
+            VIEW_TYPE_LOADING
+        } else {
+            VIEW_TYPE_NORMAL
+        }
     }
 
-    fun updateHome(updateList: List<Mosque>) {
-        this.masjidItems.clear()
-        this.masjidItems.addAll(updateList)
-        notifyDataSetChanged()
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if (getItemViewType(position) == VIEW_TYPE_NORMAL) {
+            (holder as ContentHolder).onBind(getItem(position), context)
+        } else {
+            (holder as LodingHolder).onBind(networkState)
+        }
+
     }
 
-    internal fun setOnInfoItemClickListener(listener: OnInfoItemClickListener) {
-        mOnInfoItemClickListener = listener
-    }
-    internal fun setOnDonasiItemClickListener(listener: OnDonasiItemClickListener) {
-        mOnDonasiItemClickListener = listener
-    }
 
-    inner class HomeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    fun setNetworkState(newNetworkState: NetworkState) {
+        val previousState = this.networkState
+        val hadExtraRow = hasExtraRow()
+        this.networkState = newNetworkState
+        val hasExtraRow = hasExtraRow()
 
-        override fun onClick(v: View?) {
-
-            if (v == itemView.info){
-                mOnInfoItemClickListener?.onItemSelected((masjidItems[adapterPosition]))
-            } else if (v == itemView.donasi){
-                mOnDonasiItemClickListener?.onItemSelected((masjidItems[adapterPosition]))
+        if (hadExtraRow != hasExtraRow) {
+            if (hadExtraRow) {                             //hadExtraRow is true and hasExtraRow false
+                notifyItemRemoved(super.getItemCount())    //remove the progressbar at the end
+            } else {                                       //hasExtraRow is true and hadExtraRow false
+                notifyItemInserted(super.getItemCount())   //add the progressbar at the end
             }
-
-
+        } else if (hasExtraRow && previousState != newNetworkState) { //hasExtraRow is true and hadExtraRow true and (NetworkState.ERROR or NetworkState.ENDOFLIST)
+            notifyItemChanged(itemCount - 1)       //add the network message at the end
         }
 
-        fun clear() {
+    }
+
+    class MosqueDiffCallback : DiffUtil.ItemCallback<Mosque>() {
+        override fun areItemsTheSame(oldItem: Mosque, newItem: Mosque): Boolean {
+            return oldItem.id == newItem.id
         }
 
-        fun onBind(position: Int) {
-            val (
-                mosqueId,
-                mosqueType,
-                mosqueCode,
-                mosqueName,
-                mosqueIdentity,
-                surfaceArea,
-                buildingArea,
-                los,
-                since,
-                bankId,
-                rek,
-                address,
-                latitude,
-                longitude,
-                provinceId,
-                estimate,
-                estimateDate,
-                cityId,
-                kecId,
-                kelId,
-                pic,
-                description,
-                bank  ,
-                province,
-                regency,
-                district,
-                village) = masjidItems[position]
-
-            inflateData(
-                mosqueId,
-                mosqueType,
-                mosqueCode,
-                mosqueName,
-                mosqueIdentity,
-                surfaceArea,
-                buildingArea,
-                los,
-                since,
-                bankId,
-                rek,
-                address,
-                latitude,
-                longitude,
-                provinceId,
-                estimate,
-                estimateDate,
-                cityId,
-                kecId,
-                kelId,
-                pic,
-                description,
-                bank  ,
-                province,
-                regency,
-                district,
-                village
-            )
+        override fun areContentsTheSame(oldItem: Mosque, newItem: Mosque): Boolean {
+            return oldItem == newItem
         }
+    }
 
-        private fun inflateData(
-            mmosqueId: Int,
-            mosqueType: String,
-            mosqueCode: String,
-            mosqueName: String,
-            mosqueIdentity: String,
-            surfaceArea: String,
-            buildingArea: String,
-            los: String,
-            since: String,
-            bankId: String,
-            rek: String,
-            address: String,
-            latitude: String,
-            longitude: String,
-            provinceId: String,
-            estimate: String,
-            estimateDate: String,
-            cityId: String,
-            kecId: String,
-            kelId: String,
-            pic: String,
-            description: String,
-            bank : Bank,
-            province: Province,
-            regency: Regency,
-            district: District,
-            village: String
-        ) {
 
-            val progressDrawable: CircularProgressDrawable = getProgressDrawable(itemView.context)
+    class ContentHolder(view: View) : RecyclerView.ViewHolder(view) {
+        fun onBind(mosque: Mosque?, context: Context) {
+            val progressDrawable: CircularProgressDrawable = getProgressDrawable(context)
             val imgTarget = Constans.imageUrlPath
-            mosqueName.let {
+            val localeID = Locale("in", "ID")
+            val numFormat: NumberFormat = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
+            mosque?.name.let {
                 itemView.titleTv.text = it
             }
-            pic.let {
+
+            mosque?.estimate.let {
+                itemView.dana_terkumpul.text = numFormat.format(it?.toInt()).replace("Rp","Rp ")
+            }
+            mosque?.estimateDate.let {
+                itemView.tahap_pembangunan.text = convertDateFromString(it)
+            }
+            mosque?.pic.let {
                 itemView.iconIv.loadImage(imgTarget + it, progressDrawable)
             }
 
-            address.let {
+            mosque?.address.let {
                 itemView.descTv.text = it
             }
 
-            itemView.donasi.setOnClickListener(this)
-            itemView.info.setOnClickListener(this)
+            itemView.donasi.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(v: View?) {
+                    val intent = Intent(context, DonasiActivity::class.java)
+                    intent.putExtra("key", mosque?.id)
+                    context.startActivity(intent)
 
+                }
+
+            })
+            itemView.info.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(v: View?) {
+                    val intent = Intent(context, LaporanActivity::class.java)
+                    intent.putExtra("key", mosque?.id)
+                    context.startActivity(intent)
+
+                }
+
+            })
         }
 
     }
 
+    class LodingHolder(view: View) : RecyclerView.ViewHolder(view) {
+        fun onBind(networkState: NetworkState?) {
+            if (networkState != null && networkState == NetworkState.LOADING) {
+                itemView.progressBar.visibility = View.VISIBLE;
+            } else {
+                itemView.progressBar.visibility = View.GONE;
+            }
+
+            if (networkState != null && networkState == NetworkState.ERROR) {
+                itemView.error_msg_item.visibility = View.VISIBLE;
+                itemView.error_msg_item.text = networkState.msg;
+            } else if (networkState != null && networkState == NetworkState.ENDOFLIST) {
+                itemView.error_msg_item.visibility = View.VISIBLE;
+                itemView.error_msg_item.text = networkState.msg;
+            } else {
+                itemView.error_msg_item.visibility = View.GONE;
+            }
+        }
+
+    }
 }

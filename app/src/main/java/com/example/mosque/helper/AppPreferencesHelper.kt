@@ -49,5 +49,13 @@ class AppPreferencesHelper(context: Context) : PreferencesHelper {
         mPrefs.edit().remove("PREF_KEY_ACCESS_TOKEN").apply()
     }
 
+    override fun getRoleUser(): String? {
+        return mPrefs.getString(Constans.PREF_KEY_USER_ROLE,null)
+    }
+
+    override fun setRoleUser(userRole: String?) {
+        mPrefs.edit().putString(Constans.PREF_KEY_USER_ROLE,userRole).apply()
+    }
+
 
 }

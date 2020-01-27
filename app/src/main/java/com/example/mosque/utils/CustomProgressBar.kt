@@ -1,4 +1,4 @@
-package com.example.mosque
+package com.example.mosque.utils
 
 import android.app.Dialog
 import android.content.Context
@@ -8,13 +8,11 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.text.Editable
 import android.view.LayoutInflater
 import androidx.annotation.NonNull
 import androidx.core.content.res.ResourcesCompat
-import kotlinx.android.synthetic.main.activity_login.view.*
+import com.example.mosque.R
 import kotlinx.android.synthetic.main.progress_bar.view.*
-import org.jetbrains.annotations.NonNls
 
 class CustomProgressBar {
 
@@ -33,10 +31,13 @@ class CustomProgressBar {
         view.cp_bg_view.setBackgroundColor(Color.parseColor("#60000000"))
         view.cp_cardview.setCardBackgroundColor(Color.parseColor("#70000000"))
         setColorFilter(view.cp_pbar.indeterminateDrawable,
-            ResourcesCompat.getColor(context.resources, R.color.colorPrimary, null)) //Progress Bar Color
+            ResourcesCompat.getColor(context.resources,
+                R.color.colorPrimary, null)) //Progress Bar Color
         view.cp_title.setTextColor(Color.WHITE) //Text Color
 
-        dialog = Dialog(context, R.style.CustomProgressBarTheme)
+        dialog = Dialog(context,
+            R.style.CustomProgressBarTheme
+        )
         dialog.setContentView(view)
         dialog.show()
 

@@ -1,6 +1,5 @@
 package com.example.mosque.view
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
@@ -9,14 +8,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.mosque.CustomProgressBar
+import com.example.mosque.utils.CustomProgressBar
 import com.example.mosque.R
 import com.example.mosque.helper.AppPreferencesHelper
-import com.example.mosque.view.activity.KeuanganActivity
 import com.example.mosque.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.input_email
-import kotlinx.android.synthetic.main.activity_register.*
 
 
 class LoginActivity : AppCompatActivity() {
@@ -73,20 +70,32 @@ class LoginActivity : AppCompatActivity() {
                 if(mPrefData.getAccessToken()== it.token){
                     progressBar.dialog.dismiss()
                     mPrefData.setLogin(true)
-                    intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                } else{
+                    mPrefData.setAccessToken(it.token)
+                    mPrefData.setRoleUser(it.role)
+                    openMainActivity()
+                } else if (mPrefData.getAccessToken() != null){
                     progressBar.dialog.dismiss()
-                    if (mPrefData.getAccessToken() != null){
-                        mPrefData.clearToken()
-                        mPrefData.setAccessToken(it.token)
-                    }
+                    mPrefData.clearToken()
+                    mPrefData.setLogin(true)
+                    mPrefData.setAccessToken(it.token)
+                    mPrefData.setRoleUser(it.role)
+                    openMainActivity()
+
+                } else {
+                    progressBar.dialog.dismiss()
+
+
 
                 }
             }
 
         })
+    }
+
+    private fun openMainActivity() {
+        intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 

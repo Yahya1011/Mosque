@@ -9,10 +9,9 @@ import android.view.View.OnClickListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.mosque.CustomProgressBar
+import com.example.mosque.utils.CustomProgressBar
 import com.example.mosque.R
 import com.example.mosque.helper.AppPreferencesHelper
-import com.example.mosque.view.activity.KeuanganActivity
 import com.example.mosque.viewmodel.RegisterViewModel
 import kotlinx.android.synthetic.main.activity_register.*
 

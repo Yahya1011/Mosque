@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity() {
                             if(!mPrefData.isLoginIn()){
                                 showDialog("Silahkan Login atau Terlebih Dahulu",400)
                             } else{
-                                //OPen Activity Keuangan
+                                return false
                             }
                         return true
                     }
@@ -150,9 +150,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun selectActivity() {
-        if (mPrefData.getAccessToken() !=null) {
+        if (mPrefData.getAccessToken() !=null || !mPrefData.isLoginIn() )  {
             openLoginActivity()
-        }else{
+        } else if (mPrefData.getAccessToken() == null){
             openRegisterActivity()
         }
     }

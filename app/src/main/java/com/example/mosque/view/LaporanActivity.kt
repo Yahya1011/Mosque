@@ -63,8 +63,8 @@ class LaporanActivity : AppCompatActivity() {
     private fun observeViewModel(){
         laporanViewModel.mosquesData.observe(this, Observer { mosques->
             mosques?.let {
-                println("DATA recive API ${it.mosqueName}")
-                titleMosque.text =it.mosqueName
+                println("DATA recive API ${it.name}")
+                titleMosque.text =it.name
                 sub_title.text = it.address
                  progressDrawable= getProgressDrawable(this)
                  imgTarget = Constans.imageUrlPath

@@ -19,7 +19,7 @@ interface MosqueApi {
     fun getDetailMosque(@Path (value = "id") id: String): Single<Mosque>
 
     @GET (MOSQUE)
-    fun getMosque() : Observable<List<Mosque>>
+    fun getMosque(@Query("page") page: Int) : Observable<ApiRespons.MosqueRespons>
 
     @GET("rest/public/mosque_finance_details/{id}")
     fun getDetailLaporan(@Path (value = "id") id: String): Single<List<LaporanModel>>

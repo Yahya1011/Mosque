@@ -16,6 +16,11 @@ interface PreferencesHelper {
 
     fun isLoginIn() : Boolean
 
-    fun setLogin(logIn:Boolean)
+    fun setLogin(logIn : Boolean)
+
     fun clearToken()
+
+    fun getRoleUser(): String?
+
+    fun setRoleUser(userRole : String?)
 }
