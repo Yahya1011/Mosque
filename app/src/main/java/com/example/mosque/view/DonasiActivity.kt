@@ -39,7 +39,7 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donasi)
-
+        mPrefData =  AppPreferencesHelper(this)
         reciveData()
         donationViewModel = ViewModelProvider(this)[DonationViewModel::class.java]
         donationViewModel.refresh(valueId)
@@ -62,6 +62,7 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
 
     private fun initClickLitener() {
         btn_donasi.setOnClickListener {
+
             submitDonationData()
         }
     }
@@ -73,20 +74,30 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
     }
 
     private fun submitDonationData() {
-        mPrefData =  AppPreferencesHelper(this)
-        if (donationSelected == 0 || selectedBankProvide == "" || input_nominal.text.toString() == "") {
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        val currentDateandTime: String = sdf.format(Date())
+
+
+        println("Data ${ mPrefData.getAccessToken()} ")
+
+
+        /*if (donationSelected == 0 || selectedBankProvide == "" || input_nominal.text.toString() == "") {
             showToast(this, "Maaf terjadi kesalahan!!, harap input jenis donasi dan bank tujuan")
             spinner_donation.requestFocus()
         } else {
             //2020-01-12 18:48:30
-            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-            val currentDateandTime: String = sdf.format(Date())
-            donationViewModel.submitDonation(mPrefData.getAccessToken()!!, valueId, input_nominal.text.toString(), currentDateandTime, donationSelected, selectedBankProvide)
+
+
+            if (mPrefData.getAccessToken() != null){
+
+            }
+
+           // donationViewModel.submitDonation(, valueId, input_nominal.text.toString(), currentDateandTime, donationSelected, selectedBankProvide)
 
 
 
         }
-
+*/
     }
 
     private fun initSpinnerData() {
@@ -140,6 +151,7 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
 
             }
         })
+
 
 
     }

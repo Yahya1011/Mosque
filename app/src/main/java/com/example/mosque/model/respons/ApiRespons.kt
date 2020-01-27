@@ -66,4 +66,16 @@ class ApiRespons {
         @Expose
         val total: Int
     )
+    
+    data class DonationResponds(
+        @SerializedName("success")
+        @Expose
+        val success: Boolean,
+        @SerializedName("message")
+        @Expose
+        val message: String,
+        @SerializedName("code")
+        @Expose
+        val code: Int
+    )
 }

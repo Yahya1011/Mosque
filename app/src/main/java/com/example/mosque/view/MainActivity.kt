@@ -122,10 +122,11 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.akun -> {
                             if(!mPrefData.isLoginIn()){
-                                showDialog("Silahkan Login atau Terlebih Dahulu",400)
-                            } else{
-                                return false
-                            }
+                                println("Silahkan Login atau Daftar Terlebih Dahulu")
+                                showDialog("Silahkan Login atau Daftar Terlebih Dahulu",400)
+                            } /*else{
+
+                            }*/
                         return true
                     }
                 }

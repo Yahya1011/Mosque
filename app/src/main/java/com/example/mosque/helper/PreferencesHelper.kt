@@ -14,13 +14,14 @@ interface PreferencesHelper {
 
     fun setCurrentUserId(userId: Long?)
 
-    fun isLoginIn() : Boolean
+    fun isLoginIn() : Boolean?
 
-    fun setLogin(logIn : Boolean)
+    fun setLoginIn(logIn : Boolean?)
 
     fun clearToken()
 
     fun getRoleUser(): String?
 
     fun setRoleUser(userRole : String?)
+    fun clearRole()
 }

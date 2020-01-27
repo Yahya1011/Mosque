@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.mosque.utils.CustomProgressBar
 import com.example.mosque.R
 import com.example.mosque.helper.AppPreferencesHelper
+import com.example.mosque.view.activity.KeuanganActivity
 import com.example.mosque.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.input_email
@@ -44,13 +45,15 @@ class LoginActivity : AppCompatActivity() {
 
 
                if(!validate()){
+                   println("LOGIN GAGAL ")
                     progressBar.dialog.dismiss()
 
                }else{
 
                    println("INPUT DATA $email, $password")
-                    loginViewModel.submitLogin( email, password)
+                   loginViewModel.submitLogin( email, password)
                    observerViewModel()
+
                }
             }
         })
@@ -63,27 +66,44 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
+
     private fun observerViewModel() {
         loginViewModel.loginData.observe(this, Observer {loginResponds->
             loginResponds.let {
-                println("Login $it")
-                if(mPrefData.getAccessToken()== it.token){
+               println("Data ${mPrefData.isLoginIn()}")
+                if(mPrefData.getAccessToken() == null || mPrefData.getAccessToken() != it.token || mPrefData.getRoleUser() == null){
                     progressBar.dialog.dismiss()
-                    mPrefData.setLogin(true)
                     mPrefData.setAccessToken(it.token)
                     mPrefData.setRoleUser(it.role)
+                    mPrefData.setLoginIn(true)
                     openMainActivity()
-                } else if (mPrefData.getAccessToken() != null){
+                }else if(mPrefData.getAccessToken() == it.token && mPrefData.isLoginIn()){
+                    progressBar.dialog.dismiss()
+                }/* else if (){
+
+                    mPrefData.clearToken()
+                    mPrefData.clearRole()
+                    mPrefData.setLoginIn(true)
+                    mPrefData.setAccessToken(it.token)
+                    mPrefData.setRoleUser(it.role)
+
+                    openMainActivity()
+
+                    println("Pindah Activity")
+
+                }else if (mPrefData.getRoleUser() != it.role  ){
                     progressBar.dialog.dismiss()
                     mPrefData.clearToken()
                     mPrefData.setLogin(true)
                     mPrefData.setAccessToken(it.token)
                     mPrefData.setRoleUser(it.role)
+
                     openMainActivity()
 
-                } else {
-                    progressBar.dialog.dismiss()
+                    println("Pindah Activity")
 
+                }*/else{
+                    progressBar.dialog.dismiss()
 
 
                 }

@@ -47,7 +47,6 @@ class RegisterActivity : AppCompatActivity(){
                showDialog("Success", it.message)
            }
 
-
        })
 
 
@@ -62,7 +61,6 @@ class RegisterActivity : AppCompatActivity(){
                 if(it.data.email == " "){
                     showDialogError("Error", "The email has already been taken")
                 }
-
             }
         }
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mosque.helper.AppPreferencesHelper
 import com.example.mosque.model.Mosque
+import com.example.mosque.model.respons.ApiRespons
 import com.example.mosque.network.Services
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -17,6 +18,8 @@ class DonationViewModel  :  ViewModel(){
     val masjidLoadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
 
+    val successSubmit = MutableLiveData<ApiRespons.DonationResponds>()
+
     fun refresh(id:Int){
         fetchMasjid(id)
     }
@@ -28,7 +31,6 @@ class DonationViewModel  :  ViewModel(){
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ mosqueRespons ->
-                    println("DONATION RESP $mosqueRespons")
                     mosquesData.value = mosqueRespons
                     masjidLoadError.value = false
                     loading.value = false
@@ -46,9 +48,9 @@ class DonationViewModel  :  ViewModel(){
                 .subscribe({ donationRespons ->
                     println("SUBMIT RESP ${donationRespons}")
 
-                    mosquesData.value = donationRespons
+/*                    successSubmit.value = donationRespons
                     masjidLoadError.value = false
-                    loading.value = false
+                    loading.value = false*/
                 },{ err->
                     masjidLoadError.value = true
                     loading.value = false

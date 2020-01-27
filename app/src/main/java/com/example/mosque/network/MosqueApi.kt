@@ -21,7 +21,7 @@ interface MosqueApi {
     @GET (MOSQUE)
     fun getMosque(@Query("page") page: Int) : Observable<ApiRespons.MosqueRespons>
 
-    @GET("rest/public/mosque_finance_details/{id}")
+    @GET("rest/public/mosque_finance_details/neraca/{id}")
     fun getDetailLaporan(@Path (value = "id") id: String): Single<List<LaporanModel>>
 
 
@@ -34,7 +34,7 @@ interface MosqueApi {
                        @Field (value = "date") date: String,
                        @Field (value = "sub_category_id") sub_category_id: String,
                        @Field (value = "nominal") nominal: Int,
-                       @Field (value = "status") status: Int): Observable<Mosque>
+                       @Field (value = "status") status: Int): Observable<ApiRespons.DonationResponds>
 
 
     @POST("rest/public/register")

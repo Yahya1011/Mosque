@@ -38,11 +38,11 @@ class AppPreferencesHelper(context: Context) : PreferencesHelper {
     }
 
     override fun isLoginIn(): Boolean {
-        return false
+        return  mPrefs.getBoolean(Constans.PREF_KEY_ISLOGIN, false)
     }
 
-    override fun setLogin(logIn: Boolean) {
-        mPrefs.edit().putBoolean(Constans.PREF_KEY_ISLOGIN,true).apply()
+    override fun setLoginIn(logIn: Boolean?) {
+        mPrefs.edit().putBoolean(Constans.PREF_KEY_ISLOGIN, false).apply()
     }
 
     override fun clearToken() {
@@ -55,6 +55,10 @@ class AppPreferencesHelper(context: Context) : PreferencesHelper {
 
     override fun setRoleUser(userRole: String?) {
         mPrefs.edit().putString(Constans.PREF_KEY_USER_ROLE,userRole).apply()
+    }
+
+    override fun clearRole() {
+        mPrefs.edit().remove("PREF_KEY_USER_ROLE").apply()
     }
 
 
