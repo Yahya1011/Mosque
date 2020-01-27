@@ -40,10 +40,9 @@ class LaporanActivity : AppCompatActivity() {
         println(mPrefData.isLoginIn())
 
         fab.setOnClickListener {
-            println(mPrefData.isLoginIn())
-            if (mPrefData.isLoginIn() && mPrefData.getRoleUser() == "DKM"){
+            if (mPrefData.isLoginIn() && mPrefData.getRoleUser() == "dkm"){
                 showDialog("","Selamat datang ${mPrefData.getFullname()}",200)
-            }else if(mPrefData.isLoginIn() && mPrefData.getRoleUser()!= "DKM"){
+            }else if(mPrefData.isLoginIn() && mPrefData.getRoleUser()!= "dkm"){
                 showDialog("","Anda tidak memiliki akses yang tepat untuk membuka halaman ini, \nHalaman ini hanya di gunakan untuk pengurus masjid(DKM)",201)
             }else{
                 val intent = Intent(this@LaporanActivity, LoginActivity::class.java)
@@ -114,8 +113,8 @@ class LaporanActivity : AppCompatActivity() {
             .setPositiveButton("ok") {dialog, _ ->
 
                 if (code == 200){
-                   openKeuanganActivity()
                     dialog.dismiss()
+                    openKeuanganActivity()
                 } else {
                     dialog.dismiss()
                 }
