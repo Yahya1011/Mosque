@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.mosque.utils.CustomProgressBar
 import com.example.mosque.R
 import com.example.mosque.helper.AppPreferencesHelper
-import com.example.mosque.view.activity.KeuanganActivity
 import com.example.mosque.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.input_email
@@ -42,7 +41,6 @@ class LoginActivity : AppCompatActivity() {
         btn_login.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
                 progressBar.show(this@LoginActivity,"Please Wait...")
-
 
                if(!validate()){
                    println("LOGIN GAGAL ")
@@ -75,6 +73,10 @@ class LoginActivity : AppCompatActivity() {
                     progressBar.dialog.dismiss()
                     mPrefData.setAccessToken(it.token)
                     mPrefData.setRoleUser(it.role)
+                    mPrefData.setCurrentUserEmail(it.email)
+                    mPrefData.setCurrentUserId(it.id.toLong())
+                    mPrefData.setUserName(it.username)
+                    mPrefData.setFullName(it.name)
                     mPrefData.setLoginIn(true)
                     openMainActivity()
                 }else if(mPrefData.getAccessToken() == it.token && mPrefData.isLoginIn()){

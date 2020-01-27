@@ -23,5 +23,15 @@ interface PreferencesHelper {
     fun getRoleUser(): String?
 
     fun setRoleUser(userRole : String?)
+
     fun clearRole()
+
+    fun getUserName(): String?
+
+    fun setUserName(username: String?)
+
+    fun getFullName(): String?
+
+    fun setFullName(name: String?)
+
 }
