@@ -1,5 +1,6 @@
 package com.example.mosque.view
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -41,10 +42,9 @@ class LaporanActivity : AppCompatActivity() {
         fab.setOnClickListener {
             println(mPrefData.isLoginIn())
             if (mPrefData.isLoginIn() && mPrefData.getRoleUser() == "DKM"){
-                val intent = Intent(this@LaporanActivity, KeuanganActivity::class.java)
-                startActivity(intent)
-            }else if(mPrefData.isLoginIn() &&mPrefData.getRoleUser()!= "DKM"){
-                showToast(this,"Anda tidak memiliki akses yang tepat untuk membuka halaman ini, \nHalaman ini hanya di gunakan untuk pengurus masjid(DKM)")
+                showDialog("","Selamat datang ${mPrefData.getFullname()}",200)
+            }else if(mPrefData.isLoginIn() && mPrefData.getRoleUser()!= "DKM"){
+                showDialog("","Anda tidak memiliki akses yang tepat untuk membuka halaman ini, \nHalaman ini hanya di gunakan untuk pengurus masjid(DKM)",201)
             }else{
                 val intent = Intent(this@LaporanActivity, LoginActivity::class.java)
                 startActivity(intent)
@@ -107,6 +107,31 @@ class LaporanActivity : AppCompatActivity() {
     }
 
 
+    private fun showDialog(mTitle: String, msg: String, code: Int){
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.setMessage(msg)
+            .setCancelable(false)
+            .setPositiveButton("ok") {dialog, _ ->
+
+                if (code == 200){
+                   openKeuanganActivity()
+                    dialog.dismiss()
+                } else {
+                    dialog.dismiss()
+                }
+
+            }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(mTitle)
+        alert.show()
+    }
+
+    private fun openKeuanganActivity() {
+        val intent = Intent(this@LaporanActivity, KeuanganActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 
 
 }

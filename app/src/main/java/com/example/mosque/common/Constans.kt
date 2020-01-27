@@ -41,8 +41,9 @@ object Constans {
     const val PREF_FILE_NAME: String = "yukamal"
     const val PREF_KEY_CURRENT_USER_ID: String = "PREF_KEY_CURRENT_USER_ID"
     const val PREF_KEY_ISLOGIN: String = "PREF_KEY_ISLOGIN"
-
     const val PREF_KEY_USER_ROLE: String = "PREF_KEY_USER_ROLE"
+    const val PREF_KEY_CURRENT_FULLNAME : String  = "PREF_KEY_CURRENT_FULLNAME"
+    const val PREF_KEY_CURRENT_USERNAME : String  = "PREF_KEY_CURRENT_USERNAME"
 
 
     const val FIRST_PAGE = 1

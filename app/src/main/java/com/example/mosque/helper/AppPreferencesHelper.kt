@@ -3,7 +3,6 @@ package com.example.mosque.helper
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.mosque.common.Constans
-import com.example.mosque.common.Constans.PREF_KEY_CURRENT_USER_ID
 
 
 class AppPreferencesHelper(context: Context) : PreferencesHelper {
@@ -24,7 +23,24 @@ class AppPreferencesHelper(context: Context) : PreferencesHelper {
     }
 
     override fun setCurrentUserEmail(email: String?) {
-        mPrefs.edit().putString(Constans.PREF_KEY_CURRENT_USER_EMAIL,email).apply()
+        mPrefs.edit().putString(Constans.PREF_KEY_CURRENT_USER_EMAIL, email).apply()
+    }
+
+
+    override fun getFullname(): String? {
+        return mPrefs.getString(Constans.PREF_KEY_CURRENT_FULLNAME,null)
+    }
+
+    override fun setFullname(fullname: String?) {
+        mPrefs.edit().putString(Constans.PREF_KEY_CURRENT_FULLNAME, fullname).apply()
+    }
+
+    override fun getUsername(): String? {
+        return mPrefs.getString(Constans.PREF_KEY_CURRENT_USERNAME,null)
+    }
+
+    override fun setUsername(username: String?) {
+        mPrefs.edit().putString(Constans.PREF_KEY_CURRENT_USERNAME, username).apply()
     }
 
     override fun getCurrentUserId(): Long? {
@@ -34,7 +50,7 @@ class AppPreferencesHelper(context: Context) : PreferencesHelper {
 
     override fun setCurrentUserId(userId: Long?) {
         val id = userId ?: Constans.NULL_INDEX
-        mPrefs.edit().putLong(PREF_KEY_CURRENT_USER_ID, id).apply()
+        mPrefs.edit().putLong(Constans.PREF_KEY_CURRENT_USER_ID, id).apply()
     }
 
     override fun isLoginIn(): Boolean {
@@ -42,7 +58,9 @@ class AppPreferencesHelper(context: Context) : PreferencesHelper {
     }
 
     override fun setLoginIn(logIn: Boolean?) {
-        mPrefs.edit().putBoolean(Constans.PREF_KEY_ISLOGIN, false).apply()
+        logIn?.let {
+            mPrefs.edit().putBoolean(Constans.PREF_KEY_ISLOGIN, it).apply()
+        }
     }
 
     override fun clearToken() {

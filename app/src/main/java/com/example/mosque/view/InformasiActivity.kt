@@ -1,5 +1,6 @@
 package com.example.mosque.view
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -22,6 +23,7 @@ import com.example.mosque.viewmodel.HomeViewModels
 import kotlinx.android.synthetic.main.activity_informasi.*
 
 
+@Suppress("UNCHECKED_CAST")
 class InformasiActivity : AppCompatActivity() {
 
 
@@ -83,5 +85,7 @@ class InformasiActivity : AppCompatActivity() {
 
 
     }
+
+
 
 }

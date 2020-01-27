@@ -1,5 +1,6 @@
 package com.example.mosque.view
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.mosque.utils.CustomProgressBar
 import com.example.mosque.R
 import com.example.mosque.helper.AppPreferencesHelper
+import com.example.mosque.utils.showToast
 import com.example.mosque.view.activity.KeuanganActivity
 import com.example.mosque.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
@@ -24,17 +26,15 @@ class LoginActivity : AppCompatActivity() {
     lateinit var loginViewModel : LoginViewModel
     var email: String =" "
     var password: String =" "
+    var isLoginIn : Boolean = true
     val progressBar = CustomProgressBar()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
         mPrefData = AppPreferencesHelper(this)
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-
         initialView()
-
         initClickListener()
     }
 
@@ -48,8 +48,8 @@ class LoginActivity : AppCompatActivity() {
                    println("LOGIN GAGAL ")
                     progressBar.dialog.dismiss()
 
-               }else{
 
+               }else{
                    println("INPUT DATA $email, $password")
                    loginViewModel.submitLogin( email, password)
                    observerViewModel()
@@ -64,22 +64,50 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         })
+
+
+
     }
+
+
 
 
     private fun observerViewModel() {
         loginViewModel.loginData.observe(this, Observer {loginResponds->
             loginResponds.let {
-               println("Data ${mPrefData.isLoginIn()}")
-                if(mPrefData.getAccessToken() == null || mPrefData.getAccessToken() != it.token || mPrefData.getRoleUser() == null){
+                println("Data Pref ${mPrefData.isLoginIn()}")
+                val message: String
+                val title : String
+                if (it.code == 200){
+                    if (mPrefData.getAccessToken() == null || mPrefData.getAccessToken() != it.data.token || mPrefData.getRoleUser() == null){
+                        mPrefData.setAccessToken(it.data.token)
+                        mPrefData.setRoleUser(it.data.role)
+                        mPrefData.setCurrentUserEmail(it.data.email)
+                        mPrefData.setFullname(it.data.name)
+                        mPrefData.setUsername(it.data.username)
+
+                    }
+                    message = "Selamat datang kembali ${it.data.name}"
+                    it.message.let { titleDialog->
+                        title = titleDialog
+                    }
+                    showDialog(title,message,it.code)
+                } else {
                     progressBar.dialog.dismiss()
-                    mPrefData.setAccessToken(it.token)
-                    mPrefData.setRoleUser(it.role)
-                    mPrefData.setLoginIn(true)
+                    title = "Ups, Maaf!!"
+                    it.message.let { messageDialog->
+                        message = messageDialog
+                    }
+                    showDialog(title, message, it.code)
+                }
+                /*if(mPrefData.getAccessToken() == null || mPrefData.getAccessToken() != it.data.token || mPrefData.getRoleUser() == null){
+                    mPrefData.setAccessToken(it.data.token)
+                    mPrefData.setRoleUser(it.data.role)
+                    progressBar.dialog.dismiss()
                     openMainActivity()
-                }else if(mPrefData.getAccessToken() == it.token && mPrefData.isLoginIn()){
+                }else if(mPrefData.getAccessToken() == it.data.token && mPrefData.isLoginIn()){
                     progressBar.dialog.dismiss()
-                }/* else if (){
+                }*//* else if (){
 
                     mPrefData.clearToken()
                     mPrefData.clearRole()
@@ -102,17 +130,49 @@ class LoginActivity : AppCompatActivity() {
 
                     println("Pindah Activity")
 
-                }*/else{
+                }*//*else{
                     progressBar.dialog.dismiss()
 
 
-                }
+                }*/
             }
+
+        })
+
+
+        loginViewModel.loginLoadError.observe(this, Observer {
+
 
         })
     }
 
+
+
+
+    private fun showDialog(mTitle: String, msg: String, code: Int){
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.setMessage(msg)
+            .setCancelable(false)
+            .setPositiveButton("ok") {dialog, _ ->
+                if (code == 200){
+                    openMainActivity()
+                    dialog.cancel()
+                }
+
+            }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(mTitle)
+        if(alert.isShowing){
+            alert.dismiss()
+        } else {
+            alert.show()
+        }
+
+    }
+
     private fun openMainActivity() {
+        mPrefData.setLoginIn(this.isLoginIn)
         intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
@@ -163,4 +223,22 @@ class LoginActivity : AppCompatActivity() {
         }
         return valid
     }
+
+    override fun onPause() {
+        super.onPause()
+        if (progressBar.dialog.isShowing) {
+            progressBar.dialog.dismiss()
+        }
+    }
+
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (progressBar.dialog.isShowing) {
+            progressBar.dialog.dismiss()
+        }
+    }
+
+
 }
