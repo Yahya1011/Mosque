@@ -27,7 +27,7 @@ class MosqueDataSource (private val apiService : MosqueApi, private val disposab
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                callback.onResult(it.data, page-1, page+1)
+                callback.onResult(it.data.data, page-1, page+1)
                 networkState.postValue(NetworkState.LOADED)
             },{ err->
                 networkState.postValue(NetworkState.ERROR)
@@ -44,8 +44,8 @@ class MosqueDataSource (private val apiService : MosqueApi, private val disposab
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
 
-                if (it.total >= params.key){
-                    callback.onResult(it.data, params.key+1)
+                if (it.data.total >= params.key){
+                    callback.onResult(it.data.data, params.key+1)
                     networkState.postValue(NetworkState.LOADED)
                 }
             },{ err->

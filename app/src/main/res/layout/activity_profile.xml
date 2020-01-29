@@ -1,186 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginBottom="?attr/actionBarSize"
+    android:orientation="vertical">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_profile"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/profile"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"/>
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="80dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"
+        app:srcCompat="@drawable/profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="User Name"
-        android:textColor="#000"
-        android:layout_below="@+id/iv_profile"
-        android:layout_centerHorizontal="true"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"/>
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Full Name"
-        android:layout_below="@+id/username"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"/>
-
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Email"
-        android:layout_below="@+id/username"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="5dp"/>
-
-    <TextView
-        android:id="@+id/role"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Role"
-        android:layout_below="@+id/username"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="50dp"
-        android:layout_marginTop="5dp"/>
 
     <ImageView
-        android:id="@+id/iv_linearlayout_1"
+        android:id="@+id/bg_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/header_register"
-        android:layout_below="@+id/name"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_profile"
+        app:srcCompat="@drawable/bg_profile" />
 
-    <LinearLayout
-        android:id="@+id/ll"
+    <RelativeLayout
+        android:id="@+id/rl_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/iv_linearlayout_1"
-        android:layout_marginTop="20dp">
-
-    <ImageView
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginLeft="70dp"
-        android:src="@drawable/profile"
-        />
+        android:background="@drawable/bg_detail_profile"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_profile">
 
         <TextView
-            android:id="@+id/profile"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_fullname"
+            style="@style/title_text"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:text="Profile"
-            android:textColor="#000"
-            android:textSize="18sp" />
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Nama Lengkap" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tv_user_role"
+            style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_fullname"
+            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="User Role :" />
 
-    <LinearLayout
-        android:id="@+id/linearlayout1"
+        <LinearLayout
+            android:id="@+id/ll_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_user_role"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:padding="5dp">
+
+
+            <TextView
+                android:id="@+id/tv_username"
+                style="@style/text_label_info_white"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:text="User Name :" />
+
+            <TextView
+                android:id="@+id/tv_email_address"
+                style="@style/text_label_info_white"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:text="Alamat Email : " />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+    <View
+        android:id="@+id/devider"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/ll"
-        android:layout_marginTop="20dp">
+        android:layout_height="2dp"
+        android:background="#999898"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bg_layout" />
 
-        <ImageView
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginLeft="70dp"
-            android:src="@drawable/profile"
-            />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_menu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/devider" />
 
-        <TextView
-            android:id="@+id/transaksi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:text="Transaksi"
-            android:textColor="#000"
-            android:textSize="18sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearlayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/linearlayout1"
-        android:layout_marginTop="20dp">
-
-        <ImageView
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginLeft="70dp"
-            android:src="@drawable/profile"
-            />
-
-        <TextView
-            android:id="@+id/keuangan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:text="Data Masjid"
-            android:visibility="gone"
-            android:textColor="#000"
-            android:textSize="18sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearlayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/linearlayout2"
-        android:layout_marginTop="20dp">
-
-        <ImageView
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginLeft="70dp"
-            android:src="@drawable/profile"
-            />
-
-        <TextView
-            android:id="@+id/donasi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:text="Donasi"
-            android:visibility="gone"
-            android:textColor="#000"
-            android:textSize="18sp" />
-
-    </LinearLayout>
-
-        <TextView
-            android:id="@+id/logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Logout"
-            android:textColor="#000"
-            android:textSize="18sp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/linearlayout3"/>
-
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

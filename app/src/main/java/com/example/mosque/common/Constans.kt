@@ -46,9 +46,6 @@ object Constans {
     const val PREF_KEY_CURRENT_FULLNAME : String  = "PREF_KEY_CURRENT_FULLNAME"
     const val PREF_KEY_CURRENT_USERNAME : String  = "PREF_KEY_CURRENT_USERNAME"
 
-    const val PREF_KEY_CURRENT_USERNAME: String = "PREF_KEY_CURRENT_USERNAME"
-    const val PREF_KEY_CURRENT_FULLNAME: String = "PREF_KEY_CURRENT_FULLNAME"
-
 
     const val FIRST_PAGE = 1
     const val POST_PER_PAGE = 10

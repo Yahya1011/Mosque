@@ -26,23 +26,6 @@ class AppPreferencesHelper(context: Context) : PreferencesHelper {
         mPrefs.edit().putString(Constans.PREF_KEY_CURRENT_USER_EMAIL, email).apply()
     }
 
-
-    override fun getFullname(): String? {
-        return mPrefs.getString(Constans.PREF_KEY_CURRENT_FULLNAME,null)
-    }
-
-    override fun setFullname(fullname: String?) {
-        mPrefs.edit().putString(Constans.PREF_KEY_CURRENT_FULLNAME, fullname).apply()
-    }
-
-    override fun getUsername(): String? {
-        return mPrefs.getString(Constans.PREF_KEY_CURRENT_USERNAME,null)
-    }
-
-    override fun setUsername(username: String?) {
-        mPrefs.edit().putString(Constans.PREF_KEY_CURRENT_USERNAME, username).apply()
-    }
-
     override fun getCurrentUserId(): Long? {
         val userId = mPrefs.getLong(Constans.PREF_KEY_CURRENT_USER_ID, Constans.NULL_INDEX)
         return if (userId == Constans.NULL_INDEX) null else userId
@@ -79,19 +62,19 @@ class AppPreferencesHelper(context: Context) : PreferencesHelper {
         mPrefs.edit().remove("PREF_KEY_USER_ROLE").apply()
     }
 
-    override fun getUserName(): String? {
+    override fun getUsername(): String? {
         return mPrefs.getString(Constans.PREF_KEY_CURRENT_USERNAME,null)
     }
 
-    override fun setUserName(username: String?) {
+    override fun setUsername(username: String?) {
         mPrefs.edit().putString(Constans.PREF_KEY_CURRENT_USERNAME,username).apply()
     }
 
-    override fun getFullName(): String? {
+    override fun getFullname(): String? {
         return mPrefs.getString(Constans.PREF_KEY_CURRENT_FULLNAME,null)
     }
 
-    override fun setFullName(name: String?) {
+    override fun setFullname(name: String?) {
         mPrefs.edit().putString(Constans.PREF_KEY_CURRENT_FULLNAME,name).apply()
     }
 
