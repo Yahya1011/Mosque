@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity() {
 
 
         mPrefData = AppPreferencesHelper(this)
+        println("Data Pref Main  ${mPrefData.isLoginIn()}")
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         mainViewModel = ViewModelProvider(this)[MainNavViewModel::class.java]
         viewModel.turnOnGps(this)

@@ -10,6 +10,14 @@ interface PreferencesHelper {
 
     fun setCurrentUserEmail(email: String?)
 
+    fun getFullname(): String?
+
+    fun setFullname(fullname: String?)
+
+    fun getUsername(): String?
+
+    fun setUsername(username: String?)
+
     fun getCurrentUserId(): Long?
 
     fun setCurrentUserId(userId: Long?)

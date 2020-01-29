@@ -11,8 +11,7 @@ import io.reactivex.schedulers.Schedulers
 
 class LoginViewModel : ViewModel() {
     private val disposable =  CompositeDisposable()
-    val loginData = MutableLiveData<LoginModel>()
-    val errorData = MutableLiveData<LoginModel>()
+    val loginData = MutableLiveData<ApiRespons.LoginRespons>()
     val loginLoadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
 
@@ -27,11 +26,10 @@ class LoginViewModel : ViewModel() {
 
                     if (loginRespons.code !=200){
                         loginLoadError.value = true
-                        errorData.value = loginRespons.data
+                        loginData.value = loginRespons
                     } else {
-                        loginData.value = loginRespons.data
+                        loginData.value = loginRespons
                         loginLoadError.value = false
-
                     }
 
 
@@ -42,5 +40,11 @@ class LoginViewModel : ViewModel() {
                 }))
 
 
+    }
+
+
+    override fun onCleared() {
+        super.onCleared()
+        disposable.clear()
     }
 }

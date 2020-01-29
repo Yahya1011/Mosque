@@ -21,10 +21,13 @@ class ApiRespons {
     )
 
     data class LoginRespons(
+        @SerializedName("message")
+        @Expose
+        val message: String,
         @SerializedName("data")
         @Expose
         val data: LoginModel,
-        @SerializedName("0")
+        @SerializedName("code")
         @Expose
         val code: Int
     )
