@@ -180,7 +180,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun openMainActivity() {
         mPrefData.setLoginIn(this.isLoginIn)
-        intent = Intent(this, MainActivity::class.java)
+        intent = Intent(this, KeuanganActivity::class.java)
         startActivity(intent)
         finish()
     }

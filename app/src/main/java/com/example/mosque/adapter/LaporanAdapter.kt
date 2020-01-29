@@ -171,7 +171,6 @@ class LaporanAdapter (var laporanItems: MutableList<LaporanModel>) : RecyclerVie
 
 
 
-
             if (nama == "Pendapatan"){
                 if (nominal == "0" || nominal == ""){
                     nominal.let {

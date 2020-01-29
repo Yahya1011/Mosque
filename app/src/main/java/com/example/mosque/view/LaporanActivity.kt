@@ -39,14 +39,15 @@ class LaporanActivity : AppCompatActivity() {
         println(mPrefData.isLoginIn())
 
         fab.setOnClickListener {
-            if (mPrefData.isLoginIn() && mPrefData.getRoleUser() == "dkm"){
+            /*if (mPrefData.isLoginIn() && mPrefData.getRoleUser() == "dkm"){
                 showDialog("","Selamat datang ${mPrefData.getFullname()}",200)
             }else if(mPrefData.isLoginIn() && mPrefData.getRoleUser()!= "dkm"){
                 showDialog("","Anda tidak memiliki akses yang tepat untuk membuka halaman ini, \nHalaman ini hanya di gunakan untuk pengurus masjid(DKM)",201)
             }else{
                 val intent = Intent(this@LaporanActivity, LoginActivity::class.java)
                 startActivity(intent)
-            }
+            }*/
+            openKeuanganActivity()
 
         }
 

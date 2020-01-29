@@ -15,12 +15,12 @@ class KeuanganViewModel :  ViewModel(){
     val keuanganData = MutableLiveData<LaporanModel>()
     val loading = MutableLiveData<Boolean>()
 
-    fun refreshKeuangan(id:Int){
+    /*fun refreshKeuangan(id:Int){
         fetchKeuangan(id)
-    }
+    }*/
 
-    private fun fetchKeuangan(id: Int) {
-        /*loading.value = true
+    /*private fun fetchKeuangan(id: Int) {
+        loading.value = true
         disposable.add(
             Services.getLaporanDetail().getDetailLaporan(id.toString())
                 .subscribeOn(Schedulers.io())
@@ -32,7 +32,7 @@ class KeuanganViewModel :  ViewModel(){
                 },{ err->
                     keuanganLoadError.value = true
                     loading.value = false
-                }))*/
-    }
+                }))
+    }*/
 
 }

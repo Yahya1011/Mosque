@@ -19,6 +19,7 @@ import com.example.mosque.model.MosqueFinance
 import com.example.mosque.viewmodel.KeuanganViewModel
 import com.example.mosque.viewmodel.LaporanViewModel
 import kotlinx.android.synthetic.main.activity_keuangan.*
+import kotlinx.android.synthetic.main.list_keuangan.*
 
 class KeuanganActivity() : AppCompatActivity() {
 
@@ -29,31 +30,31 @@ class KeuanganActivity() : AppCompatActivity() {
     private val laporanAdapter = LaporanAdapter(ArrayList())
 
     var progressDrawable: CircularProgressDrawable? = null
-    var imgTarget: String = ""*/
+    var imgTarget: String = ""
 
-    lateinit var button5: Button
+    lateinit var button5: Button*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_keuangan)
 
-        /*val recyclerDataAdapter = KeuanganAdapter(getDummyDataToPass())
+        val recyclerDataAdapter = KeuanganAdapter(getDummyDataToPass())
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = recyclerDataAdapter
-        recyclerView.setHasFixedSize(true)*/
+        recyclerView.setHasFixedSize(true)
 
         /*mPrefData = AppPreferencesHelper(this)
         println(mPrefData.isLoginIn())
 
         keuanganViewModel = ViewModelProvider(this)[keuanganViewModel::class.java]
-        keuanganViewModel.refreshLaporan(valueId)
+        keuanganViewModel.refreshLaporan(valueId)*/
 
-        rv_keuangan.apply{
+        /*rv_keuangan.apply{
             layoutManager = LinearLayoutManager(context)
             adapter = laporanAdapter
-        }*/
+        }
 
-        /*reciveData()*/
+        reciveData()*/
 
         // Initializing a String Array
         /*val jenis = arrayOf<String>("Pemasukan","Pengeluaran")
@@ -107,7 +108,7 @@ class KeuanganActivity() : AppCompatActivity() {
     }
 }
 
-/*private fun getDummyDataToPass(): MutableList<FinanceModel> {
+private fun getDummyDataToPass(): MutableList<FinanceModel> {
 println("")
 val dummyDataItems: MutableList<MosqueFinance> = ArrayList()
 var childDataItems: MutableList<FinanceModel>
@@ -123,4 +124,3 @@ for (k in 1..4) {
 }
 return dummyDataItems
 }
-}*/
