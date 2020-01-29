@@ -2,127 +2,53 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
-
-    <!--<TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Laporan Keuangan"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:textStyle="bold|italic"
-            android:textColor="#5b98d1" />
-    <View
-            android:layout_width="match_parent"
-            android:visibility="visible"
-            android:layout_height="1dp"
-            android:layout_marginTop="2dp"
-            android:background="#000000"/>
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Jenis"
-            android:layout_marginTop="10dp"/>
-    <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp" />
-
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Kategori"
-            android:layout_marginTop="10dp"/>
-    <Spinner
-            android:id="@+id/spinner1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp" />
-
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Jumlah"
-            android:layout_marginTop="10dp"/>
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Rp. 1.000.000"
-            android:layout_marginTop="5dp"/>
-
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Keterangan"
-            android:layout_marginTop="10dp"/>
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Infaq jammah"
-            android:layout_marginTop="5dp"/>
-
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tanggal"
-            android:layout_marginTop="10dp"/>
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"/>
-
-    <Button
-            android:id="@+id/keuangan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Simpan"
-            android:layout_marginTop="30dp"/>-->
-
+    android:orientation="vertical">
     <LinearLayout
-        android:id="@+id/rv_keuangan"
+        android:id="@+id/parentView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
         <TextView
             android:id="@+id/no"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:textAlignment="center"
             android:text="No" />
         <TextView
             android:id="@+id/tgl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:text="Tanggal"
-            android:layout_marginStart="10dp"/>
+            android:layout_weight="0.8"/>
         <TextView
             android:id="@+id/tv_nama_masjid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nama Masjid"
-            android:layout_marginStart="10dp"/>
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Nama Masjid"/>
         <TextView
             android:id="@+id/user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="User"
-            android:layout_marginStart="10dp"/>
+            android:layout_width="0dp"
+            android:layout_weight="0.8"
+            android:layout_height="match_parent"
+            android:text="User"/>
 
-        <Button
-            android:id="@+id/dropdown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp" />
+        <ImageView
+            android:id="@+id/iv_expand"
+            android:layout_width="0dp"
+            android:layout_weight="0.2"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/ic_down_arrow"
+            android:text="User"/>
 
     </LinearLayout>
 
@@ -132,9 +58,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_keuangan">
+        app:layout_constraintTop_toBottomOf="@+id/parentView">
 
         <TextView
             android:id="@+id/kategori"

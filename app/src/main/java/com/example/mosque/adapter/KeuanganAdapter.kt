@@ -5,87 +5,66 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mosque.R
-import com.example.mosque.model.FinanceModel
+import com.example.mosque.model.*
 import kotlinx.android.synthetic.main.list_keuangan.view.*
 
-class KeuanganAdapter (val parentDataItems: MutableList<FinanceModel>) : RecyclerView.Adapter<KeuanganAdapter.MyViewHolder>() {
+class KeuanganAdapter (val financeDataList: MutableList<LaporanModel>) : RecyclerView.Adapter<KeuanganAdapter.KeuanganHolder>() {
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.list_keuangan, parent, false)
-        return MyViewHolder(itemView)
+    private var context: Context? = null
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KeuanganHolder {
+        context = parent.context
+        val itemView = LayoutInflater.from(context).inflate(R.layout.list_keuangan, parent, false)
+        return KeuanganHolder(itemView)
     }
 
     override fun getItemCount(): Int {
-        return parentDataItems.size
+        return financeDataList.size
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val parentDataItem = parentDataItems[position]
-        holder.itemView.dropdown.text = parentDataItem.mosqueFinance.toString()
+    override fun onBindViewHolder(holder: KeuanganHolder, position: Int) {
 
-        holder.bind(parentDataItem)
+        val item = financeDataList[position]
+
+        holder.tanggalKeuangan.text = item.date
+        holder.mosqueName.text  = item.mosqueId
+
+        holder.ivArrow.setOnClickListener { onItemClicked(item) }
+        if (item.isExpanded!!) {
+            holder.childView.visibility = View.VISIBLE
+            holder.ivArrow.setImageResource(R.drawable.ic_up_arrow)
+        } else {
+            holder.childView.visibility = View.GONE
+            holder.ivArrow.setImageResource(R.drawable.ic_down_arrow)
+        }
+
+
     }
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-        View.OnClickListener {
+    private fun onItemClicked(item: LaporanModel) {
+        item.isExpanded = !item.isExpanded!!
+        notifyDataSetChanged()
+    }
 
-        private var context: Context? = null
-        override fun onClick(view: View?) {
-            if (view?.id == R.id.dropdown) {
-                if (itemView.child_items?.visibility == View.VISIBLE) {
-                    itemView.child_items?.visibility = View.GONE
-                } else {
-                    itemView.child_items?.visibility = View.VISIBLE
-                }
-            } else {
-                val textViewClicked = view as TextView
-                Toast.makeText(context, "" + textViewClicked.text.toString(), Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
+    fun updateData(financeData: List<LaporanModel>) {
+        this.financeDataList.clear()
+        this.financeDataList.addAll(financeData)
+        notifyDataSetChanged()
+    }
 
-        fun bind(parentDataItem: FinanceModel) {
-            context = itemView.context
-            itemView.child_items?.visibility = View.GONE
-            val intMaxNoOfChild = parentDataItem.mosqueFinance.size
-
-            for (indexView in 0 until intMaxNoOfChild) {
-                val textView = TextView(context)
-                textView.id = indexView
-                textView.setPadding(0, 20, 0, 20)
-                textView.gravity = Gravity.CENTER
-                textView.background = ContextCompat.getDrawable(context!!, R.drawable.background_sub_module_text)
-                val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-                textView.setOnClickListener(this)
-                itemView.child_items?.addView(textView, layoutParams)
-            }
-            itemView.dropdown?.setOnClickListener(this)
+    inner class KeuanganHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var tanggalKeuangan: TextView = itemView.tgl
+        var mosqueName : TextView = itemView.tv_nama_masjid
+        var childView: LinearLayout = itemView.child_items
+        var ivArrow: ImageView = itemView.iv_expand
 
 
-            val noOfChildTextViews = itemView.child_items?.childCount
-
-            val noOfChild = parentDataItem.mosqueFinance.size
-
-            if (noOfChild < noOfChildTextViews!!) {
-                for (index in noOfChild until noOfChildTextViews) {
-                    val currentTextView = itemView.child_items!!.getChildAt(index) as TextView
-                    currentTextView.visibility = View.GONE
-                }
-            }
-            for (textViewIndex in 0 until noOfChild) {
-                val currentTextView = itemView.child_items!!.getChildAt(textViewIndex) as TextView
-                currentTextView.text = parentDataItem.mosqueFinance[textViewIndex].userId
-            }
-
-        }
     }
 
 }
