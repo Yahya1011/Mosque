@@ -46,7 +46,7 @@ data class Mosque(
     val longitude: String,
     @SerializedName("estimate")
     @Expose
-    val estimate: String,
+    val estimate: Int,
     @SerializedName("estimate_date")
     @Expose
     val estimateDate: String,

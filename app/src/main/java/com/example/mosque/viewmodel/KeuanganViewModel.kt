@@ -12,27 +12,30 @@ class KeuanganViewModel :  ViewModel(){
 
     private val disposable = CompositeDisposable()
     val keuanganLoadError = MutableLiveData<Boolean>()
-    val keuanganData = MutableLiveData<LaporanModel>()
+    val keuanganData = MutableLiveData<List<LaporanModel>>()
     val loading = MutableLiveData<Boolean>()
 
-    /*fun refreshKeuangan(id:Int){
-        fetchKeuangan(id)
-    }*/
 
-    /*private fun fetchKeuangan(id: Int) {
-        loading.value = true
+    fun refreshKeuangan(mosqueId:Int){
+        fetchKeuangan(mosqueId)
+    }
+
+    private fun fetchKeuangan(id: Int) {
         disposable.add(
             Services.getLaporanDetail().getDetailLaporan(id.toString())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ keuanganRespons ->
-                    keuanganData.value = keuanganRespons
+                    println("Keuangan RESP ${keuanganRespons.data.size}")
+
+                    keuanganData.value = keuanganRespons.data
                     keuanganLoadError.value = false
                     loading.value = false
                 },{ err->
                     keuanganLoadError.value = true
                     loading.value = false
                 }))
-    }*/
+
+    }
 
 }

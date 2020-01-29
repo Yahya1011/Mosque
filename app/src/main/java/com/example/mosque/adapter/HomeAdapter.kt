@@ -115,13 +115,13 @@ class HomeAdapter(val context: Context) : PagedListAdapter<Mosque, ViewHolder>(M
             val progressDrawable: CircularProgressDrawable = getProgressDrawable(context)
             val imgTarget = Constans.imageUrlPath
             val localeID = Locale("in", "ID")
-            val numFormat: NumberFormat = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
+            val numFormat: NumberFormat = NumberFormat.getCurrencyInstance(localeID)
             mosque?.name.let {
                 itemView.titleTv.text = it
             }
 
             mosque?.estimate.let {
-                itemView.dana_terkumpul.text = numFormat.format(it?.toInt()).replace("Rp","Rp ")
+                itemView.dana_terkumpul.text = numFormat.format(it).replace("Rp","Rp ")
             }
             mosque?.estimateDate.let {
                 itemView.tahap_pembangunan.text = convertDateFromString(it)
@@ -134,15 +134,11 @@ class HomeAdapter(val context: Context) : PagedListAdapter<Mosque, ViewHolder>(M
                 itemView.descTv.text = it
             }
 
-            itemView.donasi.setOnClickListener(object : View.OnClickListener {
-                override fun onClick(v: View?) {
-                    val intent = Intent(context, DonasiActivity::class.java)
-                    intent.putExtra("key", mosque?.id)
-                    context.startActivity(intent)
-
-                }
-
-            })
+            itemView.donasi.setOnClickListener {
+                val intent = Intent(context, DonasiActivity::class.java)
+                intent.putExtra("key", mosque?.id)
+                context.startActivity(intent)
+            }
             itemView.info.setOnClickListener(object : View.OnClickListener {
                 override fun onClick(v: View?) {
                     val intent = Intent(context, LaporanActivity::class.java)

@@ -33,6 +33,7 @@ data class LaporanModel(
     val mosqueId: String,
     @SerializedName("nama")
     @Expose
-    val nama: String
+    val nama: String,
+    var isExpanded: Boolean? = false
 
 )

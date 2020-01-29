@@ -156,7 +156,7 @@ class LaporanAdapter (var laporanItems: MutableList<LaporanModel>) : RecyclerVie
             ) {
             var pos = adapterPosition+1
             val localeID = Locale("in", "ID")
-            val numFormat: NumberFormat = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
+            val numFormat: NumberFormat = NumberFormat.getCurrencyInstance(localeID)
 
 
             itemView.no.text = pos.toString()

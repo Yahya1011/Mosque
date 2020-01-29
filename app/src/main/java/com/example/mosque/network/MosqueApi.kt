@@ -22,7 +22,7 @@ interface MosqueApi {
     fun getMosque(@Query("page") page: Int) : Observable<ApiRespons.MosqueRespons>
 
     @GET("rest/public/mosque_finance_details/neraca/{id}")
-    fun getDetailLaporan(@Path (value = "id") id: String): Single<List<LaporanModel>>
+    fun getDetailLaporan(@Path (value = "id") id: String): Single<ApiRespons.LaporanRespons>
 
 
     @POST("rest/public/mosque_donations")
@@ -48,4 +48,5 @@ interface MosqueApi {
     @FormUrlEncoded
     fun login(@Field (value= "email") email: String,
               @Field (value= "password") password: String): Single<ApiRespons.LoginRespons>
+
 }

@@ -56,14 +56,11 @@ class LaporanViewModel : ViewModel() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ laporanRespons ->
-                    println("LAPORAN RESP ${laporanRespons.size}")
+                    println("LAPORAN RESP ${laporanRespons.data.size}")
 
-                    laporan.value = laporanRespons
+                    laporan.value = laporanRespons.data
                     laporanLoadError.value = false
                     loading.value = false
-//                    mosquesData.value = mosqueRespons
-//                    masjidLoadError.value = false
-//                    loading.value = false
                 },{ err->
                     laporanLoadError.value = true
                     loading.value = false
