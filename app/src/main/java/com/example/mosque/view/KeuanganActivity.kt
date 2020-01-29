@@ -113,7 +113,7 @@ println("")
 val dummyDataItems: MutableList<MosqueFinance> = ArrayList()
 var childDataItems: MutableList<FinanceModel>
 
-for (k in 1..4) {
+/*for (k in 1..4) {
     childDataItems = ArrayList()
     for (i in 0..k) {
         val dummyChildDataItem = FinanceModel("Child Item $k.$i")
@@ -121,6 +121,6 @@ for (k in 1..4) {
     }
     val dummyParentDataItem = MosqueFinance("Parent $k", childDataItems)
     dummyDataItems.add(dummyParentDataItem)
-}
+}*/
 return dummyDataItems
 }
