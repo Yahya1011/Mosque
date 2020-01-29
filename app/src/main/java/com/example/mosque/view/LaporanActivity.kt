@@ -76,9 +76,6 @@ class LaporanActivity : AppCompatActivity() {
                 }
 
 
-
-
-
             }
         })
 

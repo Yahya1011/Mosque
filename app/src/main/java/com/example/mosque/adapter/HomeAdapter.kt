@@ -36,13 +36,7 @@ class HomeAdapter(val context: Context) : PagedListAdapter<Mosque, ViewHolder>(M
     private var networkState: NetworkState? = null
 
 
-    interface OnInfoItemClickListener {
-        fun onItemSelected(masjidItems: Mosque)
-    }
 
-    interface OnDonasiItemClickListener {
-        fun onItemSelected(masjidItems: Mosque)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

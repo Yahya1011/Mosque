@@ -28,6 +28,10 @@ class ProfileActivity : AppCompatActivity() {
             intent = Intent(this, LaporanActivity::class.java)
             startActivity(intent)
         }
+        logout.setOnClickListener {
+            intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun loadData() {

@@ -38,7 +38,6 @@ class LaporanAdapter (var laporanItems: MutableList<LaporanModel>) : RecyclerVie
         } else {
             val contentItem = LayoutInflater.from(mContext).inflate(R.layout.item_laporan, parent, false)
             return ItemContent(contentItem)
-
         }
     }
 
@@ -90,8 +89,6 @@ class LaporanAdapter (var laporanItems: MutableList<LaporanModel>) : RecyclerVie
         }
 
     }
-
-
 
 
     fun updateData(laporanDataItems: List<LaporanModel>) {
