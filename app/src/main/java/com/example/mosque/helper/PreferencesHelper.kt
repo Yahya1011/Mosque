@@ -12,7 +12,7 @@ interface PreferencesHelper {
 
     fun getFullname(): String?
 
-    fun setFullname(fullname: String?)
+    fun setFullname(name: String?)
 
     fun getUsername(): String?
 
@@ -34,12 +34,5 @@ interface PreferencesHelper {
 
     fun clearRole()
 
-    fun getUserName(): String?
-
-    fun setUserName(username: String?)
-
-    fun getFullName(): String?
-
-    fun setFullName(name: String?)
 
 }

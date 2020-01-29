@@ -125,9 +125,9 @@ class MainActivity : AppCompatActivity() {
                             if(!mPrefData.isLoginIn()){
                                 println("Silahkan Login atau Daftar Terlebih Dahulu")
                                 showDialog("Silahkan Login atau Daftar Terlebih Dahulu",400)
-                            } /*else{
-
-                            }*/
+                            } else{
+                                loadProfileDashboard()
+                            }
                         return true
                     }
                 }
@@ -135,6 +135,12 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun loadProfileDashboard() {
+        val intent = Intent(this, ProfileActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     fun showDialog(msg: String, code: Int){

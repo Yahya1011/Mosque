@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.example.mosque.model.Mosque
+import com.example.mosque.model.MosqueModel
 import com.example.mosque.model.respons.ApiRespons
 import com.example.mosque.network.Services
 import com.example.mosque.repository.MosqueDataSource
