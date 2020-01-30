@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mosque.model.LaporanModel
 import com.example.mosque.model.Mosque
+import com.example.mosque.model.MosqueModel
 import com.example.mosque.network.Services
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -14,7 +15,7 @@ class LaporanViewModel : ViewModel() {
     private val disposable = CompositeDisposable()
     val laporan = MutableLiveData<List<LaporanModel>>()
     val laporanLoadError = MutableLiveData<Boolean>()
-    val mosquesData = MutableLiveData<Mosque>()
+    val mosquesData = MutableLiveData<MosqueModel>()
     val masjidLoadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
 
@@ -30,14 +31,11 @@ class LaporanViewModel : ViewModel() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ mosqueRespons ->
-                    println("MOSQUE RESP ${mosqueRespons}")
+                    println("MOSQUE RESP ${mosqueRespons.data}")
 
-                    mosquesData.value = mosqueRespons
+                    mosquesData.value = mosqueRespons.data
                     masjidLoadError.value = false
                     loading.value = false
-//                    mosquesData.value = mosqueRespons
-//                    masjidLoadError.value = false
-//                    loading.value = false
                 },{ err->
                     masjidLoadError.value = true
                     loading.value = false

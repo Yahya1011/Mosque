@@ -4,40 +4,70 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class MosqueModel (
-    @SerializedName("current_page")
+    @SerializedName("id")
     @Expose
-    val currentPage: Int,
-    @SerializedName("data")
+    val id: Int,
+    @SerializedName("type")
     @Expose
-    val data: List<Mosque>,
-    @SerializedName("first_page_url")
+    val type: String,
+    @SerializedName("code")
     @Expose
-    val firstPageUrl: String,
-    @SerializedName("from")
+    val code: String,
+    @SerializedName("name")
     @Expose
-    val from: Int,
-    @SerializedName("last_page")
+    val name: String,
+    @SerializedName("identity")
     @Expose
-    val lastPage: Int,
-    @SerializedName("last_page_url")
+    val identity: String,
+    @SerializedName("surface_area")
     @Expose
-    val lastPageUrl: String,
-    @SerializedName("next_page_url")
+    val surfaceArea: String,
+    @SerializedName("building_area")
     @Expose
-    val nextPageUrl: String,
-    @SerializedName("path")
+    val buildingArea: String,
+    @SerializedName("los")
     @Expose
-    val path: String,
-    @SerializedName("per_page")
+    val los: String,
+    @SerializedName("since")
     @Expose
-    val perPage: Int,
-    @SerializedName("prev_page_url")
+    val since: String,
+    @SerializedName("rek")
     @Expose
-    val prevPageUrl: String,
-    @SerializedName("to")
+    val rek: String,
+    @SerializedName("address")
     @Expose
-    val to: Int,
-    @SerializedName("total")
+    val address: String,
+    @SerializedName("latitude")
     @Expose
-    val total: Int
+    val latitude: String,
+    @SerializedName("longitude")
+    @Expose
+    val longitude: String,
+    @SerializedName("estimate")
+    @Expose
+    val estimate: String,
+    @SerializedName("estimate_date")
+    @Expose
+    val estimateDate: String,
+    @SerializedName("pic")
+    @Expose
+    val pic: String,
+    @SerializedName("description")
+    @Expose
+    val description: String,
+    @SerializedName("bank")
+    @Expose
+    val bank: Bank,
+    @SerializedName("province")
+    @Expose
+    val province: Province,
+    @SerializedName("regency")
+    @Expose
+    val regency: Regency,
+    @SerializedName("district")
+    @Expose
+    val district: District,
+    @SerializedName("village")
+    @Expose
+    val village: String
 )

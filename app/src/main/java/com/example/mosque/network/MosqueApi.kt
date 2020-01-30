@@ -16,7 +16,7 @@ interface MosqueApi {
                         @Query ("key") MuslimKey : String)  : Single<Jadwal>
 
     @GET("rest/public/mosques/{id}")
-    fun getDetailMosque(@Path (value = "id") id: String): Single<Mosque>
+    fun getDetailMosque(@Path (value = "id") id: String): Single<ApiRespons.MosquesRespons>
 
     @GET (MOSQUE)
     fun getMosque(@Query("page") page: Int) : Observable<ApiRespons.MosqueRespons>

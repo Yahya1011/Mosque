@@ -69,7 +69,7 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
     }
 
     // Get the selected radio button text using radio button on click listener
-    fun radio_button_click(view: View) {
+    fun radio_button_click() {
         // Get the clicked radio button instance
         val radio: RadioButton = findViewById(metode_pembayaran.checkedRadioButtonId)
     }

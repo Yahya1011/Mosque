@@ -36,12 +36,24 @@ class ApiRespons {
         val message: String,
         @SerializedName("data")
         @Expose
-        val data: MosqueModel,
+        val data: List<MosqueModel>,
         @SerializedName("code")
         @Expose
         val code: Int
     )
 
+    data class MosquesRespons(
+
+        @SerializedName("message")
+        @Expose
+        val message: String,
+        @SerializedName("data")
+        @Expose
+        val data: MosqueModel,
+        @SerializedName("code")
+        @Expose
+        val code: Int
+    )
 
     data class LaporanRespons(
         @SerializedName("message")

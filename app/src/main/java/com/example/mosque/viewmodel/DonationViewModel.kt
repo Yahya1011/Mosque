@@ -16,7 +16,7 @@ class DonationViewModel  :  ViewModel(){
 
     private val disposable = CompositeDisposable()
     val laporanLoadError = MutableLiveData<Boolean>()
-    val mosquesData = MutableLiveData<Mosque>()
+    val mosquesData = MutableLiveData<MosqueModel>()
     val masjidLoadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
 
@@ -33,7 +33,7 @@ class DonationViewModel  :  ViewModel(){
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ mosqueRespons ->
-                    mosquesData.value = mosqueRespons
+                    mosquesData.value = mosqueRespons.data
                     masjidLoadError.value = false
                     loading.value = false
                 },{ err->
@@ -50,9 +50,9 @@ class DonationViewModel  :  ViewModel(){
                 .subscribe({ donationRespons ->
                     println("SUBMIT RESP ${donationRespons}")
 
-/*                    successSubmit.value = donationRespons
+                    successSubmit.value = donationRespons
                     masjidLoadError.value = false
-                    loading.value = false*/
+                    loading.value = false
                 },{ err->
                     masjidLoadError.value = true
                     loading.value = false
