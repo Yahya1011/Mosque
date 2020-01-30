@@ -36,7 +36,7 @@ class ApiRespons {
         val message: String,
         @SerializedName("data")
         @Expose
-        val data: List<MosqueModel>,
+        val data: MosqueModel,
         @SerializedName("code")
         @Expose
         val code: Int
@@ -49,7 +49,7 @@ class ApiRespons {
         val message: String,
         @SerializedName("data")
         @Expose
-        val data: MosqueModel,
+        val data: Mosque,
         @SerializedName("code")
         @Expose
         val code: Int

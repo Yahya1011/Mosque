@@ -7,7 +7,7 @@ import com.example.mosque.R
 class InputLaporanActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_donasi)
+        setContentView(R.layout.activity_input_laporan)
 
 
     }

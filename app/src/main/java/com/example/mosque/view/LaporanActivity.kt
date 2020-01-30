@@ -16,6 +16,7 @@ import com.example.mosque.extention.getProgressDrawable
 import com.example.mosque.extention.loadImage
 import com.example.mosque.helper.AppPreferencesHelper
 import com.example.mosque.utils.showToast
+import com.example.mosque.view.activity.InputLaporanActivity
 import com.example.mosque.viewmodel.LaporanViewModel
 import kotlinx.android.synthetic.main.activity_laporan.*
 
@@ -47,6 +48,9 @@ class LaporanActivity : AppCompatActivity() {
                 val intent = Intent(this@LaporanActivity, LoginActivity::class.java)
                 startActivity(intent)
             }
+            /*intent = Intent(this, InputLaporanActivity::class.java)
+            startActivity(intent)
+            finish()*/
         }
 
         reciveData()

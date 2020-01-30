@@ -35,5 +35,4 @@ data class LaporanModel(
     @Expose
     val nama: String,
     var isExpanded: Boolean? = false
-
 )

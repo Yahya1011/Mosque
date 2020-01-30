@@ -15,7 +15,7 @@ class LaporanViewModel : ViewModel() {
     private val disposable = CompositeDisposable()
     val laporan = MutableLiveData<List<LaporanModel>>()
     val laporanLoadError = MutableLiveData<Boolean>()
-    val mosquesData = MutableLiveData<MosqueModel>()
+    val mosquesData = MutableLiveData<Mosque>()
     val masjidLoadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
 

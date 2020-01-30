@@ -69,7 +69,7 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
     }
 
     // Get the selected radio button text using radio button on click listener
-    fun radio_button_click() {
+    fun radio_button_click(view: View) {
         // Get the clicked radio button instance
         val radio: RadioButton = findViewById(metode_pembayaran.checkedRadioButtonId)
     }
@@ -88,9 +88,8 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
 
             if (mPrefData.isLoginIn()){
                 mToken = mPrefData.getAccessToken().toString()
-                donationViewModel.submitDonation(this, valueId, input_nominal.text.toString(), currentDateandTime, donationSelected, selectedBankProvide)
-
             }
+            donationViewModel.submitDonation(this, valueId, input_nominal.text.toString(), currentDateandTime, donationSelected, selectedBankProvide)
         }
     }
 
@@ -145,8 +144,6 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
 
             }
         })
-
-
 
     }
 
