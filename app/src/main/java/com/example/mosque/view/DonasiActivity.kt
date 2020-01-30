@@ -81,7 +81,7 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
         println("Data ${ mPrefData.getAccessToken()} ")
 
 
-        /*if (donationSelected == 0 || selectedBankProvide == "" || input_nominal.text.toString() == "") {
+        if (donationSelected == 0 || selectedBankProvide == "" || input_nominal.text.toString() == "") {
             showToast(this, "Maaf terjadi kesalahan!!, harap input jenis donasi dan bank tujuan")
             spinner_donation.requestFocus()
         } else {
@@ -92,12 +92,9 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
 
             }
 
-           // donationViewModel.submitDonation(, valueId, input_nominal.text.toString(), currentDateandTime, donationSelected, selectedBankProvide)
-
-
+           donationViewModel.submitDonation(this, valueId, input_nominal.text.toString(), currentDateandTime, donationSelected, selectedBankProvide)
 
         }
-*/
     }
 
     private fun initSpinnerData() {

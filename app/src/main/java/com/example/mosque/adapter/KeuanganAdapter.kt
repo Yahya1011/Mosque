@@ -1,15 +1,12 @@
 package com.example.mosque.adapter
 
 import android.content.Context
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mosque.R
 import com.example.mosque.model.*
@@ -63,7 +60,6 @@ class KeuanganAdapter (val financeDataList: MutableList<LaporanModel>) : Recycle
         var mosqueName : TextView = itemView.tv_nama_masjid
         var childView: LinearLayout = itemView.child_items
         var ivArrow: ImageView = itemView.iv_expand
-
 
     }
 

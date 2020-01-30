@@ -67,8 +67,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-
-
     private fun observerViewModel() {
         loginViewModel.loginData.observe(this, Observer {loginResponds->
             loginResponds.let {
@@ -180,7 +178,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun openMainActivity() {
         mPrefData.setLoginIn(this.isLoginIn)
-        intent = Intent(this, KeuanganActivity::class.java)
+        intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }

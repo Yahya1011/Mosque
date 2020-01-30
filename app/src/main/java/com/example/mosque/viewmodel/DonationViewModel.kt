@@ -7,6 +7,7 @@ import com.example.mosque.model.Mosque
 import com.example.mosque.model.MosqueModel
 import com.example.mosque.model.respons.ApiRespons
 import com.example.mosque.network.Services
+import com.example.mosque.view.DonasiActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -41,7 +42,7 @@ class DonationViewModel  :  ViewModel(){
                 }))
     }
 
-    fun submitDonation(token : String, mosqueId: Int, jmlDonasi: String, donationDate: String,jnsDonasi: Int, bankTujuan: String) {
+    fun submitDonation(token : DonasiActivity, mosqueId: Int, jmlDonasi: String, donationDate: String,jnsDonasi: Int, bankTujuan: String) {
         loading.value = true
         disposable.add(Services.getPostDonation().donationSubmit("Bearer $token", mosqueId.toString(),"1",bankTujuan,donationDate,jnsDonasi.toString(),jmlDonasi.toInt(),0)
                 .subscribeOn(Schedulers.io())
@@ -58,4 +59,5 @@ class DonationViewModel  :  ViewModel(){
                 }))
 
     }
+
 }
