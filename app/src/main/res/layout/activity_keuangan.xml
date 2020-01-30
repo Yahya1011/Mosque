@@ -6,7 +6,6 @@
     android:layout_height="match_parent">
 
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_keuangan"
         android:layout_width="match_parent"

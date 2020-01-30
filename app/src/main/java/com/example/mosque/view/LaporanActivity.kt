@@ -47,8 +47,6 @@ class LaporanActivity : AppCompatActivity() {
                 val intent = Intent(this@LaporanActivity, LoginActivity::class.java)
                 startActivity(intent)
             }
-
-
         }
 
         reciveData()

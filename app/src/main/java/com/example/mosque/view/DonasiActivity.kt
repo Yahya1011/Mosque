@@ -1,6 +1,7 @@
 package com.example.mosque.view
 
 import android.os.Bundle
+import android.util.JsonToken
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
@@ -32,6 +33,7 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
     var valueId: Int = 0
     var imgTarget: String = ""
     var progressDrawable: CircularProgressDrawable? = null
+    var mToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNmRkNWM0N2MzYzk2MjU5MWNjZmVjYjk2N2M2ZTIyOTA5NTY5YjQwMzMwNTIwM2EwZmNlYzU1MzEwYTkwMzM1OGY5NThlNmZlOTgzNjQxODYiLCJpYXQiOjE1ODAyMTYxNjQsIm5iZiI6MTU4MDIxNjE2NCwiZXhwIjoxNjExODM4NTY0LCJzdWIiOiIxMDkiLCJzY29wZXMiOltdfQ.IZGmlzoamqaGOOueJ_X_FIXRXMSyVm5DqcjnwVDWZXRNJGgCn7RNL9NE1hmSI1-RhWy5t_2491JxesI_tksU2uACHdeuerzENiF6uZikSSpfAUhBHdqVq21moLhZdXsBFPWaZGhYSaCBwQ75VFt0SmNeS14ms-VWKPRdGJpRScxTmpDldZeMPzlEgUzU-IG7fgQSD-run3mKgLgrFGHXqDvMjhuhkT2vMzsO6QvRSTOIWlc0rC70y8hwsJJGNRqUA4lVRznVvyeCFr_tXwd5dG0rmWCK6KHwfpVC8jMp8fewBRkoFqpYiL1qJ-7eMtwLiOtTOITTD6POJAmq1XlO2Sbn59YNGdelFZmbj8gRQ1RizecquXV9NzIrdyoKJCWNWR2Dv_K___aCgDh6cmjC82c9x1WTgyMNikOk_29AMbfx3GVTAG9sln1Q4khnyOeZjVUmZjStdednFrEGVcG7HUu-QdYex97ecInBGgGbWA1eR1MSb6tPpkPhoI6566O6hCXNQ_mCJErGsqNtgc-RPwtWDuteKuULsiBTEZBLmH9ycAl7oJmXRwhwA3q3-5MVANgwpVOPP1tiEGpJXjl2H88niicycwuMJQV-kpe42sh5JxUHbzRwKe6uZy7251vQUce90fykNF3cU5wwHvTy_DOYq1kcSVBYGqKFqUuus4M"
 
     lateinit var donationViewModel: DonationViewModel
     lateinit var mPrefData: AppPreferencesHelper
@@ -51,7 +53,6 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
         initRadioButton()
         observeViewModel()
     }
-
 
     private fun initRadioButton() {
         metode_pembayaran.setOnCheckedChangeListener { _, checkedId ->
@@ -77,9 +78,7 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         val currentDateandTime: String = sdf.format(Date())
 
-
         println("Data ${ mPrefData.getAccessToken()} ")
-
 
         if (donationSelected == 0 || selectedBankProvide == "" || input_nominal.text.toString() == "") {
             showToast(this, "Maaf terjadi kesalahan!!, harap input jenis donasi dan bank tujuan")
@@ -87,13 +86,11 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
         } else {
             //2020-01-12 18:48:30
 
-
-            if (mPrefData.getAccessToken() != null){
+            if (mPrefData.isLoginIn()){
+                mToken = mPrefData.getAccessToken().toString()
+                donationViewModel.submitDonation(this, valueId, input_nominal.text.toString(), currentDateandTime, donationSelected, selectedBankProvide)
 
             }
-
-           donationViewModel.submitDonation(this, valueId, input_nominal.text.toString(), currentDateandTime, donationSelected, selectedBankProvide)
-
         }
     }
 
