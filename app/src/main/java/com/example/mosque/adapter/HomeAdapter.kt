@@ -36,8 +36,6 @@ class HomeAdapter(val context: Context) : PagedListAdapter<Mosque, ViewHolder>(M
     private var networkState: NetworkState? = null
 
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view: View
@@ -121,7 +119,8 @@ class HomeAdapter(val context: Context) : PagedListAdapter<Mosque, ViewHolder>(M
             }
 
             mosque?.estimate.let {
-                itemView.dana_terkumpul.text = numFormat.format(it).replace("Rp","Rp ")
+                itemView.dana_terkumpul.text = it
+                    //numFormat.format(it).replace("Rp","Rp ")
             }
             mosque?.estimateDate.let {
                 itemView.tahap_pembangunan.text = convertDateFromString(it)

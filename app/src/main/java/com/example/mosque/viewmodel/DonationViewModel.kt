@@ -2,12 +2,9 @@ package com.example.mosque.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.mosque.helper.AppPreferencesHelper
 import com.example.mosque.model.Mosque
-import com.example.mosque.model.MosqueModel
 import com.example.mosque.model.respons.ApiRespons
 import com.example.mosque.network.Services
-import com.example.mosque.view.DonasiActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

@@ -3,6 +3,7 @@ package com.example.mosque.repository
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.example.mosque.model.Mosque
+import com.example.mosque.model.MosquesModel
 import com.example.mosque.network.MosqueApi
 import io.reactivex.disposables.CompositeDisposable
 

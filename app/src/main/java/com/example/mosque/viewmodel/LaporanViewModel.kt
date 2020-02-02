@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mosque.model.LaporanModel
 import com.example.mosque.model.Mosque
-import com.example.mosque.model.MosqueModel
 import com.example.mosque.network.Services
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

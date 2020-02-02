@@ -3,7 +3,7 @@ package com.example.mosque.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class MosqueModel (
+data class MosquesModel(
     @SerializedName("current_page")
     @Expose
     val currentPage: Int,
@@ -40,4 +40,4 @@ data class MosqueModel (
     @SerializedName("total")
     @Expose
     val total: Int
-)
+    )

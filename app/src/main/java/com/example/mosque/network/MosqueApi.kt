@@ -16,10 +16,10 @@ interface MosqueApi {
                         @Query ("key") MuslimKey : String)  : Single<Jadwal>
 
     @GET("rest/public/mosques/{id}")
-    fun getDetailMosque(@Path (value = "id") id: String): Single<ApiRespons.MosquesRespons>
+    fun getDetailMosque(@Path (value = "id") id: String): Single<ApiRespons.MosqueRespons>
 
     @GET (MOSQUE)
-    fun getMosque(@Query("page") page: Int) : Observable<ApiRespons.MosqueRespons>
+    fun getMosque(@Query("page") page: Int) : Observable<ApiRespons.MosquesRespons>
 
     @GET("rest/public/mosque_finance_details/neraca/{id}")
     fun getDetailLaporan(@Path (value = "id") id: String): Single<ApiRespons.LaporanRespons>

@@ -1,12 +1,7 @@
 package com.example.mosque.model.respons
 
 
-import com.example.mosque.model.LoginModel
-import com.example.mosque.model.Mosque
-import com.example.mosque.model.MosqueModel
-import com.example.mosque.model.RegisterModel
-import com.example.mosque.model.LaporanModel
-import com.example.mosque.model.FinanceModel
+import com.example.mosque.model.*
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -35,20 +30,23 @@ class ApiRespons {
         val code: Int
     )
 
-    data class MosqueRespons(
+    //for paggination Respons
+    data class MosquesRespons(
 
         @SerializedName("message")
         @Expose
         val message: String,
         @SerializedName("data")
         @Expose
-        val data: MosqueModel,
+        val data: MosquesModel,
         @SerializedName("code")
         @Expose
         val code: Int
     )
 
-    data class MosquesRespons(
+    //For Detail respons
+
+    data class MosqueRespons(
 
         @SerializedName("message")
         @Expose

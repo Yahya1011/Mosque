@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class Mosque(
-
     @SerializedName("id")
     @Expose
     val id: Int,
@@ -46,7 +45,7 @@ data class Mosque(
     val longitude: String,
     @SerializedName("estimate")
     @Expose
-    val estimate: Int,
+    val estimate: String,
     @SerializedName("estimate_date")
     @Expose
     val estimateDate: String,
@@ -55,7 +54,7 @@ data class Mosque(
     val pic: String,
     @SerializedName("description")
     @Expose
-    val description: String,
+    val description : String,
     @SerializedName("bank")
     @Expose
     val bank: Bank,
@@ -71,5 +70,6 @@ data class Mosque(
     @SerializedName("village")
     @Expose
     val village: Village
+
 )
    

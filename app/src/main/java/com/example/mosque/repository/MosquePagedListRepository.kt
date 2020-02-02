@@ -6,6 +6,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.example.mosque.common.Constans
 import com.example.mosque.model.Mosque
+import com.example.mosque.model.MosquesModel
 import com.example.mosque.network.MosqueApi
 import com.example.mosque.utils.NetworkState
 import io.reactivex.disposables.CompositeDisposable
