@@ -42,7 +42,7 @@ class DonationViewModel  :  ViewModel(){
                 }))
     }
 
-    fun submitDonation(token : DonasiActivity, mosqueId: Int, jmlDonasi: String, donationDate: String,jnsDonasi: Int, bankTujuan: String) {
+    fun submitDonation(token : DonasiActivity , mosqueId: Int, jmlDonasi: String, donationDate: String,jnsDonasi: Int, bankTujuan: String) {
         loading.value = true
         disposable.add(Services.getPostDonation().donationSubmit("Bearer $token", mosqueId.toString(),"1",bankTujuan,donationDate,jnsDonasi.toString(),jmlDonasi.toInt(),0)
                 .subscribeOn(Schedulers.io())
