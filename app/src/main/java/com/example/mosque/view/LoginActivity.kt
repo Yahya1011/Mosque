@@ -78,6 +78,7 @@ class LoginActivity : AppCompatActivity() {
                         mPrefData.setAccessToken(it.data.token)
                         mPrefData.setRoleUser(it.data.role)
                         mPrefData.setCurrentUserEmail(it.data.email)
+                        mPrefData.setCurrentUserId(it.data.id)
                         mPrefData.setFullname(it.data.name)
                         mPrefData.setUsername(it.data.username)
 
@@ -95,51 +96,6 @@ class LoginActivity : AppCompatActivity() {
                     }
                     showDialog(title, message, it.code)
                 }
-                /*if(mPrefData.getAccessToken() == null || mPrefData.getAccessToken() != it.data.token || mPrefData.getRoleUser() == null){
-                    mPrefData.setAccessToken(it.data.token)
-                    mPrefData.setRoleUser(it.data.role)
-                    progressBar.dialog.dismiss()
-<<<<<<< HEAD
-                    mPrefData.setAccessToken(it.token)
-                    mPrefData.setRoleUser(it.role)
-                    mPrefData.setCurrentUserEmail(it.email)
-                    mPrefData.setCurrentUserId(it.id.toLong())
-                    mPrefData.setUserName(it.username)
-                    mPrefData.setFullName(it.name)
-                    mPrefData.setLoginIn(true)
-=======
->>>>>>> devrahman
-                    openMainActivity()
-                }else if(mPrefData.getAccessToken() == it.data.token && mPrefData.isLoginIn()){
-                    progressBar.dialog.dismiss()
-                }*//* else if (){
-
-                    mPrefData.clearToken()
-                    mPrefData.clearRole()
-                    mPrefData.setLoginIn(true)
-                    mPrefData.setAccessToken(it.token)
-                    mPrefData.setRoleUser(it.role)
-
-                    openMainActivity()
-
-                    println("Pindah Activity")
-
-                }else if (mPrefData.getRoleUser() != it.role  ){
-                    progressBar.dialog.dismiss()
-                    mPrefData.clearToken()
-                    mPrefData.setLogin(true)
-                    mPrefData.setAccessToken(it.token)
-                    mPrefData.setRoleUser(it.role)
-
-                    openMainActivity()
-
-                    println("Pindah Activity")
-
-                }*//*else{
-                    progressBar.dialog.dismiss()
-
-
-                }*/
             }
 
         })

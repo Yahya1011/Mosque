@@ -27,13 +27,13 @@ class RegisterViewModel : ViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ registerRespons ->
 
-                if (!registerRespons.status){
+                if (registerRespons.code == 200){
+                    registerData.value = registerRespons
+                    registerLoadError.value = false
+
+                } else {
                     registerLoadError.value = true
                     errorData.value = registerRespons
-                } else {
-                     registerData.value = registerRespons
-                     registerLoadError.value = false
-
                 }
 
 

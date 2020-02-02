@@ -26,14 +26,13 @@ class AppPreferencesHelper(context: Context) : PreferencesHelper {
         mPrefs.edit().putString(Constans.PREF_KEY_CURRENT_USER_EMAIL, email).apply()
     }
 
-    override fun getCurrentUserId(): Long? {
-        val userId = mPrefs.getLong(Constans.PREF_KEY_CURRENT_USER_ID, Constans.NULL_INDEX)
-        return if (userId == Constans.NULL_INDEX) null else userId
+    override fun getCurrentUserId(): Int {
+        val userId = mPrefs.getInt(Constans.PREF_KEY_CURRENT_USER_ID,0)
+        return userId
     }
 
-    override fun setCurrentUserId(userId: Long?) {
-        val id = userId ?: Constans.NULL_INDEX
-        mPrefs.edit().putLong(Constans.PREF_KEY_CURRENT_USER_ID, id).apply()
+    override fun setCurrentUserId(userId: Int) {
+        mPrefs.edit().putInt(Constans.PREF_KEY_CURRENT_USER_ID, userId).apply()
     }
 
     override fun isLoginIn(): Boolean {

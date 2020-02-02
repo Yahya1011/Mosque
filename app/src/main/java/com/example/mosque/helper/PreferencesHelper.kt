@@ -18,9 +18,9 @@ interface PreferencesHelper {
 
     fun setUsername(username: String?)
 
-    fun getCurrentUserId(): Long?
+    fun getCurrentUserId(): Int
 
-    fun setCurrentUserId(userId: Long?)
+    fun setCurrentUserId(userId: Int)
 
     fun isLoginIn() : Boolean?
 

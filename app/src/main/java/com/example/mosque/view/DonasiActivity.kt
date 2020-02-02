@@ -33,7 +33,9 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
     var valueId: Int = 0
     var imgTarget: String = ""
     var progressDrawable: CircularProgressDrawable? = null
-    var mToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNmRkNWM0N2MzYzk2MjU5MWNjZmVjYjk2N2M2ZTIyOTA5NTY5YjQwMzMwNTIwM2EwZmNlYzU1MzEwYTkwMzM1OGY5NThlNmZlOTgzNjQxODYiLCJpYXQiOjE1ODAyMTYxNjQsIm5iZiI6MTU4MDIxNjE2NCwiZXhwIjoxNjExODM4NTY0LCJzdWIiOiIxMDkiLCJzY29wZXMiOltdfQ.IZGmlzoamqaGOOueJ_X_FIXRXMSyVm5DqcjnwVDWZXRNJGgCn7RNL9NE1hmSI1-RhWy5t_2491JxesI_tksU2uACHdeuerzENiF6uZikSSpfAUhBHdqVq21moLhZdXsBFPWaZGhYSaCBwQ75VFt0SmNeS14ms-VWKPRdGJpRScxTmpDldZeMPzlEgUzU-IG7fgQSD-run3mKgLgrFGHXqDvMjhuhkT2vMzsO6QvRSTOIWlc0rC70y8hwsJJGNRqUA4lVRznVvyeCFr_tXwd5dG0rmWCK6KHwfpVC8jMp8fewBRkoFqpYiL1qJ-7eMtwLiOtTOITTD6POJAmq1XlO2Sbn59YNGdelFZmbj8gRQ1RizecquXV9NzIrdyoKJCWNWR2Dv_K___aCgDh6cmjC82c9x1WTgyMNikOk_29AMbfx3GVTAG9sln1Q4khnyOeZjVUmZjStdednFrEGVcG7HUu-QdYex97ecInBGgGbWA1eR1MSb6tPpkPhoI6566O6hCXNQ_mCJErGsqNtgc-RPwtWDuteKuULsiBTEZBLmH9ycAl7oJmXRwhwA3q3-5MVANgwpVOPP1tiEGpJXjl2H88niicycwuMJQV-kpe42sh5JxUHbzRwKe6uZy7251vQUce90fykNF3cU5wwHvTy_DOYq1kcSVBYGqKFqUuus4M"
+    var mAnonymousToken : String =  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYjU1M2VkNjc2ODgxZDFhMjkwZDc3YzE3MGYzOWMyNjRjZDgzM2Y4ZTllYjViOGJkNDA0NDNlOTI1MThlZGQ2YmE3NmJhOTU4NTJlNTYwMTIiLCJpYXQiOjE1ODAzMzk5NzEsIm5iZiI6MTU4MDMzOTk3MSwiZXhwIjoxNjExOTYyMzcxLCJzdWIiOiIxMDAwOSIsInNjb3BlcyI6W119.vZr5wgn6GsUWi7olDmsCSIfGAIjcv6Hlbsj5f6h6_dlbUQFyUcHCCRtm36OoA8VZ90OSs5qUQn9HC0CW2r_ZaybNonGraNNLzqKeMruhBaZlK18bFQe-AIQheIxrxKTEEk_NhejOAn1i8PZKGo4sFrV2U2nTMYYo0fNLjyWmw5czcwOG6-OmmnBEwwXEe85TlG9mjP5iAjCOhX2Vqj_KZoKZlckuQ5WyIp1WSz7TI_JaNqA07RlSvla3neSeboJetB-6AvYTNidsgc1wy_qZuK9L7r9f5479wU1T-5GeHwYrE9logbtlBlG5cp12BKjxHu3uwI7H2kkvsVPljiEmOhOivcN1wyf8FlM8uaEWNTvSjKHedDd9X2TXvpz2eGQnB1VariB0Fo7bOfu0bkuFQ8Cl1X9iaJMUksaaa8bNu3W10VzzKKpQBvUdKYuPrfJJe0oUcnh7bSWDZ95fc8lU5kGho7PWnmm-fhC8XdUcR9Nolkxt5g5_anArLR41jawLvTqmR0ibhsrfyGheV29B9bpIN5V52qJvSuvQGNgv1f0T3l0IgwqNCUl_igGpwOjM1DVl1L3efX4H5FAlX1cRuXOq9PZJ3VF7k47db-ygWU2qF-LJJMFzTIXLF3KLJf-w9WY0J_1RliwHvGYpRbeVKPbdvpKQOH3EMIcdT1rLpzs"
+    var mToken : String  = ""
+    var mUserId: Int  = 0
 
     lateinit var donationViewModel: DonationViewModel
     lateinit var mPrefData: AppPreferencesHelper
@@ -88,8 +90,12 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
 
             if (mPrefData.isLoginIn()){
                 mToken = mPrefData.getAccessToken().toString()
+                mUserId = mPrefData.getCurrentUserId()
+            } else {
+                mToken = mAnonymousToken
+                mUserId = 10009
             }
-            donationViewModel.submitDonation(this, valueId, input_nominal.text.toString(), currentDateandTime, donationSelected, selectedBankProvide)
+            donationViewModel.submitDonation(mToken, valueId, mUserId, input_nominal.text.toString(), currentDateandTime, donationSelected, selectedBankProvide)
         }
     }
 
