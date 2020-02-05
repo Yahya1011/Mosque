@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
                     gMap.uiSettings.isCompassEnabled = false
                     gMap.uiSettings.isZoomGesturesEnabled = true
                     gMap.uiSettings.isRotateGesturesEnabled = false
-                    gMap.uiSettings.isZoomControlsEnabled = true
+                    gMap.uiSettings.isZoomControlsEnabled = false
                 }
 
             })
