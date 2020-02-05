@@ -34,4 +34,7 @@
     <string name="MasukkanPassword">Masukkan Password Anda</string>
     <string name="register">Tidak punya akun? Daftar di sini</string>
 
+    <string name="you_are_offline">You are Offline</string>
+    <string name="masjid_not_found">Masjid not found</string>
+
 </resources>

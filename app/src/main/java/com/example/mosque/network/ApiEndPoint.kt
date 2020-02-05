@@ -5,4 +5,5 @@ object ApiEndPoint {
     const val MOSQUE: String = "rest/public/mosques"
     const val LAPORAN: String = "rest/public/mosque_finance_details"
     const val  SHALAT_BASE_URL = "http://muslimsalat.com/"
+    const val Fasilitas : String = "rest/public/mosque_facilities"
 }

@@ -1,47 +1,51 @@
 package com.example.mosque.adapter
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import androidx.paging.PagedList
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.example.mosque.R
 import com.example.mosque.common.Constans
 import com.example.mosque.extention.getProgressDrawable
 import com.example.mosque.extention.loadImage
-import com.example.mosque.model.*
+import com.example.mosque.model.Mosque
 import com.example.mosque.utils.NetworkState
-import com.example.mosque.utils.convertDateFromString
-import com.example.mosque.view.DonasiActivity
 import com.example.mosque.view.LaporanActivity
 import kotlinx.android.synthetic.main.item_loading.view.*
 import kotlinx.android.synthetic.main.row.view.*
+import kotlinx.android.synthetic.main.row.view.descTv
+import kotlinx.android.synthetic.main.row.view.iconIv
+import kotlinx.android.synthetic.main.row.view.titleTv
+import kotlinx.android.synthetic.main.row_masjidsekitar.view.*
 import java.text.NumberFormat
 import java.util.*
 
+class MasjidSekitarAdapter(val context: Context) : PagedListAdapter<Mosque, RecyclerView.ViewHolder>(MosqueDiffCallback()),
+    Filterable {
 
-class HomeAdapter(val context: Context) : PagedListAdapter<Mosque, ViewHolder>(MosqueDiffCallback()) {
-    
+
     val VIEW_TYPE_NORMAL: Int = 1
     val VIEW_TYPE_LOADING: Int = 2
 
     private var networkState: NetworkState? = null
+    private lateinit var masjidListFilter: MutableList<Mosque>
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view: View
 
         if (viewType == VIEW_TYPE_NORMAL) {
-            view = layoutInflater.inflate(R.layout.row, parent, false)
+            view = layoutInflater.inflate(R.layout.row_masjidsekitar, parent, false)
             return ContentHolder(view)
         } else {
             view = layoutInflater.inflate(R.layout.item_loading, parent, false)
@@ -69,7 +73,7 @@ class HomeAdapter(val context: Context) : PagedListAdapter<Mosque, ViewHolder>(M
     }
 
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (getItemViewType(position) == VIEW_TYPE_NORMAL) {
             (holder as ContentHolder).onBind(getItem(position), context)
         } else {
@@ -118,13 +122,6 @@ class HomeAdapter(val context: Context) : PagedListAdapter<Mosque, ViewHolder>(M
                 itemView.titleTv.text = it
             }
 
-            mosque?.estimate.let {
-                itemView.dana_terkumpul.text = it
-                    //numFormat.format(it).replace("Rp","Rp ")
-            }
-            mosque?.estimateDate.let {
-                itemView.tahap_pembangunan.text = convertDateFromString(it)
-            }
             mosque?.pic.let {
                 itemView.iconIv.loadImage(imgTarget + it, progressDrawable)
             }
@@ -133,20 +130,15 @@ class HomeAdapter(val context: Context) : PagedListAdapter<Mosque, ViewHolder>(M
                 itemView.descTv.text = it
             }
 
-            itemView.donasi.setOnClickListener {
-                val intent = Intent(context, DonasiActivity::class.java)
+            mosque?.let {
+                itemView.descTiming.text = "otw"
+            }
+
+            itemView.btn_detail.setOnClickListener {
+                val intent = Intent(context, LaporanActivity::class.java)
                 intent.putExtra("key", mosque?.id)
                 context.startActivity(intent)
             }
-            itemView.info.setOnClickListener(object : View.OnClickListener {
-                override fun onClick(v: View?) {
-                    val intent = Intent(context, LaporanActivity::class.java)
-                    intent.putExtra("key", mosque?.id)
-                    context.startActivity(intent)
-
-                }
-
-            })
         }
 
     }
@@ -170,5 +162,36 @@ class HomeAdapter(val context: Context) : PagedListAdapter<Mosque, ViewHolder>(M
             }
         }
 
+    }
+
+    //GET MAsJID FOR SEARCH OPTIONS
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(charSequence: CharSequence): FilterResults {
+                val charString = charSequence.toString()
+                if (charString.isEmpty()) {
+                    masjidListFilter
+                } else {
+                    val filteredList: MutableList<Mosque> = ArrayList()
+//                    println("DATA ${listOf(filteredList)}")
+                    for (row in masjidListFilter) {
+                        if (row.name.toLowerCase().contains(charString.toLowerCase())) {
+                            filteredList.add(row)
+                        }
+                    }
+                    masjidListFilter = filteredList
+                }
+                val filterResults = FilterResults()
+
+                filterResults.values = masjidListFilter
+//                println("DATA ADAPTER ${filterResults}")
+                return filterResults
+            }
+
+            override fun publishResults(constraint: CharSequence, results: FilterResults) {
+                masjidListFilter = results.values as ArrayList<Mosque>
+                notifyDataSetChanged()
+            }
+        }
     }
 }

@@ -6,6 +6,19 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 class ApiRespons {
+
+    data class FilterRespons(
+        @SerializedName("success")
+        @Expose
+        val success: Boolean,
+        @SerializedName("message")
+        @Expose
+        val message: String,
+        @SerializedName("code")
+        @Expose
+        val code: Int
+    )
+
     data class RegisterRespons(
         @SerializedName("message")
         @Expose

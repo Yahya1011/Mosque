@@ -1,9 +1,11 @@
 package com.example.mosque.network
 
+import com.example.mosque.model.Fasilitas
 import com.example.mosque.model.Jadwal
 import com.example.mosque.model.LaporanModel
 import com.example.mosque.model.Mosque
 import com.example.mosque.model.respons.ApiRespons
+import com.example.mosque.network.ApiEndPoint.Fasilitas
 import com.example.mosque.network.ApiEndPoint.MOSQUE
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -20,6 +22,19 @@ interface MosqueApi {
 
     @GET (MOSQUE)
     fun getMosque(@Query("page") page: Int) : Observable<ApiRespons.MosquesRespons>
+
+    @GET (MOSQUE)
+    fun getMosqueMarker() : Observable<ApiRespons.MosquesRespons>
+
+    @GET(Fasilitas)
+    fun getFilteredMasjid() : Observable<List<Fasilitas>>
+
+    @POST("rest/public/mosque_facilities")
+    @FormUrlEncoded
+    fun filterSubmit(@Field (value = "full_time") full_time: String,
+                     @Field (value = "ac") ac: String,
+                     @Field (value = "free_water") free_water: String,
+                     @Field (value = "easy_access") easy_access: String) : Observable<ApiRespons.FilterRespons>
 
     @GET("rest/public/mosque_finance_details/neraca/{id}")
     fun getDetailLaporan(@Path (value = "id") id: String): Single<ApiRespons.LaporanRespons>

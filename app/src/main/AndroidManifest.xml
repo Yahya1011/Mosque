@@ -46,7 +46,9 @@
         </activity>
         <activity android:name=".view.InformasiActivity" />
         <activity android:name=".view.DonasiActivity" />
-        <activity android:name=".view.activity.MasjidSekitarActivity" />
+        <activity android:name=".view.activity.MasjidSekitarActivity"
+            android:label="Masjid Sekitar"
+            android:theme="@style/AppTheme.NoActionBar"/>/>
         <activity android:name=".view.activity.AcaraActivity" />
         <activity android:name=".view.LaporanActivity" />
         <activity android:name=".view.activity.DetailDonasiActivity" />
