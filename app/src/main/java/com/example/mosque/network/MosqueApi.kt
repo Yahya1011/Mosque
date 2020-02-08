@@ -33,6 +33,7 @@ interface MosqueApi {
     @FormUrlEncoded
     fun filterSubmit(@Field (value = "full_time") full_time: String,
                      @Field (value = "ac") ac: String,
+                     @Field (value = "car_parking") car_parking: String,
                      @Field (value = "free_water") free_water: String,
                      @Field (value = "easy_access") easy_access: String) : Observable<ApiRespons.FilterRespons>
 

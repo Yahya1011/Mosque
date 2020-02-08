@@ -24,13 +24,12 @@
     </string-array>
 
     <string-array name="fasilitas">
-    <item>Full Time</item>
-    <item>Air Conditioner</item>
-    <item>Car Parking</item>
-    <item>Free Mineral Water</item>
-    <item>Easy Way Access</item>
+        <item>Full Time</item>
+        <item>Air Conditioner</item>
+        <item>Car Parking</item>
+        <item>Free Mineral Water</item>
+        <item>Easy Way Access</item>
     </string-array>
-
 
 
 </resources>

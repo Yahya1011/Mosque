@@ -9,11 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mosque.R
 import com.example.mosque.adapter.FasilitasAdapter
 import com.example.mosque.model.FasilitasString
-import com.example.mosque.view.activity.MasjidSekitarActivity
+import com.example.mosque.view.fragment.HomeFragment
+import com.example.mosque.viewmodel.HomeViewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -27,21 +29,19 @@ class FasilitasFragment : BottomSheetDialogFragment() {
         fun newInstance(): FasilitasFragment {
             return FasilitasFragment()
         }
-
         fun newInstance(listFasilitas: List<FasilitasString>): FasilitasFragment {
             mFasilitas = listFasilitas.toMutableList()
             return FasilitasFragment()
         }
-
-
     }
 
-    private val mainActivity: MasjidSekitarActivity = MasjidSekitarActivity()
+    private val mainActivity: HomeFragment = HomeFragment()
     private var mAdapterFasilitas = FasilitasAdapter(ArrayList())
     private lateinit var dialog: BottomSheetDialog
     private lateinit var behavior: BottomSheetBehavior<View>
     lateinit var fragmentView: View
-    var checkedFasilitas: MutableList<FasilitasString> = ArrayList()
+    lateinit var viewModel: HomeViewModels
+
     var valueSelected = 0
 
 
@@ -73,6 +73,7 @@ class FasilitasFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initRecycle(mFasilitas) //GET BUTTON FILTER
     }
 
@@ -94,6 +95,7 @@ class FasilitasFragment : BottomSheetDialogFragment() {
 
         //GET BUTTON FILTER
         btn_filter_fasilitas.setOnClickListener {
+
             //            println ("DATA BOTTOM HAHA $kategoriName")
             val stringBuilder = StringBuilder()
             for (checkedFasilitas in mFasilitas) {
