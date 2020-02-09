@@ -41,7 +41,6 @@ class KeuanganAdapter (val financeDataList: MutableList<LaporanModel>) : Recycle
             holder.ivArrow.setImageResource(R.drawable.ic_down_arrow)
         }
 
-
     }
 
     private fun onItemClicked(item: LaporanModel) {

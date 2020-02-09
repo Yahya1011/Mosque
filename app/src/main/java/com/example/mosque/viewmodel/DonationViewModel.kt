@@ -47,10 +47,9 @@ class DonationViewModel  :  ViewModel(){
         disposable.add(Services.getPostDonation().donationSubmit("Bearer $token", mosqueId,userId ,bankTujuan,donationDate,jnsDonasi,jmlDonasi.toInt(),0)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ donationRespons ->
-                    println("SUBMIT RESP ${donationRespons}")
-
-                    successSubmit.value = donationRespons
+                .subscribe({
+                    println("SUBMIT RESP ${it.message}")
+                    successSubmit.value = it
                     masjidLoadError.value = false
                     loading.value = false
                 },{ err->
