@@ -51,17 +51,27 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.InformasiActivity" />
-        <activity android:name=".view.DonasiActivity" />
-        <activity android:name=".view.FinanceActivity"/>
+        <activity
+            android:name=".view.DonasiActivity"
+            android:label="Donasi" />
         <activity
             android:name=".view.MasjidSekitarActivity"
             android:label="Masjid Sekitar"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.activity.AcaraActivity" />
-        <activity android:name=".view.LaporanActivity" />
-        <activity android:name=".view.DetailDonasiActivity" />
+        <activity
+            android:name=".view.LaporanActivity"
+            android:label="Laporan Keuangan" />
+        <activity
+            android:name=".view.DetailDonasiActivity"
+            android:label="Detail Donasi" />
         <activity android:name=".view.KeuanganActivity" />
-        <activity android:name=".view.activity.InputLaporanActivity" />
+        <activity
+            android:name=".view.activity.InputLaporanActivity"
+            android:label="Input Laporan" />
+        <activity
+            android:name=".view.FinanceActivity"
+            android:label="Input Laporan" />
         <activity
             android:name=".view.ProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" />
