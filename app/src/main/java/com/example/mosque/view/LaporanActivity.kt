@@ -42,6 +42,8 @@ class LaporanActivity : AppCompatActivity() {
         fab.setOnClickListener {
             if (mPrefData.isLoginIn() && mPrefData.getRoleUser() == "dkm"){
                 showDialog("","Selamat datang ${mPrefData.getFullname()}",200)
+                val intent = Intent(this@LaporanActivity, KeuanganActivity::class.java)
+                startActivity(intent)
             }else if(mPrefData.isLoginIn() && mPrefData.getRoleUser()!= "dkm"){
                 showDialog("","Anda tidak memiliki akses yang tepat untuk membuka halaman ini, \nHalaman ini hanya di gunakan untuk pengurus masjid(DKM)",201)
             }else{
@@ -71,13 +73,11 @@ class LaporanActivity : AppCompatActivity() {
                 println("DATA recive API ${it.name}")
                 titleMosque.text =it.name
                 sub_title.text = it.address
-                 progressDrawable= getProgressDrawable(this)
-                 imgTarget = Constans.imageUrlPath
+                progressDrawable= getProgressDrawable(this)
+                imgTarget = Constans.imageUrlPath
                 it.pic.let {
                     image_poster.loadImage(imgTarget + it, progressDrawable!!)
                 }
-
-
             }
         })
 
@@ -125,11 +125,9 @@ class LaporanActivity : AppCompatActivity() {
     }
 
     private fun openKeuanganActivity() {
-        val intent = Intent(this@LaporanActivity, KeuanganActivity::class.java)
+        val intent = Intent(this@LaporanActivity, FinanceActivity::class.java)
         intent.putExtra("key", valueId)
         startActivity(intent)
         finish()
     }
-
-
 }

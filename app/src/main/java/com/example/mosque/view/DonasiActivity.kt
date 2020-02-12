@@ -1,5 +1,6 @@
 package com.example.mosque.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.JsonToken
 import android.util.Log
@@ -16,6 +17,7 @@ import com.example.mosque.extention.getProgressDrawable
 import com.example.mosque.extention.loadImage
 import com.example.mosque.helper.AppPreferencesHelper
 import com.example.mosque.utils.showToast
+import com.example.mosque.view.activity.DetailDonasiActivity
 import com.example.mosque.viewmodel.DonationViewModel
 import com.tiper.MaterialSpinner
 import kotlinx.android.synthetic.main.activity_donasi.*
@@ -96,7 +98,11 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
                 mUserId = 10009
             }
             donationViewModel.submitDonation(mToken, valueId, mUserId, input_nominal.text.toString(), currentDateandTime, donationSelected, selectedBankProvide)
+            println("Data Berhasil di Tambahkan")
+            val intent = Intent(this, DetailDonasiActivity::class.java)
+            startActivity(intent)
         }
+
     }
 
     private fun initSpinnerData() {

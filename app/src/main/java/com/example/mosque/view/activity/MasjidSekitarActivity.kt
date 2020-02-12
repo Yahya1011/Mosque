@@ -1,15 +1,18 @@
 package com.example.mosque.view.activity
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.os.Looper
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
@@ -18,11 +21,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mosque.R
+import com.example.mosque.adapter.FasilitasAdapter
+import com.example.mosque.adapter.MasjidFasilitasAdapter
 import com.example.mosque.adapter.MasjidSekitarAdapter
 import com.example.mosque.common.Constans
-import com.example.mosque.fragment.FasilitasFragment
-import com.example.mosque.model.FasilitasString
 import com.example.mosque.network.MosqueApi
 import com.example.mosque.network.Services
 import com.example.mosque.repository.MosquePagedListRepository
@@ -42,17 +46,16 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_masjid_sekitar.*
 
 class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    //Filterasi
-    private var valueSelected : Int = 0
-    private var itung: Int = 0
-    lateinit var fasilitasModel: FasilitasFragment
-
-    var fasilitasList: MutableList<FasilitasString> = mutableListOf()
+    //filterasi
+    internal lateinit var restApi: MosqueApi //get list fasilitas.
+    lateinit var fasilitasAdapter : MasjidFasilitasAdapter
 
     //MAPS
     private lateinit var mMap: GoogleMap
@@ -60,8 +63,6 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
     private var mMarker: Marker? = null
 
     private lateinit var mapsModel: MapActivityModel
-    private val masjidAdapter =
-        MasjidSekitarAdapter(this)
 
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
@@ -71,28 +72,27 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
     lateinit var locationRequest: LocationRequest
     lateinit var locationCallback: LocationCallback
 
-    //Get Search View
-    private var searchView: SearchView? = null
-    private var myCompositeDisposable = CompositeDisposable()
-
-
     //Get List Masjid
-    lateinit var sekitarAdapter : MasjidSekitarAdapter
+    lateinit var sekitarAdapter: MasjidSekitarAdapter
     lateinit var viewModel: HomeViewModels
     lateinit var mosqueRepository: MosquePagedListRepository
+
     val progressBar = CustomProgressBar()
+    private var myCompositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_masjid_sekitar)
 
-        val apiService : MosqueApi = Services.getHomeMosque()
-
+        //init
+        restApi = Services.getFasilitasList() //filterasi
+        Handler().post { fetchCategories() } //DAPETIN LIST FASILITAS MENGGUNAKAN API / RETROFIT
+        val apiService: MosqueApi = Services.getHomeMosque()
         mosqueRepository = MosquePagedListRepository(apiService)
-
         viewModel = getViewModels()
-        viewModel.loadFasilitas()
         mapsModel = ViewModelProvider(this).get(MapActivityModel::class.java)
+        //end init
+
 
         nav.setOnNavigationItemSelectedListener { p0 ->
             when (p0.itemId) {
@@ -100,20 +100,24 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
                     println("SORT BELOM AKTIF")
                 }
                 R.id.btn_filter -> {
-                    showBottomSheetDialogFragment()
+                    showFilterDialog()
                 }
             }
             true
         } // BUTTOM NAVIGATION
 
         initAdapter() // GET LIST MASJID
-        initFilterData() // FILTER FASILITAS MASJID
 
         //actionbar
         setSupportActionBar(toolbar)
         //set back button
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        swipeRefresh.setOnRefreshListener {
+            swipeRefresh.isRefreshing = false
+            viewModel.refresh()
+        }
 
         //Request runtime permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -127,10 +131,77 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
+    //MELAKUKAN SHOW / POP-UP DIALOG DAN MENAMPILKAN LIST FASILITAS
+    private fun showFilterDialog() {
+
+        val alertDialog = AlertDialog.Builder(this@MasjidSekitarActivity)
+        alertDialog.setTitle("Pilih Fasilitas")
+
+        val inflater = this.layoutInflater
+        val filter_options_layout = inflater.inflate(R.layout.dialog_filter, null)
+
+        val recycler_options =
+            filter_options_layout.findViewById(R.id.recycler_options) as RecyclerView
+        recycler_options.setHasFixedSize(true)
+        recycler_options.layoutManager = LinearLayoutManager(this)
+        val adapter = FasilitasAdapter(baseContext, Services.categories!!)
+        recycler_options.adapter = adapter
+
+        alertDialog.setView(filter_options_layout)
+
+        alertDialog.setNegativeButton("CANCEL") { dialogInterface, _ -> dialogInterface.dismiss() }
+        alertDialog.setPositiveButton("FILTER") { dialogInterface, _ ->
+
+
+            fetchFilterCategory(adapter.filterArray)
+        }
+
+        alertDialog.show()
+    }
+
+    //HASIL FASILITAS YANG TELAH DIPILIH AKAN TAMPIL DISINI
+    private fun fetchFilterCategory(filterArray: String) {
+        myCompositeDisposable.add(
+            restApi.getFilteredMasjid(filterArray) //MANGGIL POSTNYA DISINI
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ filterCategories ->
+
+                    map.isVisible == true
+                    map.view?.visibility = View.GONE
+                    recycler_masjids.visibility = View.VISIBLE
+                    recycler_masjids.adapter = MasjidFasilitasAdapter(baseContext, filterCategories) // HASIL DILEMPAR KE ADAPTER YANG BERBEDA
+                    println("hasil filterasi $filterCategories")
+
+                },
+                    {
+                        Toast.makeText(baseContext, "Data is not found", Toast.LENGTH_SHORT).show()
+                        recycler_masjids.visibility = View.VISIBLE
+                    })
+        )
+    }
+
+    //DAPETIN LIST FASILITAS DARI API
+    private fun fetchCategories() {
+        myCompositeDisposable.add(
+            restApi.fasilitasList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ categories ->
+                    Services.categories = categories
+                },
+                    {
+                        Toast.makeText(baseContext, "Fail to connect /filter", Toast.LENGTH_SHORT).show()
+                    })
+        )
+    }
+    //END FILTERASI
+
     //GET LIST MASJID
     private fun initAdapter() {
         sekitarAdapter = MasjidSekitarAdapter(this)
-        recycler_masjids.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recycler_masjids.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recycler_masjids.addItemDecoration(
             EqualSpacingItemDecoration(
                 12,
@@ -146,7 +217,7 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
         viewModel.networkState.observe(this, Observer {
             //Load Progress Bar
             if (viewModel.listIsEmpty() && it == NetworkState.LOADING) {
-                progressBar.show(this,"Please Wait...")
+                progressBar.show(this, "Please Wait...")
             } else {
                 progressBar.dialog.dismiss()
             }
@@ -155,8 +226,6 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
                 sekitarAdapter.setNetworkState(it)
             }
         })
-
-
     }
 
     private fun getViewModels(): HomeViewModels {
@@ -164,49 +233,10 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 return HomeViewModels(mosqueRepository) as T
             }
-
         })[HomeViewModels::class.java]
     }
     //END LIST MASJID
 
-    //GET VALUE CHECKBOX FROM FASILITAS FILTER
-    fun onClickEventPassData(name: String) {
-        submitFilterData()
-
-        println("DATA From BottomSheet to main $name")
-    }
-
-    private fun submitFilterData() {
-        if (valueSelected == 0){
-
-        } else {
-            viewModel.submitFilter("","","","")
-            println("TES MODEL ${viewModel}")
-        }
-    }
-
-    private fun initFilterData() {
-        val onFasilitas = this.resources.getStringArray(R.array.fasilitas)
-
-        for(i in onFasilitas.indices) {
-            fasilitasList.add(
-                FasilitasString(
-                    i, onFasilitas[i]
-                )
-            )
-        }
-    }
-    //END FASILITAS FILTER
-
-
-    //BOTTOM SHEET OPTIONS
-    private fun showBottomSheetDialogFragment() {
-        val bottomSheetFragment = FasilitasFragment.newInstance(fasilitasList)
-        bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
-        println("DATA SIZEE ${fasilitasList.size}")
-        println("DATAITUNG $itung")
-
-    }
 
     //SEARCH OPTIONS
     @RequiresApi(Build.VERSION_CODES.HONEYCOMB)
@@ -220,38 +250,42 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
 
         searchView.setOnSearchClickListener {
             if (map.isVisible == true) {
-//                recycler_masjids.visibility = View.INVISIBLE
+                recycler_masjids.visibility = View.INVISIBLE
                 map.view?.visibility = View.GONE
                 changeLayoutView()
             } else {
-//                recycler_masjids.visibility = View.VISIBLE
-                map.view?.visibility = View.VISIBLE
+                recycler_masjids.visibility = View.GONE
+                map.view?.visibility = View.GONE
             }
         }
 
         searchView.setOnCloseListener {
             if (map.isVisible == false) {
-//                recycler_masjids.visibility = View.VISIBLE
+                recycler_masjids.visibility = View.VISIBLE
                 map.view?.visibility = View.VISIBLE
                 changeBackLayoutView()
             }
             initAdapter()
             false
         }
+
         searchView.maxWidth = Int.MAX_VALUE
         searchView.queryHint = "Cari Masjid Yuk"
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-//                recycler_masjids.visibility = View.VISIBLE
-                sekitarAdapter.filter.filter(query)
+                recycler_masjids.visibility = View.VISIBLE
+//                fasilitasAdapter.filter.filter(query)
+                println("DATA ACTIVITY $query")
                 return false
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-//                recycler_masjids.visibility = View.VISIBLE
-                sekitarAdapter.filter.filter(newText)
-                return true
+                recycler_masjids.visibility = View.GONE
+//                fasilitasAdapter.filter.filter(newText)
+                println("DATA ACTIVITY2 $newText")
+                return false
             }
+
 
         })
         return true
@@ -423,12 +457,11 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
     //END GOOGLE MAPS MARKER
 
     //Add back button
-    override fun onBackPressed() {
-        if (!searchView!!.isIconified) {
-            searchView!!.isIconified = true
-            return
-        }
-        return
+    override fun onSupportNavigateUp(): Boolean {
+
+        //back button to refresh activity masjid sekitar
+        startActivity(Intent(this@MasjidSekitarActivity, MasjidSekitarActivity::class.java))
+        return true
     }
 
     override fun onStop() {
