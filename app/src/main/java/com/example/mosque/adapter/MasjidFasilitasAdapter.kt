@@ -19,9 +19,7 @@ import com.example.mosque.model.*
 import com.example.mosque.utils.NetworkState
 import com.example.mosque.view.LaporanActivity
 import kotlinx.android.synthetic.main.item_loading.view.*
-import kotlinx.android.synthetic.main.row_masjidsekitar.view.descTv
-import kotlinx.android.synthetic.main.row_masjidsekitar.view.iconIv
-import kotlinx.android.synthetic.main.row_masjidsekitar.view.titleTv
+import kotlinx.android.synthetic.main.row_masjidsekitar.view.*
 
 class MasjidFasilitasAdapter(
     var context: Context,
@@ -61,6 +59,7 @@ class MasjidFasilitasAdapter(
         fun clear() {
             itemView.titleTv.text = ""
             itemView.descTv.text = ""
+            itemView.jarakTV.text = "Maintenance"
             itemView.iconIv.setImageDrawable(null)
         }
 
