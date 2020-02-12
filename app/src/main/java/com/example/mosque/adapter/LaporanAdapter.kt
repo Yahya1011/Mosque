@@ -36,7 +36,7 @@ class LaporanAdapter (var laporanItems: MutableList<LaporanModel>) : RecyclerVie
             val footerItem = LayoutInflater.from(mContext).inflate(R.layout.item_footer, parent, false)
             return FooterContent(footerItem)
         } else {
-            val contentItem = LayoutInflater.from(mContext).inflate(R.layout.item_laporan, parent, false)
+            val contentItem = LayoutInflater.from(mContext).inflate(R.layout.item_laporans, parent, false)
             return ItemContent(contentItem)
         }
     }
@@ -167,8 +167,6 @@ class LaporanAdapter (var laporanItems: MutableList<LaporanModel>) : RecyclerVie
             information.let {
                 itemView.keterangan.text = it
             }
-
-
 
 
             if (nama == "Pendapatan"){

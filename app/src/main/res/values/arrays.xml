@@ -20,7 +20,21 @@
         <item>Infak</item>
         <item>Zakat</item>
         <item>Wakaf</item>
+    </string-array>
+
+    <string-array name="finance_category">
+        <item>Pilih Jenis Kategori</item>
+        <item>Pemasukan</item>
+        <item>Pengeluaran</item>
+    </string-array>
+
+    <string-array name="finance_sub_category">
+        <item>Pilih Jenis Sub Kategori</item>
+        <item>Infak</item>
+        <item>Zakat</item>
+        <item>Wakaf</item>
         <item>Operasional</item>
+        <item>Modal Kerja</item>
     </string-array>
 
 </resources>

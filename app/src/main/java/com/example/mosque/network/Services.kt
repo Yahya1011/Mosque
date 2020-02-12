@@ -43,4 +43,12 @@ object Services {
         .client(ApiWorker.privateClient)
         .build()
         .create(MosqueApi::class.java)
+
+    fun getPostFinance() =  Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .client(ApiWorker.privateClient)
+        .build()
+        .create(MosqueApi::class.java)
 }

@@ -36,6 +36,15 @@ interface MosqueApi {
                        @Field (value = "nominal") nominal: Int,
                        @Field (value = "status") status: Int): Observable<ApiRespons.DonationResponds>
 
+    @POST("rest/public/mosque_finance_detail")
+    @FormUrlEncoded
+    fun financeSubmit(@Header("Authorization") token: String,
+                       @Field (value = "category_id") category_id: Int,
+                       @Field (value = "sub_category_id") sub_category_id: Int,
+                       @Field (value = "information") information: String,
+                       @Field (value = "date") date: String,
+                       @Field (value = "nominal") nominal: Int ): Observable<ApiRespons.FinanceRespons>
+
 
     @POST("rest/public/register")
     @FormUrlEncoded

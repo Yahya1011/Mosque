@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mosque.R
 import com.example.mosque.adapter.KeuanganAdapter
+import com.example.mosque.adapter.LaporanAdapter
 import com.example.mosque.viewmodel.KeuanganViewModel
 import kotlinx.android.synthetic.main.activity_keuangan.*
 
@@ -15,7 +16,7 @@ class KeuanganActivity : AppCompatActivity() {
 
     var valueId: Int = 0
     lateinit var keuanganViewModel: KeuanganViewModel
-    private val keuanganAdapter = KeuanganAdapter(ArrayList())
+    private val keuanganAdapter = LaporanAdapter(ArrayList())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

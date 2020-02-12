@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#808080">
+
+        <TextView
+            android:id="@+id/no"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:padding="5dp"
+            tools:text="No" />
+
+        <TextView
+            android:id="@+id/tanggal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:padding="5dp"
+            tools:text="12 Jan 2019" />
+
+        <TextView
+            android:id="@+id/keterangan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:padding="5dp"
+            tools:text="Wakaf Tahun 2019"/>
+
+        <TextView
+            android:id="@+id/debit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="100.000.000.000"
+            android:layout_gravity="top"
+            android:padding="5dp"/>
+            <!--android:textAlignment="viewEnd"-->
+
+        <TextView
+            android:id="@+id/kredit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:text="100.000.000.000"
+            android:layout_gravity="top"
+            android:padding="5dp"/>
+            <!--android:textAlignment="textEnd"-->
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

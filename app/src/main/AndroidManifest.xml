@@ -51,9 +51,10 @@
         <activity android:name=".view.activity.MasjidSekitarActivity" />
         <activity android:name=".view.activity.AcaraActivity" />
         <activity android:name=".view.LaporanActivity" />
-        <activity android:name=".view.activity.DetailDonasiActivity" />
+        <activity android:name=".view.DetailDonasiActivity" />
         <activity android:name=".view.KeuanganActivity" />
         <activity android:name=".view.activity.InputLaporanActivity"/>
+        <activity android:name=".view.FinanceActivity"/>
         <activity android:name=".view.ProfileActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".view.LoginActivity"

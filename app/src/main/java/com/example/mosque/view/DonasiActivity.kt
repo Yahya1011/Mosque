@@ -2,7 +2,6 @@ package com.example.mosque.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.JsonToken
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
@@ -17,7 +16,6 @@ import com.example.mosque.extention.getProgressDrawable
 import com.example.mosque.extention.loadImage
 import com.example.mosque.helper.AppPreferencesHelper
 import com.example.mosque.utils.showToast
-import com.example.mosque.view.activity.DetailDonasiActivity
 import com.example.mosque.viewmodel.DonationViewModel
 import com.tiper.MaterialSpinner
 import kotlinx.android.synthetic.main.activity_donasi.*

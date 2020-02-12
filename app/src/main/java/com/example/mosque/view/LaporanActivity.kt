@@ -125,7 +125,7 @@ class LaporanActivity : AppCompatActivity() {
     }
 
     private fun openKeuanganActivity() {
-        val intent = Intent(this@LaporanActivity, KeuanganActivity::class.java)
+        val intent = Intent(this@LaporanActivity, FinanceActivity::class.java)
         intent.putExtra("key", valueId)
         startActivity(intent)
         finish()

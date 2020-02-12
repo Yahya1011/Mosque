@@ -8,15 +8,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class KeuanganViewModel :  ViewModel(){
+class FinanceViewModel :  ViewModel(){
 
     private val disposable = CompositeDisposable()
-    val keuanganLoadError = MutableLiveData<Boolean>()
+    val financeLoadError = MutableLiveData<Boolean>()
     val keuanganData = MutableLiveData<List<LaporanModel>>()
     val loading = MutableLiveData<Boolean>()
 
 
-    fun refreshKeuangan(id: Int){
+    /*fun refreshKeuangan(id: Int){
         fetchKeuangan(id)
     }
 
@@ -37,22 +37,22 @@ class KeuanganViewModel :  ViewModel(){
                     keuanganLoadError.value = true
                     loading.value = false
                 }))
-    }
+    }*/
 
-    /*fun submitFinance(token : String , category_id: Int, sub_category_id: Int, information: String, date: String,nominal: String) {
+    fun submitFinance(token : String , category_id: Int, sub_category_id: Int, information: String, date: String,nominal: String) {
         loading.value = true
         disposable.add(Services.getPostFinance().financeSubmit("Bearer $token", category_id,sub_category_id ,information,date,nominal.toInt())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 println("SUBMIT RESP ${it.message}")
-                keuanganLoadError.value = false
+                financeLoadError.value = false
                 loading.value = false
             },{ err->
-                keuanganLoadError.value = true
+                financeLoadError.value = true
                 loading.value = false
             }))
 
     }
-*/
+
 }
