@@ -30,13 +30,18 @@
             android:resource="@string/asset_statements" />
 
         <activity
-            android:name=".view.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".view.SplashScreen"
+            android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".view.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter
                 android:autoVerify="true"
                 tools:targetApi="m">

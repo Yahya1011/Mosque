@@ -102,5 +102,10 @@
         <item name="colorControlNormal">@color/colorWhite</item>
     </style>
 
+    <!-- SPLASH SCREEN AREA -->
+    <style name="SplashScreenTheme" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
 
 </resources>
