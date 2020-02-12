@@ -1,4 +1,3 @@
-/*
 package com.example.mosque.view.activity
 
 import android.content.Intent
@@ -394,13 +393,12 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
                 longitude = mLastLocation.longitude
 
                 val latLng = LatLng(latitude, longitude)
-                */
-/*val markerOptions = MarkerOptions()
+val markerOptions = MarkerOptions()
                     .position(latLng)
                     .title("HERE")
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
 
-                mMarker = mMap.addMarker(markerOptions)*//*
+                mMarker = mMap.addMarker(markerOptions)
 
 
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12f))
@@ -472,4 +470,4 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
         myCompositeDisposable.clear()
         super.onStop()
     }
-}*/
+}
