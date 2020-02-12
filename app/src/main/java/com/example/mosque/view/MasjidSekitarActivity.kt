@@ -111,8 +111,7 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
         //actionbar
         setSupportActionBar(toolbar)
         //set back button
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+//        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         swipeRefresh.setOnRefreshListener {
             swipeRefresh.isRefreshing = false
@@ -174,6 +173,8 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
                         baseContext,
                         filterCategories
                     ) // HASIL DILEMPAR KE ADAPTER YANG BERBEDA
+                            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
                     println("hasil filterasi $filterCategories")
 
                 },
@@ -464,7 +465,7 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
     //Add back button
     override fun onSupportNavigateUp(): Boolean {
 
-        //back button to refresh activity masjid sekitar
+        //back button to refresh activity masjid sekitar ketika hasil filter di tampilkan
         startActivity(Intent(this@MasjidSekitarActivity, MasjidSekitarActivity::class.java))
         return true
     }
