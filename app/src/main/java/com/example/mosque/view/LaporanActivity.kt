@@ -2,6 +2,7 @@ package com.example.mosque.view
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -15,8 +16,6 @@ import com.example.mosque.common.Constans
 import com.example.mosque.extention.getProgressDrawable
 import com.example.mosque.extention.loadImage
 import com.example.mosque.helper.AppPreferencesHelper
-import com.example.mosque.utils.showToast
-import com.example.mosque.view.activity.InputLaporanActivity
 import com.example.mosque.viewmodel.LaporanViewModel
 import kotlinx.android.synthetic.main.activity_laporan.*
 
@@ -73,6 +72,22 @@ class LaporanActivity : AppCompatActivity() {
                 println("DATA recive API ${it.name}")
                 titleMosque.text =it.name
                 sub_title.text = it.address
+                goMaps.setOnClickListener(object : View.OnClickListener{
+                    override fun onClick(v: View?) {
+                        val latitude = it.latitude
+                        val longitude = it.longitude
+                        val label = it.name
+                        val uriBegin = "geo:$latitude,$longitude"
+                        val query =
+                            "$latitude,$longitude($label)"
+                        val encodedQuery = Uri.encode(query)
+                        val uriString = "$uriBegin?q=$encodedQuery&z=16"
+                        val uri = Uri.parse(uriString)
+                        val intent = Intent(Intent.ACTION_VIEW, uri)
+                        startActivity(intent)
+                    }
+
+                })
                 progressDrawable= getProgressDrawable(this)
                 imgTarget = Constans.imageUrlPath
                 it.pic.let {

@@ -154,15 +154,11 @@ class MasjidFasilitasAdapter(
             }
 
             id.let {
-                itemView.setOnClickListener(object : View.OnClickListener {
-                    override fun onClick(v: View?) {
-                        val intent = Intent(context, LaporanActivity::class.java)
-                        intent.putExtra("key", id)
-                        context.startActivity(intent)
-
-                    }
-
-                })
+                itemView.setOnClickListener {
+                    val intent = Intent(context, LaporanActivity::class.java)
+                    intent.putExtra("key", id)
+                    context.startActivity(intent)
+                }
             }
 
 
