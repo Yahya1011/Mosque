@@ -19,10 +19,11 @@ class HomeViewModels(private val mosqueRepository : MosquePagedListRepository) :
     private val compositeDisposable = CompositeDisposable()
 
     lateinit var masjid: LiveData<PagedList<Mosque>>
-    val fasilitasData = MutableLiveData<List<Fasilitas>>()
-    val masjidLoadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
-    val successSubmit = MutableLiveData<ApiRespons.FilterRespons>()
+
+    fun refresh() {
+        mosquePagedList
+    }
 
     val  mosquePagedList : LiveData<PagedList<Mosque>> by lazy {
         mosqueRepository.fetchLiveMosquePagedList(compositeDisposable)
@@ -35,47 +36,6 @@ class HomeViewModels(private val mosqueRepository : MosquePagedListRepository) :
     fun listIsEmpty(): Boolean {
         return mosquePagedList.value?.isEmpty() ?: true
     }
-
-    fun loadFasilitas() {
-        fetchFacilities()
-    }
-
-    //GET LIST FASILITAS
-    private fun fetchFacilities() {
-        loading.value = true
-        compositeDisposable.add(
-            Services.getFacilitiesList().getFilteredMasjid()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ facilitiesRespon ->
-                    fasilitasData.value = facilitiesRespon
-//                    println("DATA FASILITIES ${facilitiesRespon.size}")
-                }, { err ->
-                    //                println("DATA ${err.message}")
-                })
-        )
-    }
-
-    //get Filter Data
-    fun submitFilter(full_time: String, ac: String, car_parking: String, free_water: String, easy_access: String) {
-        loading.value = true
-        compositeDisposable.add(
-            Services.getPostFilter().filterSubmit(full_time, ac, car_parking, free_water, easy_access)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ filterRespons ->
-                    println("SUBMIT RESP ${filterRespons}")
-
-                    successSubmit.value = filterRespons
-                    masjidLoadError.value = false
-                    loading.value = false
-                },{ err->
-                    masjidLoadError.value = true
-                    loading.value = false
-                }))
-
-    }
-
 
     override fun onCleared() {
         super.onCleared()

@@ -27,27 +27,6 @@
             android:scaleType="fitXY"
             android:src="@color/colorAccent" />
 
-        <Button
-            android:id="@+id/btn_detail"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="15dp"
-            app:srcCompat="@drawable/ic_directions_black_24dp" />
-
-        <ImageView
-            android:id="@+id/timing"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="17dp"
-            android:layout_toEndOf="@+id/iconIv"
-            app:srcCompat="@drawable/ic_location_on_black_24dp" />
-
         <TextView
             android:id="@+id/titleTv"
             android:layout_width="match_parent"
@@ -56,11 +35,11 @@
             android:layout_alignParentEnd="true"
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="11dp"
             android:layout_toEndOf="@+id/iconIv"
             tools:text="Title"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -74,18 +53,8 @@
             android:layout_marginEnd="11dp"
             android:layout_toEndOf="@+id/iconIv"
             tools:text="Description"
-            android:textSize="10dp" />
+            android:textSize="12sp" />
 
-        <TextView
-            android:id="@+id/descTiming"
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="9dp"
-            android:layout_marginBottom="17dp"
-            android:layout_toEndOf="@+id/timing"
-            tools:text="1.0 Km"
-            android:textSize="10dp" />
 
     </RelativeLayout>
 

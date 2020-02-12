@@ -13,11 +13,16 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.example.mosque.R
 import com.example.mosque.common.Constans
+import com.example.mosque.extention.IRecyclerClick
 import com.example.mosque.extention.getProgressDrawable
 import com.example.mosque.extention.loadImage
-import com.example.mosque.model.Mosque
+import com.example.mosque.model.*
+import com.example.mosque.network.Services
 import com.example.mosque.utils.NetworkState
+import com.example.mosque.utils.convertDateFromString
+import com.example.mosque.view.DonasiActivity
 import com.example.mosque.view.LaporanActivity
+import com.google.android.gms.common.internal.service.Common
 import kotlinx.android.synthetic.main.item_loading.view.*
 import kotlinx.android.synthetic.main.row.view.*
 import kotlinx.android.synthetic.main.row.view.descTv
@@ -26,18 +31,14 @@ import kotlinx.android.synthetic.main.row.view.titleTv
 import kotlinx.android.synthetic.main.row_masjidsekitar.view.*
 import java.text.NumberFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
-class MasjidSekitarAdapter(val context: Context) : PagedListAdapter<Mosque, RecyclerView.ViewHolder>(MosqueDiffCallback()),
-    Filterable {
-
+class MasjidSekitarAdapter(val context: Context) : PagedListAdapter<Mosque, RecyclerView.ViewHolder>(MosqueDiffCallback()) {
 
     val VIEW_TYPE_NORMAL: Int = 1
     val VIEW_TYPE_LOADING: Int = 2
 
     private var networkState: NetworkState? = null
-    private lateinit var masjidListFilter: MutableList<Mosque>
-
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -121,7 +122,6 @@ class MasjidSekitarAdapter(val context: Context) : PagedListAdapter<Mosque, Recy
             mosque?.name.let {
                 itemView.titleTv.text = it
             }
-
             mosque?.pic.let {
                 itemView.iconIv.loadImage(imgTarget + it, progressDrawable)
             }
@@ -130,15 +130,15 @@ class MasjidSekitarAdapter(val context: Context) : PagedListAdapter<Mosque, Recy
                 itemView.descTv.text = it
             }
 
-            mosque?.let {
-                itemView.descTiming.text = "otw"
-            }
+            itemView.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(v: View?) {
+                    val intent = Intent(context, LaporanActivity::class.java)
+                    intent.putExtra("key", mosque?.id)
+                    context.startActivity(intent)
 
-            itemView.btn_detail.setOnClickListener {
-                val intent = Intent(context, LaporanActivity::class.java)
-                intent.putExtra("key", mosque?.id)
-                context.startActivity(intent)
-            }
+                }
+
+            })
         }
 
     }
@@ -162,36 +162,5 @@ class MasjidSekitarAdapter(val context: Context) : PagedListAdapter<Mosque, Recy
             }
         }
 
-    }
-
-    //GET MAsJID FOR SEARCH OPTIONS
-    override fun getFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(charSequence: CharSequence): FilterResults {
-                val charString = charSequence.toString()
-                if (charString.isEmpty()) {
-                    masjidListFilter
-                } else {
-                    val filteredList: MutableList<Mosque> = ArrayList()
-//                    println("DATA ${listOf(filteredList)}")
-                    for (row in masjidListFilter) {
-                        if (row.name.toLowerCase().contains(charString.toLowerCase())) {
-                            filteredList.add(row)
-                        }
-                    }
-                    masjidListFilter = filteredList
-                }
-                val filterResults = FilterResults()
-
-                filterResults.values = masjidListFilter
-//                println("DATA ADAPTER ${filterResults}")
-                return filterResults
-            }
-
-            override fun publishResults(constraint: CharSequence, results: FilterResults) {
-                masjidListFilter = results.values as ArrayList<Mosque>
-                notifyDataSetChanged()
-            }
-        }
     }
 }
