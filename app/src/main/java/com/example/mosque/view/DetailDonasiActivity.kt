@@ -1,4 +1,4 @@
-package com.example.mosque.view.activity
+package com.example.mosque.view
 
 import android.os.Bundle
 import android.Manifest

@@ -5,33 +5,23 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.example.mosque.R
 import com.example.mosque.common.Constans
-import com.example.mosque.extention.IRecyclerClick
 import com.example.mosque.extention.getProgressDrawable
 import com.example.mosque.extention.loadImage
 import com.example.mosque.model.*
-import com.example.mosque.network.Services
 import com.example.mosque.utils.NetworkState
-import com.example.mosque.utils.convertDateFromString
-import com.example.mosque.view.DonasiActivity
 import com.example.mosque.view.LaporanActivity
-import com.google.android.gms.common.internal.service.Common
 import kotlinx.android.synthetic.main.item_loading.view.*
-import kotlinx.android.synthetic.main.row.view.*
 import kotlinx.android.synthetic.main.row.view.descTv
 import kotlinx.android.synthetic.main.row.view.iconIv
 import kotlinx.android.synthetic.main.row.view.titleTv
-import kotlinx.android.synthetic.main.row_masjidsekitar.view.*
 import java.text.NumberFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class MasjidSekitarAdapter(val context: Context) : PagedListAdapter<Mosque, RecyclerView.ViewHolder>(MosqueDiffCallback()) {
 

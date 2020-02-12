@@ -1,4 +1,4 @@
-package com.example.mosque.view.activity
+package com.example.mosque.view
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -55,7 +55,7 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
 
     //filterasi
     internal lateinit var restApi: MosqueApi //get list fasilitas.
-    lateinit var fasilitasAdapter : MasjidFasilitasAdapter
+    lateinit var fasilitasAdapter: MasjidFasilitasAdapter
 
     //MAPS
     private lateinit var mMap: GoogleMap
@@ -170,7 +170,10 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
                     map.isVisible == true
                     map.view?.visibility = View.GONE
                     recycler_masjids.visibility = View.VISIBLE
-                    recycler_masjids.adapter = MasjidFasilitasAdapter(baseContext, filterCategories) // HASIL DILEMPAR KE ADAPTER YANG BERBEDA
+                    recycler_masjids.adapter = MasjidFasilitasAdapter(
+                        baseContext,
+                        filterCategories
+                    ) // HASIL DILEMPAR KE ADAPTER YANG BERBEDA
                     println("hasil filterasi $filterCategories")
 
                 },
@@ -191,7 +194,8 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
                     Services.categories = categories
                 },
                     {
-                        Toast.makeText(baseContext, "Fail to connect /filter", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(baseContext, "Fail to connect /filter", Toast.LENGTH_SHORT)
+                            .show()
                     })
         )
     }
@@ -398,6 +402,7 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
 
                 mMarker = mMap.addMarker(markerOptions)*/
+
 
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12f))
                 val cu = CameraUpdateFactory.newLatLngZoom(latLng, 16f)
