@@ -26,7 +26,9 @@ import com.example.mosque.R
 import com.example.mosque.adapter.FasilitasAdapter
 import com.example.mosque.adapter.MasjidFasilitasAdapter
 import com.example.mosque.adapter.MasjidSekitarAdapter
+import com.example.mosque.adapter.SearchEngineAdapter
 import com.example.mosque.common.Constans
+import com.example.mosque.model.Mosque
 import com.example.mosque.network.MosqueApi
 import com.example.mosque.network.Services
 import com.example.mosque.repository.MosquePagedListRepository
@@ -37,6 +39,8 @@ import com.example.mosque.utils.MapsUtils.Companion.getUrl
 import com.example.mosque.utils.NetworkState
 import com.example.mosque.viewmodel.HomeViewModels
 import com.example.mosque.viewmodel.MapActivityModel
+import com.example.mosque.viewmodel.MasjidSekitarViewModel
+import com.example.mosque.viewmodel.SearchViewModel
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -56,7 +60,8 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
     //filterasi
     internal lateinit var restApi: MosqueApi //get list fasilitas.
     lateinit var fasilitasAdapter: MasjidFasilitasAdapter
-
+    private val searchAdapter =
+        SearchEngineAdapter(ArrayList())
     //MAPS
     private lateinit var mMap: GoogleMap
     private lateinit var mLastLocation: Location
@@ -75,6 +80,7 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
     //Get List Masjid
     lateinit var sekitarAdapter: MasjidSekitarAdapter
     lateinit var viewModel: HomeViewModels
+    lateinit var searchModel: MasjidSekitarViewModel
     lateinit var mosqueRepository: MosquePagedListRepository
 
     val progressBar = CustomProgressBar()
@@ -89,7 +95,8 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
         Handler().post { fetchCategories() } //DAPETIN LIST FASILITAS MENGGUNAKAN API / RETROFIT
         val apiService: MosqueApi = Services.getHomeMosque()
         mosqueRepository = MosquePagedListRepository(apiService)
-        viewModel = getViewModels()
+//        viewModel = getViewModels()
+        searchModel = ViewModelProvider(this)[MasjidSekitarViewModel::class.java]
         mapsModel = ViewModelProvider(this).get(MapActivityModel::class.java)
         //end init
 
@@ -106,7 +113,9 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
             true
         } // BUTTOM NAVIGATION
 
-        initAdapter() // GET LIST MASJID
+//        initAdapter() // GET LIST MASJID
+        initSearch()
+        initializeComponent()
 
         //actionbar
         setSupportActionBar(toolbar)
@@ -115,7 +124,7 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
 
         swipeRefresh.setOnRefreshListener {
             swipeRefresh.isRefreshing = false
-            viewModel.refresh()
+            searchModel.refresh()
         }
 
         //Request runtime permission
@@ -129,6 +138,8 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
         observeViewMapsModel() // ALL ABOUT GMAPS MARKER
 
     }
+
+
 
     //MELAKUKAN SHOW / POP-UP DIALOG DAN MENAMPILKAN LIST FASILITAS
     private fun showFilterDialog() {
@@ -203,7 +214,7 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
     //END FILTERASI
 
     //GET LIST MASJID
-    private fun initAdapter() {
+    /*private fun initAdapter() {
         sekitarAdapter = MasjidSekitarAdapter(this)
         recycler_masjids.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -239,7 +250,7 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
                 return HomeViewModels(mosqueRepository) as T
             }
         })[HomeViewModels::class.java]
-    }
+    }*/
     //END LIST MASJID
 
 
@@ -255,7 +266,7 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
 
         searchView.setOnSearchClickListener {
             if (map.isVisible == true) {
-                recycler_masjids.visibility = View.INVISIBLE
+                recycler_masjids.visibility = View.VISIBLE
                 map.view?.visibility = View.GONE
                 changeLayoutView()
             } else {
@@ -270,7 +281,7 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
                 map.view?.visibility = View.VISIBLE
                 changeBackLayoutView()
             }
-            initAdapter()
+            initSearch()
             false
         }
 
@@ -279,19 +290,17 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 recycler_masjids.visibility = View.VISIBLE
-//                fasilitasAdapter.filter.filter(query)
+                searchAdapter.filter.filter(query)
                 println("DATA ACTIVITY $query")
                 return false
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
                 recycler_masjids.visibility = View.GONE
-//                fasilitasAdapter.filter.filter(newText)
+                searchAdapter.filter.filter(newText)
                 println("DATA ACTIVITY2 $newText")
                 return false
             }
-
-
         })
         return true
     }
@@ -308,6 +317,45 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
         recycler_masjids.layoutParams = params
     }
     //END SEARCH OPTIONS
+
+    private fun initializeComponent() {
+        searchModel.refresh()
+
+        recycler_masjids.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            addItemDecoration(
+                EqualSpacingItemDecoration(
+                    12,
+                    EqualSpacingItemDecoration.HORIZONTAL
+                )
+            )
+            adapter = searchAdapter
+        }
+    }
+
+    private fun initSearch() {
+        searchModel.masjid.observe(this, Observer { masjid ->
+            masjid?.let {
+                recycler_masjids.visibility = View.VISIBLE
+                searchAdapter.updateMasjid(it)
+
+            }
+        })
+
+        searchModel.masjidLoadError.observe(this, Observer { isError ->
+            isError?.let { listError.visibility = if (it) View.VISIBLE else View.GONE }
+        })
+
+        searchModel.loading.observe(this, Observer { isLoading ->
+            isLoading?.let {
+                loadingView.visibility = if (it) View.VISIBLE else View.GONE
+                if (it) {
+                    listError.visibility = View.GONE
+                    recycler_masjids.visibility = View.GONE
+                }
+            }
+        })
+    }
 
     //TERKAIT GOOGLE MAPS / MARKER
     override fun onMapReady(googleMap: GoogleMap) {
@@ -461,10 +509,9 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
             return true
     }
     //END GOOGLE MAPS MARKER
-
     //Add back button
     override fun onSupportNavigateUp(): Boolean {
-
+//        super.onBackPressed()
         //back button to refresh activity masjid sekitar ketika hasil filter di tampilkan
         startActivity(Intent(this@MasjidSekitarActivity, MasjidSekitarActivity::class.java))
         return true

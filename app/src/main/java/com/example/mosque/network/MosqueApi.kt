@@ -24,6 +24,9 @@ interface MosqueApi {
     fun getMosque(@Query("page") page: Int) : Observable<ApiRespons.MosquesRespons>
 
     @GET (MARKER)
+    fun getMosqueDummy(@Query("page") page: Int) : Observable<ApiRespons.MarkerRespon>
+
+    @GET (MARKER)
     fun getMosqueMarker() : Observable<ApiRespons.MarkerRespon>
 
     @GET("categories")
