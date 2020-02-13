@@ -28,7 +28,6 @@ import com.example.mosque.helper.AppPreferencesHelper
 import com.example.mosque.model.MainNav
 import com.example.mosque.utils.*
 import com.example.mosque.view.activity.AcaraActivity
-import com.example.mosque.view.activity.MasjidSekitarActivity
 import com.example.mosque.viewmodel.MainNavViewModel
 import com.example.mosque.viewmodel.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -122,16 +121,16 @@ class MainActivity : AppCompatActivity() {
                         return true
                     }
                     R.id.akun -> {
-                            if(!mPrefData.isLoginIn()){
-                                println("Silahkan Login atau Daftar Terlebih Dahulu")
-                                showDialog("Silahkan Login atau Daftar Terlebih Dahulu",400)
-                            } else{
-                                loadProfileDashboard()
-                            }
+                        if(!mPrefData.isLoginIn()){
+                            println("Silahkan Login atau Daftar Terlebih Dahulu")
+                            showDialog("Silahkan Login atau Daftar Terlebih Dahulu",400)
+                        } else{
+                            loadProfileDashboard()
+                        }
                         return true
                     }
                 }
-               return false
+                return false
             }
 
         })
@@ -172,7 +171,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openRegisterActivity() {
-       val intent = Intent(this, RegisterActivity::class.java)
+        val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
         finish()
     }

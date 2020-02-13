@@ -1,7 +1,7 @@
 package com.example.mosque.view
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.JsonToken
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
@@ -96,7 +96,11 @@ class DonasiActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListen
                 mUserId = 10009
             }
             donationViewModel.submitDonation(mToken, valueId, mUserId, input_nominal.text.toString(), currentDateandTime, donationSelected, selectedBankProvide)
+            println("Data Berhasil di Tambahkan")
+            val intent = Intent(this, DetailDonasiActivity::class.java)
+            startActivity(intent)
         }
+
     }
 
     private fun initSpinnerData() {

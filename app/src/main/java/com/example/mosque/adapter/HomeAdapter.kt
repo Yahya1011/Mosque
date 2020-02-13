@@ -29,7 +29,7 @@ import java.util.*
 
 
 class HomeAdapter(val context: Context) : PagedListAdapter<Mosque, ViewHolder>(MosqueDiffCallback()) {
-
+    
     val VIEW_TYPE_NORMAL: Int = 1
     val VIEW_TYPE_LOADING: Int = 2
 

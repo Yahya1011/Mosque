@@ -1,26 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="menuText">
-        <item>@string/donasi_nav</item>
-        <item>@string/info_nav</item>
-        <item>@string/masjid_sekitar</item>
-        <item>@string/event</item>
-    </string-array>
+        <string-array name="menuText">
+            <item>@string/donasi_nav</item>
+            <item>@string/info_nav</item>
+            <item>@string/masjid_sekitar</item>
+            <item>@string/event</item>
+        </string-array>
 
-    <string-array name="menuIcon">
-        <item>@drawable/ic_donasi</item>
-        <item>@drawable/transaksi</item>
-        <item>@drawable/masjid</item>
-        <item>@drawable/ic_event</item>
+        <string-array name="menuIcon">
+            <item>@drawable/ic_donasi</item>
+            <item>@drawable/transaksi</item>
+            <item>@drawable/masjid</item>
+            <item>@drawable/ic_event</item>
 
-    </string-array>
+        </string-array>
 
-    <string-array name="donasi_category">
-        <item>Pilih Jenis Donasi</item>
-        <item>Infak</item>
-        <item>Zakat</item>
-        <item>Wakaf</item>
-        <item>Operasional</item>
-    </string-array>
+        <string-array name="donasi_category">
+            <item>Pilih Jenis Donasi</item>
+            <item>Infak</item>
+            <item>Zakat</item>
+            <item>Wakaf</item>
+        </string-array>
+
+        <string-array name="finance_category">
+            <item>Pilih Jenis Kategori</item>
+            <item>Pemasukan</item>
+            <item>Pengeluaran</item>
+        </string-array>
+
+        <string-array name="finance_sub_category">
+            <item>Pilih Jenis Sub Kategori</item>
+            <item>Infak</item>
+            <item>Zakat</item>
+            <item>Wakaf</item>
+            <item>Operasional</item>
+            <item>Modal Kerja</item>
+        </string-array>
 
 </resources>

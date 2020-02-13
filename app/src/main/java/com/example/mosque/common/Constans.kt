@@ -4,7 +4,7 @@ import com.example.mosque.network.ApiEndPoint
 
 object Constans {
 
-
+    const val MY_PERMISSION_CODE:Int = 1000
 
     const val imageUrlPath : String = ApiEndPoint.BASE_URL + "uploads/"
     const val KEYAPI: String = "8e73c89b39aa03da7b1a1c97b57d531f"

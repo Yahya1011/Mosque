@@ -2,6 +2,7 @@ package com.example.mosque.view
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -15,8 +16,6 @@ import com.example.mosque.common.Constans
 import com.example.mosque.extention.getProgressDrawable
 import com.example.mosque.extention.loadImage
 import com.example.mosque.helper.AppPreferencesHelper
-import com.example.mosque.utils.showToast
-import com.example.mosque.view.activity.InputLaporanActivity
 import com.example.mosque.viewmodel.LaporanViewModel
 import kotlinx.android.synthetic.main.activity_laporan.*
 
@@ -42,6 +41,8 @@ class LaporanActivity : AppCompatActivity() {
         fab.setOnClickListener {
             if (mPrefData.isLoginIn() && mPrefData.getRoleUser() == "dkm"){
                 showDialog("","Selamat datang ${mPrefData.getFullname()}",200)
+                val intent = Intent(this@LaporanActivity, KeuanganActivity::class.java)
+                startActivity(intent)
             }else if(mPrefData.isLoginIn() && mPrefData.getRoleUser()!= "dkm"){
                 showDialog("","Anda tidak memiliki akses yang tepat untuk membuka halaman ini, \nHalaman ini hanya di gunakan untuk pengurus masjid(DKM)",201)
             }else{
@@ -71,13 +72,27 @@ class LaporanActivity : AppCompatActivity() {
                 println("DATA recive API ${it.name}")
                 titleMosque.text =it.name
                 sub_title.text = it.address
-                 progressDrawable= getProgressDrawable(this)
-                 imgTarget = Constans.imageUrlPath
+                goMaps.setOnClickListener(object : View.OnClickListener{
+                    override fun onClick(v: View?) {
+                        val latitude = it.latitude
+                        val longitude = it.longitude
+                        val label = it.name
+                        val uriBegin = "geo:$latitude,$longitude"
+                        val query =
+                            "$latitude,$longitude($label)"
+                        val encodedQuery = Uri.encode(query)
+                        val uriString = "$uriBegin?q=$encodedQuery&z=16"
+                        val uri = Uri.parse(uriString)
+                        val intent = Intent(Intent.ACTION_VIEW, uri)
+                        startActivity(intent)
+                    }
+
+                })
+                progressDrawable= getProgressDrawable(this)
+                imgTarget = Constans.imageUrlPath
                 it.pic.let {
                     image_poster.loadImage(imgTarget + it, progressDrawable!!)
                 }
-
-
             }
         })
 
@@ -125,11 +140,9 @@ class LaporanActivity : AppCompatActivity() {
     }
 
     private fun openKeuanganActivity() {
-        val intent = Intent(this@LaporanActivity, KeuanganActivity::class.java)
+        val intent = Intent(this@LaporanActivity, FinanceActivity::class.java)
         intent.putExtra("key", valueId)
         startActivity(intent)
         finish()
     }
-
-
 }

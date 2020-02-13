@@ -6,6 +6,19 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 class ApiRespons {
+
+    data class MarkerRespon(
+        @SerializedName("message")
+        @Expose
+        val message: String,
+        @SerializedName("data")
+        @Expose
+        val data: List<Mosque>,
+        @SerializedName("code")
+        @Expose
+        val code: Int
+    )
+
     data class RegisterRespons(
         @SerializedName("message")
         @Expose

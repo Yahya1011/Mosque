@@ -65,4 +65,3 @@ class KeuanganAdapter (val financeDataList: MutableList<LaporanModel>) : Recycle
 
 }
 
-

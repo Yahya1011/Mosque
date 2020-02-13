@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Mosque</string>
+    <string name="app_name">YukAmal</string>
     <string name="action_settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -33,5 +33,8 @@
     <string name="MasukkanEmail">Masukkan Email Anda</string>
     <string name="MasukkanPassword">Masukkan Password Anda</string>
     <string name="register">Tidak punya akun? Daftar di sini</string>
+
+    <string name="you_are_offline">You are Offline</string>
+    <string name="masjid_not_found">Masjid not found</string>
 
 </resources>

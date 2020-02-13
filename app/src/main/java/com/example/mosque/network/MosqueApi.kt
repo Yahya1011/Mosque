@@ -1,9 +1,11 @@
 package com.example.mosque.network
 
+import com.example.mosque.model.Fasilitas
 import com.example.mosque.model.Jadwal
-import com.example.mosque.model.LaporanModel
 import com.example.mosque.model.Mosque
 import com.example.mosque.model.respons.ApiRespons
+import com.example.mosque.network.ApiEndPoint.Fasilitas
+import com.example.mosque.network.ApiEndPoint.MARKER
 import com.example.mosque.network.ApiEndPoint.MOSQUE
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -21,6 +23,19 @@ interface MosqueApi {
     @GET (MOSQUE)
     fun getMosque(@Query("page") page: Int) : Observable<ApiRespons.MosquesRespons>
 
+    @GET (MARKER)
+    fun getMosqueDummy(@Query("page") page: Int) : Observable<ApiRespons.MarkerRespon>
+
+    @GET (MARKER)
+    fun getMosqueMarker() : Observable<ApiRespons.MarkerRespon>
+
+    @GET("categories")
+    fun fasilitasList():Observable<List<Fasilitas>>
+
+    @POST("filter")
+    @FormUrlEncoded
+    fun getFilteredMasjid(@Field("data")data : String) : Observable<List<Mosque>>
+
     @GET("rest/public/mosque_finance_details/neraca/{id}")
     fun getDetailLaporan(@Path (value = "id") id: String): Single<ApiRespons.LaporanRespons>
 
@@ -35,6 +50,15 @@ interface MosqueApi {
                        @Field (value = "sub_category_id") sub_category_id: Int,
                        @Field (value = "nominal") nominal: Int,
                        @Field (value = "status") status: Int): Observable<ApiRespons.DonationResponds>
+
+    @POST("rest/public/mosque_finance_detail")
+    @FormUrlEncoded
+    fun financeSubmit(@Header("Authorization") token: String,
+                      @Field (value = "category_id") category_id: Int,
+                      @Field (value = "sub_category_id") sub_category_id: Int,
+                      @Field (value = "information") information: String,
+                      @Field (value = "date") date: String,
+                      @Field (value = "nominal") nominal: Int ): Observable<ApiRespons.FinanceRespons>
 
 
     @POST("rest/public/register")
