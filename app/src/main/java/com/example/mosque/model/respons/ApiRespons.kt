@@ -6,7 +6,21 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 class ApiRespons {
+    //list masjid dummy
+    data class ListFilterRespons(
+        @SerializedName("message")
+        @Expose
+        val message: String,
+        @SerializedName("data")
+        @Expose
+        val data: List<Fasilitas>,
+        @SerializedName("code")
+        @Expose
+        val code: Int
+    )
 
+
+    //list masjid dummy
     data class MarkerRespon(
         @SerializedName("message")
         @Expose
@@ -18,6 +32,7 @@ class ApiRespons {
         @Expose
         val code: Int
     )
+
 
     data class RegisterRespons(
         @SerializedName("message")

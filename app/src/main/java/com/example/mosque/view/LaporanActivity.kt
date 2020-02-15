@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -17,7 +18,9 @@ import com.example.mosque.extention.getProgressDrawable
 import com.example.mosque.extention.loadImage
 import com.example.mosque.helper.AppPreferencesHelper
 import com.example.mosque.viewmodel.LaporanViewModel
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_laporan.*
+import java.text.DecimalFormat
 
 
 class LaporanActivity : AppCompatActivity() {
@@ -70,7 +73,7 @@ class LaporanActivity : AppCompatActivity() {
         laporanViewModel.mosquesData.observe(this, Observer { mosques->
             mosques?.let {
                 println("DATA recive API ${it.name}")
-                titleMosque.text =it.name
+                titleMosque.text = it.name
                 sub_title.text = it.address
                 goMaps.setOnClickListener(object : View.OnClickListener{
                     override fun onClick(v: View?) {
@@ -145,4 +148,6 @@ class LaporanActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
+
 }

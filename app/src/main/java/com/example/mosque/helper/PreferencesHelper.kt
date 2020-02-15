@@ -35,4 +35,5 @@ interface PreferencesHelper {
     fun clearRole()
 
 
+    fun setLogout()
 }

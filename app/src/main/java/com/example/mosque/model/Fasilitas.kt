@@ -7,8 +7,8 @@ data class Fasilitas(
     @SerializedName("id")
     @Expose
     var id: Int,
-    @SerializedName("name_fasilitas")
+    @SerializedName("name")
     @Expose
-    var namaFasilitas: String
+    var name: String
 
 )

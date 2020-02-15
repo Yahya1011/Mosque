@@ -35,7 +35,7 @@ class SearchEngineAdapter(var masjid: MutableList<Mosque>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MasjidViewHolder {
         context = parent.context
-        val layoutInflate = LayoutInflater.from(context).inflate(R.layout.row_searchengine, parent, false)
+        val layoutInflate = LayoutInflater.from(context).inflate(R.layout.row_masjidsekitar, parent, false)
         return MasjidViewHolder(layoutInflate)
     }
 
@@ -69,7 +69,7 @@ class SearchEngineAdapter(var masjid: MutableList<Mosque>) :
         fun clear() {
             itemView.titleTv.text = ""
             itemView.descTv.text = ""
-            itemView.jarakTV.text = "search"
+            itemView.jarakTV.text = "1.0 kilometer"
             itemView.iconIv.setImageDrawable(null)
         }
 
@@ -169,6 +169,8 @@ class SearchEngineAdapter(var masjid: MutableList<Mosque>) :
                     context!!.startActivity(intent)
                 }
             }
+
+
         }
     }
 

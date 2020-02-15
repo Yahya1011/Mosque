@@ -2,7 +2,9 @@ package com.example.mosque.helper
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.system.Os.remove
 import com.example.mosque.common.Constans
+import com.example.mosque.common.Constans.PREF_KEY_ISLOGIN
 
 
 class AppPreferencesHelper(context: Context) : PreferencesHelper {
@@ -77,5 +79,8 @@ class AppPreferencesHelper(context: Context) : PreferencesHelper {
         mPrefs.edit().putString(Constans.PREF_KEY_CURRENT_FULLNAME,name).apply()
     }
 
+     override fun setLogout()  {
+         mPrefs.edit().remove("PREF_KEY_ISLOGIN").apply()
+    }
 
 }

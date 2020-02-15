@@ -192,14 +192,11 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
-
     override fun onDestroy() {
         super.onDestroy()
         if (progressBar.dialog.isShowing) {
             progressBar.dialog.dismiss()
         }
     }
-
 
 }

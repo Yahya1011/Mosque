@@ -54,6 +54,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_masjid_sekitar.*
+import kotlinx.android.synthetic.main.row_masjidsekitar.*
+import kotlinx.android.synthetic.main.row_searchengine.*
+import kotlinx.android.synthetic.main.row_searchengine.jarakTV
 
 class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -179,6 +182,7 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
 
                     map.isVisible == true
                     map.view?.visibility = View.GONE
+                    txt_total.visibility = View.GONE
                     recycler_masjids.visibility = View.VISIBLE
                     recycler_masjids.adapter = MasjidFasilitasAdapter(
                         baseContext,
@@ -190,7 +194,7 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 },
                     {
-                        Toast.makeText(baseContext, "Data is not found", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(baseContext, "Masjid Tidak Ditemukan", Toast.LENGTH_SHORT).show()
                         recycler_masjids.visibility = View.VISIBLE
                     })
         )
@@ -204,9 +208,10 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ categories ->
                     Services.categories = categories
+                    println("list $categories")
                 },
                     {
-                        Toast.makeText(baseContext, "Fail to connect /filter", Toast.LENGTH_SHORT)
+                        Toast.makeText(baseContext, "Fail to connect /List Fasilitas", Toast.LENGTH_SHORT)
                             .show()
                     })
         )
@@ -266,7 +271,8 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
 
         searchView.setOnSearchClickListener {
             if (map.isVisible == true) {
-                recycler_masjids.visibility = View.VISIBLE
+                txt_total.visibility = View.GONE
+                recycler_masjids.visibility = View.INVISIBLE
                 map.view?.visibility = View.GONE
                 changeLayoutView()
             } else {
@@ -277,6 +283,7 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
 
         searchView.setOnCloseListener {
             if (map.isVisible == false) {
+                txt_total.visibility = View.VISIBLE
                 recycler_masjids.visibility = View.VISIBLE
                 map.view?.visibility = View.VISIBLE
                 changeBackLayoutView()
@@ -337,6 +344,9 @@ class MasjidSekitarActivity : AppCompatActivity(), OnMapReadyCallback {
         searchModel.masjid.observe(this, Observer { masjid ->
             masjid?.let {
                 recycler_masjids.visibility = View.VISIBLE
+                txt_total.text = StringBuilder("Total Masjid (")
+                    .append(it.size)
+                    .append(")")
                 searchAdapter.updateMasjid(it)
 
             }
