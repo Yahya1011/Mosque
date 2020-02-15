@@ -138,7 +138,7 @@ class HomeAdapter(val context: Context) : PagedListAdapter<Mosque, ViewHolder>(M
                 intent.putExtra("key", mosque?.id)
                 context.startActivity(intent)
             }
-            itemView.info.setOnClickListener(object : View.OnClickListener {
+            itemView.setOnClickListener(object : View.OnClickListener {
                 override fun onClick(v: View?) {
                     val intent = Intent(context, LaporanActivity::class.java)
                     intent.putExtra("key", mosque?.id)

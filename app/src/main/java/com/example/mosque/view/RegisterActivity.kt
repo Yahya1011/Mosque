@@ -32,12 +32,8 @@ class RegisterActivity : AppCompatActivity(){
         mPrefData = AppPreferencesHelper(this)
         registerViewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
 
-
         initClickListener()
-
-
     }
-
 
     private fun observerViewModel() {
        registerViewModel.registerData.observe(this, Observer { regRespons->
@@ -46,7 +42,6 @@ class RegisterActivity : AppCompatActivity(){
                mPrefData.setAccessToken(it.data.token)
                showDialog("Success", it.message)
            }
-
        })
 
 
@@ -108,7 +103,7 @@ class RegisterActivity : AppCompatActivity(){
     private fun openLoginActivity() {
        val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
         startActivity(intent)
-        finish()
+//        finish()
     }
 
 
@@ -130,7 +125,7 @@ class RegisterActivity : AppCompatActivity(){
             override fun onClick(v: View?) {
                 intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                 startActivity(intent)
-                finish()
+//                finish()
             }
 
         })
@@ -178,6 +173,5 @@ class RegisterActivity : AppCompatActivity(){
 
         return valid
     }
-
 
 }

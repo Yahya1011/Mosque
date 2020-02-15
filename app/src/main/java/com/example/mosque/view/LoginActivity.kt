@@ -32,7 +32,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         mPrefData = AppPreferencesHelper(this)
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-        initialView()
         initClickListener()
     }
 
@@ -140,31 +139,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    private fun initialView() {
-
-
-//        animationDrawable.apply {
-//            layout_login.background
-//        }
-//        animationDrawable.setEnterFadeDuration(5000)
-//        animationDrawable.setExitFadeDuration(2000)
-
-
-    }
-
-//    override fun onPause() {
-//        super.onPause()
-//        if (animationDrawable != null && animationDrawable.isRunning) {
-//            animationDrawable.stop()
-//        }
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//        if (animationDrawable != null && !animationDrawable.isRunning) {
-//            animationDrawable.start()
-//        }
-//    }
 
     fun validate(): Boolean {
         var valid = true
@@ -185,7 +159,7 @@ class LoginActivity : AppCompatActivity() {
         return valid
     }
 
-    override fun onPause() {
+/*    override fun onPause() {
         super.onPause()
         if (progressBar.dialog.isShowing) {
             progressBar.dialog.dismiss()
@@ -197,6 +171,6 @@ class LoginActivity : AppCompatActivity() {
         if (progressBar.dialog.isShowing) {
             progressBar.dialog.dismiss()
         }
-    }
+    }*/ // <<-- BIKIN ERROR / CRASH
 
 }
