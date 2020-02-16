@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -17,10 +16,10 @@ import com.example.mosque.common.Constans
 import com.example.mosque.extention.getProgressDrawable
 import com.example.mosque.extention.loadImage
 import com.example.mosque.helper.AppPreferencesHelper
+import com.example.mosque.model.LaporanModel
 import com.example.mosque.viewmodel.LaporanViewModel
-import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_laporan.*
-import java.text.DecimalFormat
+import kotlinx.android.synthetic.main.item_laporans.*
 
 
 class LaporanActivity : AppCompatActivity() {
@@ -42,19 +41,21 @@ class LaporanActivity : AppCompatActivity() {
         println(mPrefData.isLoginIn())
 
         fab.setOnClickListener {
-            if (mPrefData.isLoginIn() && mPrefData.getRoleUser() == "dkm"){
-                showDialog("","Selamat datang ${mPrefData.getFullname()}",200)
-                val intent = Intent(this@LaporanActivity, KeuanganActivity::class.java)
+            if (mPrefData.isLoginIn() && mPrefData.getRoleUser() == "dkm") {
+//                showDialog("", "Selamat datang ${mPrefData.getFullname()}", 200)
+                val intent = Intent(this@LaporanActivity, FinanceActivity::class.java)
                 startActivity(intent)
-            }else if(mPrefData.isLoginIn() && mPrefData.getRoleUser()!= "dkm"){
-                showDialog("","Anda tidak memiliki akses yang tepat untuk membuka halaman ini, \nHalaman ini hanya di gunakan untuk pengurus masjid(DKM)",201)
-            }else{
+            } else if (mPrefData.isLoginIn() && mPrefData.getRoleUser() != "dkm") {
+                showDialog(
+                    "",
+                    "Anda tidak memiliki akses yang tepat untuk membuka halaman ini, \nHalaman ini hanya di gunakan untuk pengurus masjid(DKM)",
+                    201
+                )
+            } else {
                 val intent = Intent(this@LaporanActivity, LoginActivity::class.java)
                 startActivity(intent)
             }
-            /*intent = Intent(this, InputLaporanActivity::class.java)
-            startActivity(intent)
-            finish()*/
+
         }
 
         reciveData()
@@ -62,20 +63,21 @@ class LaporanActivity : AppCompatActivity() {
         laporanViewModel.refresh(valueId)
         laporanViewModel.refreshLaporan(valueId)
 
-        rv_laporan.apply{
+        rv_laporan.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = laporanAdapter
         }
 
         observeViewModel()
     }
-    private fun observeViewModel(){
-        laporanViewModel.mosquesData.observe(this, Observer { mosques->
+
+    private fun observeViewModel() {
+        laporanViewModel.mosquesData.observe(this, Observer { mosques ->
             mosques?.let {
                 println("DATA recive API ${it.name}")
                 titleMosque.text = it.name
                 sub_title.text = it.address
-                goMaps.setOnClickListener(object : View.OnClickListener{
+                goMaps.setOnClickListener(object : View.OnClickListener {
                     override fun onClick(v: View?) {
                         val latitude = it.latitude
                         val longitude = it.longitude
@@ -91,7 +93,7 @@ class LaporanActivity : AppCompatActivity() {
                     }
 
                 })
-                progressDrawable= getProgressDrawable(this)
+                progressDrawable = getProgressDrawable(this)
                 imgTarget = Constans.imageUrlPath
                 it.pic.let {
                     image_poster.loadImage(imgTarget + it, progressDrawable!!)
@@ -101,15 +103,19 @@ class LaporanActivity : AppCompatActivity() {
 
         laporanViewModel.laporan.observe(this, Observer { laporanData ->
             laporanData.let {
+//                debit.lineCount
                 println("DATA LAPORAN ${it.size}")
                 rv_laporan.visibility = View.VISIBLE
+                txt_total.text = StringBuilder("Total Saldo (")
+                    .append(it.size) //<-- BELOM KELAR
+                    .append(")")
                 laporanAdapter.updateData(it)
             }
 
         })
     }
 
-    private fun reciveData() : Int {
+    private fun reciveData(): Int {
         val extras = intent.extras
         when {
             extras != null -> {
@@ -123,13 +129,13 @@ class LaporanActivity : AppCompatActivity() {
     }
 
 
-    private fun showDialog(mTitle: String, msg: String, code: Int){
+    private fun showDialog(mTitle: String, msg: String, code: Int) {
         val dialogBuilder = AlertDialog.Builder(this)
         dialogBuilder.setMessage(msg)
             .setCancelable(false)
-            .setPositiveButton("ok") {dialog, _ ->
+            .setPositiveButton("ok") { dialog, _ ->
 
-                if (code == 200){
+                if (code == 200) {
                     dialog.dismiss()
                     openKeuanganActivity()
                 } else {
@@ -146,7 +152,7 @@ class LaporanActivity : AppCompatActivity() {
         val intent = Intent(this@LaporanActivity, FinanceActivity::class.java)
         intent.putExtra("key", valueId)
         startActivity(intent)
-        finish()
+//        finish()
     }
 
 

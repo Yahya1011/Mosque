@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.item_footer.view.*
 import kotlinx.android.synthetic.main.item_header.view.*
 import kotlinx.android.synthetic.main.item_header.view.debitlbl
 import kotlinx.android.synthetic.main.item_header.view.kreditlbl
-import kotlinx.android.synthetic.main.item_laporan.view.*
+import kotlinx.android.synthetic.main.item_laporans.view.*
 import java.text.NumberFormat
 import java.util.*
 
@@ -29,16 +29,10 @@ class LaporanAdapter (var laporanItems: MutableList<LaporanModel>) : RecyclerVie
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         mContext = parent.context
-        if(viewType == VIEW_HEADER) {
-            val headerItem = LayoutInflater.from(mContext).inflate(R.layout.item_header, parent, false)
-            return HeaderContent(headerItem)
-        } else if (viewType == VIEW_FOOTER){
-            val footerItem = LayoutInflater.from(mContext).inflate(R.layout.item_footer, parent, false)
-            return FooterContent(footerItem)
-        } else {
+
             val contentItem = LayoutInflater.from(mContext).inflate(R.layout.item_laporans, parent, false)
             return ItemContent(contentItem)
-        }
+
     }
 
     override fun getItemCount(): Int {
@@ -154,7 +148,7 @@ class LaporanAdapter (var laporanItems: MutableList<LaporanModel>) : RecyclerVie
             mosqueId: String,
             nama: String
         ) {
-            var pos = adapterPosition+1
+            val pos = adapterPosition+1
             val localeID = Locale("in", "ID")
             val numFormat: NumberFormat = NumberFormat.getCurrencyInstance(localeID)
 
@@ -203,12 +197,4 @@ class LaporanAdapter (var laporanItems: MutableList<LaporanModel>) : RecyclerVie
 
     }
 
-
-    class FooterContent(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var saldoLbl: TextView = itemView.saldolbl
-        var debitLbl: TextView = itemView.debitlbl
-        var kreditLbl: TextView = itemView.kreditlbl
-
-
-    }
 }

@@ -2,30 +2,22 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_marginTop="50dp"
+        android:id="@+id/input_date"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Input Laporan Keuangan"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:textSize="20sp"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:visibility="visible"
-        android:layout_height="1dp"
-        android:background="#000000"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Masukkan Tanggal"
-        android:gravity="center"
-        android:layout_marginTop="25dp"
-        android:textSize="16sp"/>
+        android:background="#d4d4d4"
+        android:hint="Select Date..."
+        android:padding="10dp"
+        android:textColor="#897"
+        android:textSize="16sp" />
 
     <com.tiper.MaterialSpinner
         android:id="@+id/spinner_category"
@@ -60,6 +52,7 @@
 
     <EditText
         android:id="@+id/nominal"
+        android:inputType="numberDecimal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Masukkan Nominal"
@@ -69,10 +62,13 @@
 
     <Button
         android:id="@+id/btn_input"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
         android:text="Input"
         android:layout_marginTop="30dp"
+        android:background="@drawable/button_background"
         android:textSize="16sp" />
 
 </LinearLayout>

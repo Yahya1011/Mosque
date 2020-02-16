@@ -1,5 +1,7 @@
 package com.example.mosque.view
 
+import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -15,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_finance.*
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class FinanceActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListener {
 
     lateinit var kategori: Array<String>
@@ -28,6 +31,7 @@ class FinanceActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListe
     var categoryId: Int = 0
     var subCategoryId: Int = 0
     var mUserId: Int = 0
+    lateinit var datePickerDialog : DatePickerDialog
 
     lateinit var keuanganViewModel: FinanceViewModel
     lateinit var mPrefData: AppPreferencesHelper
@@ -43,6 +47,35 @@ class FinanceActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListe
         subKategori = resources.getStringArray(R.array.finance_sub_category)
         initSpinnerData()
         initClickLitener()
+        inputDate() //datepicker
+    }
+
+    private fun inputDate() {
+        input_date.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                // calender class's instance and get current date , month and year from calender
+                val c = Calendar.getInstance()
+                val mYear = c[Calendar.YEAR] // current year
+
+                val mMonth = c[Calendar.MONTH] // current month
+
+                val mDay = c[Calendar.DAY_OF_MONTH] // current day
+
+                // date picker dialog
+                datePickerDialog = DatePickerDialog(
+                    this@FinanceActivity,
+                    OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                        // set day of month , month and year value in the edit text
+                        input_date.setText(
+                            dayOfMonth.toString() + "/"
+                                    + (monthOfYear + 1) + "/" + year
+                        )
+                    }, mYear, mMonth, mDay
+                )
+                datePickerDialog.show()
+            }
+
+        })
     }
 
     private fun initSpinnerData() {
