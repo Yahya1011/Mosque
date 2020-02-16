@@ -3,6 +3,7 @@ package com.example.mosque.network
 
 import com.example.mosque.model.Fasilitas
 import com.example.mosque.model.Mosque
+import com.example.mosque.model.respons.ApiRespons
 import com.example.mosque.network.ApiEndPoint.BASE_URL
 import com.example.mosque.network.ApiEndPoint.SHALAT_BASE_URL
 import retrofit2.Retrofit
@@ -58,7 +59,7 @@ object Services {
 
     //get fasilitas list
     fun getFasilitasList() =  Retrofit.Builder()
-        .baseUrl("http://10.0.2.2:3000")
+        .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .client(ApiWorker.client)

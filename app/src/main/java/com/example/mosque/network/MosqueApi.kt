@@ -4,9 +4,10 @@ import com.example.mosque.model.Fasilitas
 import com.example.mosque.model.Jadwal
 import com.example.mosque.model.Mosque
 import com.example.mosque.model.respons.ApiRespons
-import com.example.mosque.network.ApiEndPoint.Fasilitas
+import com.example.mosque.network.ApiEndPoint.ListFasilitas
 import com.example.mosque.network.ApiEndPoint.MARKER
 import com.example.mosque.network.ApiEndPoint.MOSQUE
+import com.example.mosque.network.ApiEndPoint.hasilFasilitas
 import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.http.*
@@ -29,10 +30,10 @@ interface MosqueApi {
     @GET (MARKER)
     fun getMosqueMarker() : Observable<ApiRespons.MarkerRespon>
 
-    @GET("categories")
+    @GET(ListFasilitas)
     fun fasilitasList():Observable<List<Fasilitas>>
 
-    @POST("filter")
+    @POST(hasilFasilitas)
     @FormUrlEncoded
     fun getFilteredMasjid(@Field("data")data : String) : Observable<List<Mosque>>
 

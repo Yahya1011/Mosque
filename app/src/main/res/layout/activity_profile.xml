@@ -12,12 +12,12 @@
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:layout_marginTop="80dp"
-        app:civ_border_width="2dp"
         app:civ_border_color="#FF000000"
-        app:srcCompat="@drawable/profile"
+        app:civ_border_width="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/profile" />
 
 
     <ImageView
@@ -33,11 +33,11 @@
         android:id="@+id/rl_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_detail_profile"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_detail_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_profile">
@@ -70,8 +70,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_user_role"
-            android:orientation="horizontal"
             android:layout_marginTop="16dp"
+            android:orientation="horizontal"
             android:padding="5dp">
 
 
@@ -94,7 +94,6 @@
     </RelativeLayout>
 
 
-
     <View
         android:id="@+id/devider"
         android:layout_width="match_parent"
@@ -105,12 +104,13 @@
         app:layout_constraintTop_toBottomOf="@+id/bg_layout" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_menu"
+        android:id="@+id/rv_listprofile"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/devider" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

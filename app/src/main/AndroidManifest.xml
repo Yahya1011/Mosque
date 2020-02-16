@@ -79,8 +79,7 @@
             android:name=".view.FinanceActivity"
             android:label="Input Laporan" />
         <activity
-            android:name=".view.ProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".view.ProfileActivity" />
         <activity
             android:name=".view.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />

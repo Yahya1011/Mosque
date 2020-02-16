@@ -41,7 +41,7 @@ class FasilitasAdapter(internal var context: Context,
     }
 
     override fun onBindViewHolder(holder: ChooseViewHolder, position: Int) {
-        holder.ckb_options.text = categories[position].namaFasilitas
+        holder.ckb_options.text = categories[position].name
         holder.ckb_options.isChecked = itemStateArray.get(position)
     }
 

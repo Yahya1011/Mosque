@@ -18,11 +18,17 @@
     <string name="notice">Pemberitahuan</string>
     <string name="pukul">Pukul</string>
     <string name="waktu_sholat">Waktu Sholat</string>
-    <string name="donasi_nav">Donasi</string>
 
+    <string name="donasi_nav">Donasi</string>
     <string name="masjid_sekitar">Masjid Sekitar</string>
     <string name="event">Acara</string>
     <string name="info_nav">Informasi</string>
+
+    <string name="edit_profile">Edit Profile</string>
+    <string name="hubungi">Hubungi Kami</string>
+    <string name="rate">Rating</string>
+    <string name="logout">Logout</string>
+
     <string name="title">Nama Masjid</string>
     <string name="alamat">Alamat Masjid</string>
     <string name="tipe">Tipe :</string>
@@ -36,5 +42,6 @@
 
     <string name="you_are_offline">You are Offline</string>
     <string name="masjid_not_found">Masjid not found</string>
+    <string name="icon_doang">icon doang</string>
 
 </resources>
