@@ -38,7 +38,6 @@ import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
-
     lateinit var mPrefData: AppPreferencesHelper
     private var updateTime: String? = null
     private var futureDate: String? = null
@@ -69,12 +68,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         mPrefData = AppPreferencesHelper(this)
         println("Data Pref Main  ${mPrefData.isLoginIn()}")
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        mainViewModel = ViewModelProvider(this)[MainNavViewModel::class.java]
         viewModel.turnOnGps(this)
+        mainViewModel = ViewModelProvider(this)[MainNavViewModel::class.java]
         mainViewModel.refresh(this)
 
         receiver = LocationReceiver {
@@ -95,13 +93,9 @@ class MainActivity : AppCompatActivity() {
             adapter = navMainAdapter
         }
 
-
         observeMainNavModel()
 
         initNavigationListener()
-
-
-
     }
 
     private fun initNavigationListener() {
@@ -138,9 +132,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadProfileDashboard() {
-        /*val intent = Intent(this, ProfileActivity::class.java)
-        startActivity(intent)
-        finish()*/
         startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
     }
 
@@ -167,19 +158,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openLoginActivity() {
-        /*val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish()*/
         startActivity(Intent(this@MainActivity, LoginActivity::class.java))
-
     }
 
     private fun openRegisterActivity() {
-        /*val intent = Intent(this, RegisterActivity::class.java)
-        startActivity(intent)
-        finish()*/
         startActivity(Intent(this@MainActivity, RegisterActivity::class.java))
-
     }
 
 

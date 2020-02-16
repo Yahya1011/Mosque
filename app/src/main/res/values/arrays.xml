@@ -12,8 +12,21 @@
             <item>@drawable/transaksi</item>
             <item>@drawable/masjid</item>
             <item>@drawable/ic_event</item>
-
         </string-array>
+
+    <string-array name="profileIcon">
+        <item>@drawable/ic_arrow_next</item>
+        <item>@drawable/ic_arrow_next</item>
+        <item>@drawable/ic_arrow_next</item>
+        <item>@drawable/ic_arrow_next</item>
+    </string-array>
+
+    <string-array name="profileMenu">
+        <item>@string/edit_profile</item>
+        <item>@string/hubungi</item>
+        <item>@string/rate</item>
+        <item>@string/logout</item>
+    </string-array>
 
         <string-array name="donasi_category">
             <item>Pilih Jenis Donasi</item>
