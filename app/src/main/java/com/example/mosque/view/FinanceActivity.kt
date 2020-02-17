@@ -99,7 +99,7 @@ class FinanceActivity : AppCompatActivity(), MaterialSpinner.OnItemSelectedListe
             android.R.layout.simple_spinner_item
         ).let {
             it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner_category.apply {
+            spinner_sub_category.apply {
                 adapter = it
                 onItemSelectedListener = this@FinanceActivity
                 onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
